@@ -77,10 +77,10 @@ public class teste {
         */
 
 
-        UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+        //UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
 
-
+        /*
         Role roleTest = Role.ADMIN;
 
         System.out.println("🔍 Recherche des utilisateurs avec le rôle : " + roleTest);
@@ -93,6 +93,16 @@ public class teste {
             for (Utilisateur user : utilisateurs) {
                 System.out.println("📌 " + user.getMatricule() + " | " + user.getNom() + " " + user.getPrenom() + " | " + user.getEmail() + " | " + user.getRole());
             }
+        }*/
+
+        // teste de modification !!
+        UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+        Utilisateur utilisateurModifie = new Utilisateur(1111, "nom", "Prenom", "nvemail@example.com", Role.ETUDIANT);
+
+        if (utilisateurDAO.modifierUtilisateur(utilisateurModifie)) {
+            System.out.println("🎉 Modification réussie !");
+        } else {
+            System.out.println("❌ La modification a échoué.");
         }
 
         //scanner.close();

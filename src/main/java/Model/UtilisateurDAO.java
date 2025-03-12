@@ -28,6 +28,7 @@ public class UtilisateurDAO {
         return false;
     }
 
+
     //On commence par creer un User
     public boolean ajouterUtilisateur(Utilisateur utilisateur) {
         String query = "INSERT INTO utilisateurs (idUser, nom, prenom, email, motdepasse, role) VALUES (?, ?, ?, ?, ?, ?)";
@@ -129,25 +130,38 @@ public class UtilisateurDAO {
         return userList;
     }
 
+    //  Methode pour modifier l'utilisateur
+    public boolean modifierUtilisateur(Utilisateur user) {
+        String requete = "UPDATE utilisateurs SET nom = ?, prenom = ?, email = ?, role = ? WHERE idUser = ?";
 
-        public static void main(String[] args) {
-            UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+        try (Connection cnx = ConnectionDB.getConnection();
+             PreparedStatement statement = cnx.prepareStatement(requete)) {
 
-            // Tester la récupération des utilisateurs avec un rôle valide
-            Role roleTest = Role.ADMIN; // Remplace par un rôle existant dans ta base de données
+            statement.setString(1, user.getNom());
+            statement.setString(2, user.getPrenom());
+            statement.setString(3, user.getEmail());
 
-            System.out.println("🔍 Recherche des utilisateurs avec le rôle : " + roleTest);
-            ArrayList<Utilisateur> utilisateurs = utilisateurDAO.getUtilisateursByRole(roleTest);
 
-            if (utilisateurs == null || utilisateurs.isEmpty()) {
-                System.out.println("⚠️ Aucun utilisateur trouvé pour le rôle : " + roleTest);
+
+            statement.setString(4, user.getRole().name());
+
+
+            statement.setInt(5, user.getMatricule());
+
+            int rowsUpdated = statement.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("✅ Utilisateur mis à jour avec succès !");
+                return true;
             } else {
-                System.out.println("✅ Utilisateurs trouvés :");
-                for (Utilisateur user : utilisateurs) {
-                    System.out.println("📌 " + user.getMatricule() + " | " + user.getNom() + " " + user.getPrenom() + " | " + user.getEmail() + " | " + user.getRole());
-                }
+                System.out.println("⚠ Aucun utilisateur trouvé avec cet ID.");
             }
+
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur lors de la modification de l'utilisateur : " + e.getMessage());
         }
+        return false;
+    }
 
 
 
