@@ -16,8 +16,25 @@ public class Utilisateur {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.password = password;
+        if (password == null || password.isEmpty()) {
+            throw new PasswordException("Le mot de passe ne peut pas être vide.");
+        }
+        if (PasswordValidator.isWeak(password)) {
+            throw new InvalidPassword("Mot de passe trop faible !");
+        }
+
+        PasswordCryp p = new PasswordCryp();
+        this.password = p.hashPassword(password);
+        //this.password = password;
         this.role= role;
+    }
+
+    public Utilisateur(int matricule, String nom, String prenom, String email, Role role){
+        this.matricule =matricule;
+        this.nom = nom;
+        this.prenom= prenom;
+        this.email = email;
+        this.role = role;
     }
 
     public int getMatricule() {
@@ -57,7 +74,15 @@ public class Utilisateur {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        if (password == null || password.isEmpty()) {
+            throw new PasswordException("Le mot de passe ne peut pas être vide.");
+        }
+        if (PasswordValidator.isWeak(password)) {
+            throw new InvalidPassword("Mot de passe trop faible !");
+        }
+
+        PasswordCryp p = new PasswordCryp();
+        this.password = p.hashPassword(password);
     }
 
     public Role getRole() {
@@ -72,6 +97,6 @@ public class Utilisateur {
     public String toString() {
         return "matricule=" + matricule +
                 ", nom='" + nom + '\'' +
-                ", email='" + email + '\'';
+                ", prenom='" + prenom + '\'';
     }
 }
