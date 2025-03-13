@@ -99,7 +99,7 @@ foreign key (idEtudiant) references etudiants(idEtudiant) on delete cascade ,
 foreign key (idModule) references modules(idModule) on delete cascade ,
 foreign key (idProf) references profs(idProf) on delete cascade  
 );
- 
+ alter table notes modify column moyenne decimal(4,2);
  create table presence(
  idPresence int primary key not null ,
  statut enum("Présent" , "Absent" ,"Justifié") not null,
@@ -155,3 +155,19 @@ idNotification int primary key not null,
  foreign key (idDestinataire) references utilisateurs(idUser)  on delete cascade 
 
 );
+
+
+
+INSERT INTO utilisateurs (idUser, nom, prenom, email, motdepasse, role) 
+VALUES (1111, 'Ougour', 'Sarah', 'Sarah.Ougour@gmail.com', 'hey', 'Etudiant');
+INSERT INTO utilisateurs (idUser, nom, prenom, email, motdepasse, role) 
+VALUES (1112, 'Kahli', 'Aya Meriem', 'AyaMeriem.Kahli@gmail.com', 'hello', 'Etudiant');
+INSERT INTO utilisateurs (idUser, nom, prenom, email, motdepasse, role) 
+VALUES (1113, 'Chaban', 'Rym', 'Rym.Chaban@gmail.com', 'CCC', 'Etudiant');
+
+select * from utilisateurs;
+
+ALTER TABLE utilisateurs MODIFY COLUMN motdepasse VARCHAR(255);
+
+
+
