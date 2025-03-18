@@ -4,38 +4,45 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AdminDAO{
-    
-    /*
-    public boolean ajouterUtilisateur(Utilisateur utilisateur) {
-        String query = "INSERT INTO utilisateurs (idUser, nom, prenom, email, motdepasse, role) VALUES (?, ?, ?, ?, ?, ?)";
-        PasswordCryp p = new PasswordCryp();
-        String hashedPassword = p.hashPassword(utilisateur.getPassword());
+public class AdminDAO extends UtilisateurDAO{
+    public AdminDAO(){
+        super();
+    }
 
-        try (PreparedStatement stmt = cnx.prepareStatement(query)) {
-            // Verifie si le Mat utilisateur existe deja
-            if (existe(utilisateur.getMatricule())) {
-                System.out.println("⚠️ Erreur : Cet ID utilisateur existe déjà !");
+    public boolean ajouterAdmin(Admin admin) {
+        String queryAdmin = "INSERT INTO Admins (idAdmin) VALUES (?)";
+
+        try {
+            cnx.setAutoCommit(false);
+
+            if (!ajouterUtilisateur(admin)) {
+                cnx.rollback();
                 return false;
             }
 
-            stmt.setInt(1, utilisateur.getMatricule());
-            stmt.setString(2, utilisateur.getNom());
-            stmt.setString(3, utilisateur.getPrenom());
-            stmt.setString(4, utilisateur.getEmail());
-            stmt.setString(5, hashedPassword);
-            stmt.setString(6, utilisateur.getRole().name());
-
-            int rowsInserted = stmt.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("✅ Utilisateur ajoutee avec succes !");
-                return true;
+            try (PreparedStatement stmtAdmin = cnx.prepareStatement(queryAdmin)) {
+                stmtAdmin.setInt(1, admin.getMatricule());
+                stmtAdmin.executeUpdate();
             }
+
+            cnx.commit();
+            System.out.println("✅ Admin ajouté avec succès !");
+            return true;
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
+            try {
+                cnx.rollback();
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
+            System.err.println("❌ Erreur lors de l'ajout de l'admin : " + e.getMessage());
+        } finally {
+            try {
+                cnx.setAutoCommit(true);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
         return false;
     }
 
-     */
 }

@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class UtilisateurDAO {
-    private Connection cnx;
+    protected Connection cnx;
 
     // pour ce connecter
     public UtilisateurDAO(){
