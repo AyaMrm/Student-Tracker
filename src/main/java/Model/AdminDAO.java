@@ -10,6 +10,20 @@ public class AdminDAO extends UtilisateurDAO{
         super();
     }
 
+    public boolean existe(int matricule){
+        String requette = "SELECT COUNT(*) FROM Admins WHERE idAdmin=?";
+        try(PreparedStatement statement = cnx.prepareStatement(requette)){
+            statement.setInt(1, matricule);
+            ResultSet response = statement.executeQuery();
+            if(response.next()){
+                return response.getInt(1)>0;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean ajouterAdmin(Admin admin) {
         String queryAdmin = "INSERT INTO Admins (idAdmin) VALUES (?)";
 
@@ -57,7 +71,7 @@ public class AdminDAO extends UtilisateurDAO{
 
             if (!checkResult.next()) {
                 System.out.println("⚠️ L'ID " + matricule + " n'est pas un admin !");
-                return null; // 🔴 Ce n'est pas un admin
+                return null;
             }
 
 
@@ -99,6 +113,40 @@ public class AdminDAO extends UtilisateurDAO{
             System.err.println("❌ Erreur lors de la modification de l'admin : " + e.getMessage());
             return false;
         }
+    }
+
+    public boolean supprimerAdmin(int matricule){
+        if(!existe(matricule)){
+            System.err.println("Admin Non Trouver !!");
+            return false;
+        }
+        String queryAdmin = "DELETE FROM Admins WHERE idAdmin =?";
+        String queryUser = "DELETE FROM utilisateurs WHERE idUser = ?";
+
+        try (Connection cnx = ConnectionDB.getConnection()) {
+            cnx.setAutoCommit(false);
+
+            try (PreparedStatement statementAdmin = cnx.prepareStatement(queryAdmin)) {
+                statementAdmin.setInt(1, matricule);
+                statementAdmin.executeUpdate();
+            }
+
+            try (PreparedStatement statementUser = cnx.prepareStatement(queryUser)) {
+                statementUser.setInt(1, matricule);
+                int rowsDeleted = statementUser.executeUpdate();
+
+                if (rowsDeleted > 0) {
+                    cnx.commit();
+                    System.out.println("✅ Admin supprimé avec succès !");
+                    return true;
+                }
+            }
+
+            cnx.rollback();
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur lors de la suppression de l'admin : " + e.getMessage());
+        }
+        return false;
     }
 
 }

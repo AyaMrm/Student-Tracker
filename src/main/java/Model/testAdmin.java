@@ -28,8 +28,6 @@ public class testAdmin {
         } else {
             System.out.println("❌ Aucun admin trouvé avec ce matricule !");
         }
-         */
-
 
         Admin admin = new Admin(10, "Nom", "NouveauPrenom", "newemail@example.com");
 
@@ -40,7 +38,16 @@ public class testAdmin {
         } else {
             System.out.println("❌ Échec de la modification.");
         }
+         */
+        int matricule = 10;
 
+        boolean success = adminDAO.supprimerAdmin(matricule);
+
+        if (success) {
+            System.out.println("✅ Suppression réussie !");
+        } else {
+            System.out.println("❌ Échec de la suppression. Vérifiez le matricule !");
+        }
 
     }
 }
