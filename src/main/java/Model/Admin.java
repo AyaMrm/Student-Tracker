@@ -1,8 +1,14 @@
 package Model;
 
+import com.mysql.cj.util.DnsSrv;
+
 public class Admin extends Utilisateur {
     public Admin(int matricule, String nom, String prenom, String email, String password){
         super(matricule, nom, prenom, email, password, Role.ADMIN);
+    }
+
+    public Admin(int matricule, String nom, String prenom, String email){
+        super(matricule, nom, prenom, email, Role.ADMIN);
     }
 
     @Override

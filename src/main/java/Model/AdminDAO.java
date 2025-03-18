@@ -3,6 +3,7 @@ package Model;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.*;
 
 public class AdminDAO extends UtilisateurDAO{
     public AdminDAO(){
@@ -45,7 +46,59 @@ public class AdminDAO extends UtilisateurDAO{
         return false;
     }
 
-    public Utilisateur getAdminByMat(int matricule){
+    public Utilisateur getAdminByMat(int matricule) {
+        String checkQuery = "SELECT idAdmin FROM admins WHERE idAdmin = ?";
 
+        try (Connection cnx = ConnectionDB.getConnection();
+             PreparedStatement checkStmt = cnx.prepareStatement(checkQuery)) {
+
+            checkStmt.setInt(1, matricule);
+            ResultSet checkResult = checkStmt.executeQuery();
+
+            if (!checkResult.next()) {
+                System.out.println("⚠️ L'ID " + matricule + " n'est pas un admin !");
+                return null; // 🔴 Ce n'est pas un admin
+            }
+
+
+            Utilisateur utilisateur = getUtilisateurByMat(matricule);
+            if (utilisateur != null) {
+                return new Utilisateur(
+                        utilisateur.getMatricule(),
+                        utilisateur.getNom(),
+                        utilisateur.getPrenom(),
+                        utilisateur.getEmail(),
+                        utilisateur.getRole()
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("❌ Erreur lors de la récupération de l'admin", e);
+        }
+
+        return null;
     }
+
+    public boolean modifierAdmin(Admin admin) {
+
+        String checkQuery = "SELECT idAdmin FROM admins WHERE idAdmin = ?";
+
+        try (Connection cnx = ConnectionDB.getConnection();
+             PreparedStatement checkStmt = cnx.prepareStatement(checkQuery)) {
+
+            checkStmt.setInt(1, admin.getMatricule());
+            ResultSet result = checkStmt.executeQuery();
+
+            if (!result.next()) {
+                System.out.println("⚠ L'ID " + admin.getMatricule() + " n'est pas un admin !");
+                return false;
+            }
+
+            return modifierUtilisateur(admin);
+
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur lors de la modification de l'admin : " + e.getMessage());
+            return false;
+        }
+    }
+
 }

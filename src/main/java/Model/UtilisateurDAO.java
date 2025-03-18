@@ -95,7 +95,6 @@ public class UtilisateurDAO {
         return null;
     }
 
-
     // les utilisateurs par role
     public ArrayList<Utilisateur> getUtilisateursByRole(Role role) {
         String requete = "SELECT * FROM utilisateurs WHERE role = ?";
@@ -213,7 +212,7 @@ public class UtilisateurDAO {
 
 
             statement.setString(4, user.getRole().name());
-
+            //statement.setString(4, (user.getRole() != null) ? user.getRole().name() : null);
 
             statement.setInt(5, user.getMatricule());
 

@@ -36,6 +36,12 @@ public class Utilisateur {
         this.email = email;
         this.role = role;
     }
+    public  Utilisateur(int matricule, String nom, String prenom, String email){
+        this.matricule = matricule;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+    }
 
     public int getMatricule() {
         return matricule;
