@@ -45,4 +45,7 @@ public class AdminDAO extends UtilisateurDAO{
         return false;
     }
 
+    public Utilisateur getAdminByMat(int matricule){
+
+    }
 }
