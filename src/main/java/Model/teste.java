@@ -12,7 +12,7 @@ public class teste {
             return;
         }
 
-             /*
+
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
 
@@ -57,11 +57,13 @@ public class teste {
             System.out.println("✅ Utilisateur ajoutee avec succees !");
         } else {
             System.out.println("❌ echec de l'ajout de l'utili.");
-        }*/
+        }
+
+
         /*
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
-        int matriculeExistant = 33;
+        int matriculeExistant = 1111;
         Utilisateur utilisateur1 = utilisateurDAO.getUtilisateurByMat(matriculeExistant);
 
         if (utilisateur1 != null) {
@@ -77,11 +79,9 @@ public class teste {
         */
 
 
-        //UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
-
-
         /*
-        Role roleTest = Role.ADMIN;
+        UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+        Role roleTest = Role.ETUDIANT;
 
         System.out.println("🔍 Recherche des utilisateurs avec le rôle : " + roleTest);
         ArrayList<Utilisateur> utilisateurs = utilisateurDAO.getUtilisateursByRole(roleTest);
@@ -93,8 +93,10 @@ public class teste {
             for (Utilisateur user : utilisateurs) {
                 System.out.println("📌 " + user.getMatricule() + " | " + user.getNom() + " " + user.getPrenom() + " | " + user.getEmail() + " | " + user.getRole());
             }
-        }*/
+        }
+        */
 
+        /*
         // teste de modification !!
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
         Utilisateur utilisateurModifie = new Utilisateur(1111, "nom", "Prenom", "nvemail@example.com", Role.ETUDIANT);
@@ -104,7 +106,64 @@ public class teste {
         } else {
             System.out.println("❌ La modification a échoué.");
         }
+        */
 
+
+        /*
+        UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("🔎 Entrez l'ID de l'utilisateur à supprimer : ");
+        int idUser = scanner.nextInt();
+
+        boolean success = utilisateurDAO.supprimerUtilisateur(idUser);
+
+        if (success) {
+            System.out.println("✅ L'utilisateur avec ID " + idUser + " a été supprimé avec succès !");
+        } else {
+            System.out.println("❌ Échec de la suppression. Vérifiez si l'ID existe !");
+        }
+
+        scanner.close();
+        */
+
+
+        /*
+        UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+
+
+        String namee = "jsp";
+
+        System.out.println("🔍 Recherche des utilisateurs avec le rôle : ");
+        ArrayList<Utilisateur> utilisateurs = utilisateurDAO.getUtilisateurByNom(namee);
+
+        if (utilisateurs == null || utilisateurs.isEmpty()) {
+            System.out.println("⚠️ Aucun utilisateur trouvé pour le rôle : " + namee);
+        } else {
+            System.out.println("✅ Utilisateurs trouvés :");
+            for (Utilisateur user : utilisateurs) {
+                System.out.println("📌 " + user.getMatricule() + " | " + user.getNom() + " " + user.getPrenom() + " | " + user.getEmail() + " | "+user.getRole());
+            }
+            */
+         /*
+        UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+        System.out.println("📌 Test : Récupération des utilisateurs...");
+        ArrayList<Utilisateur> utilisateurs = utilisateurDAO.getAllUtilisateurs();
+
+        if (utilisateurs.isEmpty()) {
+            System.out.println("⚠ Aucun utilisateur trouvé.");
+        } else {
+            System.out.println("✅ Liste des utilisateurs récupérée avec succès !");
+            for (Utilisateur user : utilisateurs) {
+                System.out.println("➡ ID: " + user.getMatricule() +
+                        ", Nom: " + user.getNom() +
+                        ", Prénom: " + user.getPrenom() +
+                        ", Email: " + user.getEmail() +
+                        ", Rôle: " + user.getRole());
+            }
+        }
+
+         */
         //scanner.close();
     }
 }

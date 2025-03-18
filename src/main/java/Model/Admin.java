@@ -1,8 +1,8 @@
 package Model;
 
 public class Admin extends Utilisateur {
-    public Admin(int matricule, String nom, String prenom, String email, String password, Role role){
-        super(matricule, nom, prenom, email, password, role);
+    public Admin(int matricule, String nom, String prenom, String email, String password){
+        super(matricule, nom, prenom, email, password, Role.ADMIN);
     }
 
     @Override

@@ -96,7 +96,6 @@ public class UtilisateurDAO {
     }
 
 
-
     // les utilisateurs par role
     public ArrayList<Utilisateur> getUtilisateursByRole(Role role) {
         String requete = "SELECT * FROM utilisateurs WHERE role = ?";
@@ -110,7 +109,7 @@ public class UtilisateurDAO {
 
             while (response.next()) {
                 try {
-                    Role userRole = Role.valueOf(response.getString("role").toUpperCase()); // Protection contre les erreurs
+                    Role userRole = Role.valueOf(response.getString("role").toUpperCase());
                     Utilisateur user = new Utilisateur(
                             response.getInt("idUser"),
                             response.getString("nom"),
@@ -128,6 +127,76 @@ public class UtilisateurDAO {
         }
 
         return userList;
+    }
+
+    // voir les utilisateurs par nom
+    public ArrayList<Utilisateur> getUtilisateurByNom(String nom){
+        String requete = "SELECT * FROM utilisateurs WHERE nom = ?";
+        ArrayList<Utilisateur> usr = new ArrayList<Utilisateur>();
+
+        try (Connection cnx = ConnectionDB.getConnection();
+             PreparedStatement statement = cnx.prepareStatement(requete)) {
+
+            statement.setString(1, nom);
+            ResultSet response = statement.executeQuery();
+
+            while (response.next()) {
+                try {
+                    String userNom = response.getString("nom");
+                    Utilisateur user = new Utilisateur(
+                            response.getInt("idUser"),
+                            userNom,
+                            response.getString("prenom"),
+                            response.getString("email"),
+                            Role.valueOf(response.getString("role").toUpperCase())
+                    );
+                    usr.add(user);
+                } catch (IllegalArgumentException e) {
+                    System.err.println("❌ Rôle inconnu dans la base de données : " + response.getString("role"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur lors de la recherche des utilisateurs : " + e.getMessage());
+        }
+        return usr;
+    }
+
+    public ArrayList<Utilisateur> getAllUtilisateurs(){
+        String requette = "SELECT idUser, nom, prenom, email, role FROM utilisateurs";
+        ArrayList<Utilisateur> users = new ArrayList<>();
+
+        try(Connection cnx = ConnectionDB.getConnection();
+            PreparedStatement statement = cnx.prepareStatement(requette)){
+
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                try {
+                    int matricule = resultSet.getInt("idUser");
+                    String nom = resultSet.getString("nom");
+                    String prenom = resultSet.getString("prenom");
+                    String email = resultSet.getString("email");
+                    String roleString = resultSet.getString("role").toUpperCase();
+
+                    Role role;
+                    try {
+                        role = Role.valueOf(roleString);
+                    } catch (IllegalArgumentException e) {
+                        System.err.println("Role inconu detecter !!");
+                        role = Role.ETUDIANT;
+                    }
+
+                    Utilisateur user = new Utilisateur(matricule, nom, prenom, email, role);
+                    users.add(user);
+                }catch (SQLException e){
+                    System.err.println("Erreur lors de la recuperation d'un utilisateur !!");
+                }
+            }
+        }catch (SQLException e){
+            System.err.format("❌ Erreur SQL lors de la récupération des utilisateurs : %s (Code: %d, État: %s)%n",
+                    e.getMessage(), e.getErrorCode(), e.getSQLState());
+        }
+
+        return users;
     }
 
     //  Methode pour modifier l'utilisateur
@@ -163,6 +232,24 @@ public class UtilisateurDAO {
         return false;
     }
 
+    //supprimer utilisateur
+    public boolean supprimerUtilisateur(int matricule){
+        if(!existe(matricule)){
+            System.err.println("Utilisateur inexistant !!");
+            return false;
+        }
+        String requette = "DELETE FROM utilisateurs WHERE idUser = ?";
+        try(Connection cnx = ConnectionDB.getConnection()){
+            PreparedStatement statement = cnx.prepareStatement(requette);
+
+            statement.setInt(1, matricule);
+            int rowsDeleted = statement.executeUpdate();
+            return rowsDeleted >0;
+        }catch (SQLException e){
+            System.err.println("Erreur lors de la suppression de l'utilisateur !");
+        }
+        return false ;
+    }
 
 
 }
