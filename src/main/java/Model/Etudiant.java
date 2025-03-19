@@ -18,6 +18,15 @@ public class Etudiant extends Utilisateur {
         this.idEmploiDuTemp = idEmploiDuTemp;
     }
 
+    public Etudiant(int matricule, String nom, String prenom, String email, String specialite, String section, String groupe, int idAnnee, int idEmploiDuTemp){
+        super(matricule, nom, prenom, email, Role.ETUDIANT);
+        this.specialite = specialite;
+        this.section = section;
+        this.groupe = groupe;
+        this.idAnnee = idAnnee;
+        this.idEmploiDuTemp = idEmploiDuTemp;
+    }
+
     @Override
     public int getMatricule() {
         return super.getMatricule();

@@ -160,6 +160,7 @@ public class UtilisateurDAO {
         return usr;
     }
 
+
     public ArrayList<Utilisateur> getAllUtilisateurs(){
         String requette = "SELECT idUser, nom, prenom, email, role FROM utilisateurs";
         ArrayList<Utilisateur> users = new ArrayList<>();

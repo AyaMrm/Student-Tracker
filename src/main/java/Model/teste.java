@@ -13,9 +13,9 @@ public class teste {
         }
 
 
-        UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+        //UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
-
+/*
         Scanner scanner = new Scanner(System.in);
 
 
@@ -60,6 +60,8 @@ public class teste {
         }
 
 
+
+ */
         /*
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
@@ -128,7 +130,7 @@ public class teste {
         */
 
 
-        /*
+
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
 
@@ -144,7 +146,7 @@ public class teste {
             for (Utilisateur user : utilisateurs) {
                 System.out.println("📌 " + user.getMatricule() + " | " + user.getNom() + " " + user.getPrenom() + " | " + user.getEmail() + " | "+user.getRole());
             }
-            */
+
          /*
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
         System.out.println("📌 Test : Récupération des utilisateurs...");
@@ -166,5 +168,5 @@ public class teste {
          */
         //scanner.close();
     }
-}
+}}
 

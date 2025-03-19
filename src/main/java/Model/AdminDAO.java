@@ -61,10 +61,10 @@ public class AdminDAO extends UtilisateurDAO{
     }
 
     public Utilisateur getAdminByMat(int matricule) {
-        String checkQuery = "SELECT idAdmin FROM admins WHERE idAdmin = ?";
+        String query = "SELECT idAdmin FROM admins WHERE idAdmin = ?";
 
         try (Connection cnx = ConnectionDB.getConnection();
-             PreparedStatement checkStmt = cnx.prepareStatement(checkQuery)) {
+             PreparedStatement checkStmt = cnx.prepareStatement(query)) {
 
             checkStmt.setInt(1, matricule);
             ResultSet checkResult = checkStmt.executeQuery();
@@ -76,6 +76,7 @@ public class AdminDAO extends UtilisateurDAO{
 
 
             Utilisateur utilisateur = getUtilisateurByMat(matricule);
+
             if (utilisateur != null) {
                 return new Utilisateur(
                         utilisateur.getMatricule(),
