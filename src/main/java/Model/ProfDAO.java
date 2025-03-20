@@ -109,5 +109,91 @@ public class ProfDAO extends UtilisateurDAO{
         return profs;
     }
 
+    public ArrayList<Prof> getProfBySpecialite(String specialite){
+        ArrayList<Prof> profs = new ArrayList<>();
+        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, p.specialite, p.grade, p.departement "+
+                "FROM utilisateurs u "+
+                "JOIN profs p ON u.idUser = p.idProf "+
+                "WHERE p.specialite = ?";
+
+        try(Connection cnx = ConnectionDB.getConnection();
+        PreparedStatement statement = cnx.prepareStatement(query)){
+            statement.setString(1, specialite);
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                int matricule = result.getInt("idUser");
+                String nom = result.getString("nom");
+                String prenom = result.getString("prenom");
+                String email = result.getString("email");
+                String grade = result.getString("grade");
+                String departement = result.getString("departement");
+
+                Prof p = new Prof(matricule, nom, prenom, email, specialite, grade, departement);
+                profs.add(p);
+            }
+        }catch (SQLException e){
+            System.err.println("Erreur lors de la recherche du prof avec specialite "+specialite+" 😔!!");
+        }
+        return profs;
+    }
+
+    public ArrayList<Prof> getProfByGrade(String grade){
+        ArrayList<Prof> profs = new ArrayList<>() ;
+
+        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, p.specialite, p.grade, p.departement "+
+                "FROM utilisateurs u "+
+                "JOIN profs p ON u.idUser = p.idProf "+
+                "WHERE p.grade = ?";
+
+        try(Connection cnx = ConnectionDB.getConnection();
+        PreparedStatement statement = cnx.prepareStatement(query)){
+            statement.setString(1, grade);
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                int matricule = result.getInt("idUser");
+                String nom = result.getString("nom");
+                String prenom = result.getString("prenom");
+                String email = result.getString("email");
+                String specialite = result.getString("specialite");
+                String departement = result.getString("departement");
+
+                Prof p = new Prof(matricule, nom, prenom, email, specialite, grade, departement);
+                profs.add(p);
+            }
+        }catch (SQLException e){
+            System.err.println("Erreur lors de la recherche des profs avec grade "+grade+" 😔!!");
+        }
+        return profs;
+    }
+
+    public ArrayList<Prof> getProfByDepartement(String departement){
+        ArrayList<Prof> profs = new ArrayList<>();
+        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, p.specialite, p.grade, p.departement "+
+                "FROM utilisateurs u "+
+                "JOIN profs p ON u.idUser = idProf "+
+                "WHERE p.departement = ?";
+        try(Connection cnx = ConnectionDB.getConnection();
+        PreparedStatement statement = cnx.prepareStatement(query)){
+            statement.setString(1, departement);
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                int matricule = result.getInt("idUser");
+                String nom = result.getString("nom");
+                String prenom = result.getString("prenom");
+                String email = result.getString("email");
+                String specialite = result.getString("specialite");
+                String grade = result.getString("grade");
+
+                Prof p = new Prof(matricule, nom, prenom, email, specialite, grade, departement);
+                profs.add(p);
+            }
+        }catch(SQLException e){
+            System.err.println("Erreur lors de la recherche des profs avec grade "+departement+" 😔!!");
+        }
+        return profs;
+    }
 
 }
