@@ -27,6 +27,7 @@ public class Etudiant extends Utilisateur {
         this.idEmploiDuTemp = idEmploiDuTemp;
     }
 
+
     @Override
     public int getMatricule() {
         return super.getMatricule();
@@ -119,11 +120,11 @@ public class Etudiant extends Utilisateur {
         this.idAnnee = idAnnee;
     }
 
-    public int getIdEmploiDuTemp() {
+    public int getIdEmploiDuTemps() {
         return idEmploiDuTemp;
     }
 
-    public void setIdEmploiDuTemp(int idEmploiDuTemp) {
+    public void setIdEmploiDuTemps(int idEmploiDuTemp) {
         this.idEmploiDuTemp = idEmploiDuTemp;
     }
 }
