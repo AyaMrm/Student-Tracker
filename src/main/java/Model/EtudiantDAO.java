@@ -316,5 +316,4 @@ public class EtudiantDAO extends UtilisateurDAO{
             throw new RuntimeException(e);
         }
     }
-
 }
