@@ -15,6 +15,13 @@ public class Prof extends Utilisateur {
         this.departement =departement;
     }
 
+    public Prof(int matricule, String nom, String prenom, String email, String specialite, String grade, String departement){
+        super(matricule, nom, prenom, email);
+        this.specialite = specialite;
+        this.grade = grade;
+        this.departement = departement;
+    }
+
     @Override
     public int getMatricule() {
         return super.getMatricule();

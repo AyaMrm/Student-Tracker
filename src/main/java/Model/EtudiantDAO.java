@@ -33,12 +33,10 @@ public class EtudiantDAO extends UtilisateurDAO{
         try (Connection cnx = ConnectionDB.getConnection()) {
             cnx.setAutoCommit(false);
 
-
             if (!ajouterUtilisateur(etudiant)) {
                 cnx.rollback();
                 return false;
             }
-
 
             try (PreparedStatement stmtEtudiant = cnx.prepareStatement(queryEtudiant)) {
                 stmtEtudiant.setInt(1, etudiant.getMatricule());
@@ -55,10 +53,10 @@ public class EtudiantDAO extends UtilisateurDAO{
             }
 
             cnx.commit();
-            System.out.println("✅ etudiant ajoute avec succes !");
+            System.out.println("etudiant ajoute avec succes !😊");
             return true;
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de l'ajout de l'etudiant : " + e.getMessage());
+            System.err.println("Erreur lors de l'ajout de l'etudiant 😔 : " + e.getMessage());
             return false;
         }
     }
@@ -87,7 +85,7 @@ public class EtudiantDAO extends UtilisateurDAO{
 
                 return new Etudiant(matricule, nom, prenom, email, specialite, section, groupe, idAnnee, idEmploiDuTemps);
             } else {
-                System.out.println("⚠ Aucun étudiant trouvé avec le matricule : " + matricule);
+                System.out.println("⚠ Aucun étudiant trouvé avec le matricule : " + matricule +"😔");
             }
 
         } catch (SQLException e) {
@@ -124,7 +122,7 @@ public class EtudiantDAO extends UtilisateurDAO{
             }
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de la récupération des étudiants : " + e.getMessage());
+            System.err.println("Erreur lors de la recherche d'Etudiant avec le nom "+nom+" 😔!!");
         }
 
         return etudiants;
