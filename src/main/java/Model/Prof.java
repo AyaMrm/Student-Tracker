@@ -8,8 +8,8 @@ public class Prof extends Utilisateur {
     public Prof(){
 
     }
-    public Prof(int matricule, String nom, String prenom, String email, String password, Role role, String specialite, String grade, String departement){
-        super(matricule, nom, prenom, email, password, role);
+    public Prof(int matricule, String nom, String prenom, String email, String password, String specialite, String grade, String departement){
+        super(matricule, nom, prenom, email, password, Role.PROF);
         this.specialite = specialite;
         this.grade = grade;
         this.departement =departement;

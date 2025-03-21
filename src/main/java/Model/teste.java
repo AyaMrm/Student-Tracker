@@ -111,29 +111,30 @@ public class teste {
         */
 
 
-        /*
+
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("🔎 Entrez l'ID de l'utilisateur à supprimer : ");
-        int idUser = scanner.nextInt();
+        //System.out.print("🔎 Entrez l'ID de l'utilisateur à supprimer : ");
+        //int idUser = scanner.nextInt();
 
-        boolean success = utilisateurDAO.supprimerUtilisateur(idUser);
+        boolean success = utilisateurDAO.supprimerUtilisateur(8789);
 
         if (success) {
-            System.out.println("✅ L'utilisateur avec ID " + idUser + " a été supprimé avec succès !");
+            System.out.println("✅ L'utilisateur avec ID " +" a été supprimé avec succès !");
         } else {
             System.out.println("❌ Échec de la suppression. Vérifiez si l'ID existe !");
         }
 
         scanner.close();
-        */
 
 
 
-        UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+
+        //UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
 
+        /*
         String namee = "jsp";
 
         System.out.println("🔍 Recherche des utilisateurs avec le rôle : ");
@@ -146,6 +147,8 @@ public class teste {
             for (Utilisateur user : utilisateurs) {
                 System.out.println("📌 " + user.getMatricule() + " | " + user.getNom() + " " + user.getPrenom() + " | " + user.getEmail() + " | "+user.getRole());
             }
+
+         */
 
          /*
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
@@ -168,5 +171,5 @@ public class teste {
          */
         //scanner.close();
     }
-}}
+}
 
