@@ -2,7 +2,7 @@ package Model;
 
 
 public class PasswordValidator {
-    private static final int minLength = 8;
+    private static final int minLength = 5;
     public static boolean isWeak(String password){
         if(password == null || password.length() < minLength || !containUppercase(password)|| !containLowercase(password)|| !containDigit(password)|| !containSpecialChar(password)){
             return true;

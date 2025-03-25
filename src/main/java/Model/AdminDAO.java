@@ -30,7 +30,7 @@ public class AdminDAO extends UtilisateurDAO{
         try {
             cnx.setAutoCommit(false);
 
-            if (!ajouterUtilisateur(admin)) {
+            if (!ajouterUtilisateur(new Utilisateur(admin.getMatricule(), admin.getNom(), admin.getPrenom(), admin.getEmail(), admin.getPassword(), Role.ADMIN))) {
                 cnx.rollback();
                 return false;
             }
@@ -60,10 +60,10 @@ public class AdminDAO extends UtilisateurDAO{
         return false;
     }
 
-    public Utilisateur getAdminByMat(int matricule) {
+    public Admin getAdminByMat(int matricule) {
         String query = "SELECT idAdmin FROM admins WHERE idAdmin = ?";
 
-        try (Connection cnx = ConnectionDB.getConnection();
+        try (//Connection cnx = ConnectionDB.getConnection();
              PreparedStatement checkStmt = cnx.prepareStatement(query)) {
 
             checkStmt.setInt(1, matricule);
@@ -78,12 +78,11 @@ public class AdminDAO extends UtilisateurDAO{
             Utilisateur utilisateur = getUtilisateurByMat(matricule);
 
             if (utilisateur != null) {
-                return new Utilisateur(
+                return new Admin(
                         utilisateur.getMatricule(),
                         utilisateur.getNom(),
                         utilisateur.getPrenom(),
-                        utilisateur.getEmail(),
-                        utilisateur.getRole()
+                        utilisateur.getEmail()
                 );
             }
         } catch (SQLException e) {

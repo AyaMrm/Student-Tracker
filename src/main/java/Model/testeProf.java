@@ -25,10 +25,14 @@ public class testeProf {
         for(int i=0; i<ar.size();i++){
             System.out.println(ar.get(i));
         }
-         */
+
         Prof p = new Prof(21, "Boulouden", "chahrazed", "bouloudenchahrazed@gmail.com" ,"iEEie@#D3", "math", "docteur", "algebre");
         boolean i = profDAO.modifierProf(p);
         //boolean i = profDAO.supprimerProf(11);
         System.out.println(i);
+
+         */
+
+
     }
 }

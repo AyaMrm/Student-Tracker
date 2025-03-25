@@ -11,7 +11,7 @@ public class Utilisateur {
     public Utilisateur(){
     }
 
-    public Utilisateur(int matricule, String nom, String prenom, String email, String password, Role role){
+    public Utilisateur(int matricule, String nom, String prenom, String email, String password, Role role) {
         this.matricule = matricule;
         this.nom = nom;
         this.prenom = prenom;
@@ -22,11 +22,8 @@ public class Utilisateur {
         if (PasswordValidator.isWeak(password)) {
             throw new InvalidPassword("Mot de passe trop faible !");
         }
-
-        PasswordCryp p = new PasswordCryp();
-        this.password = p.hashPassword(password);
-        //this.password = password;
-        this.role= role;
+        this.password = password;
+        this.role = role;
     }
 
     public Utilisateur(int matricule, String nom, String prenom, String email, Role role){
@@ -41,6 +38,13 @@ public class Utilisateur {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
+    }
+    public Utilisateur(int matricule, String nom, String prenom, String email, String password){
+        this.matricule = matricule;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.password = password;
     }
 
     public int getMatricule() {
@@ -86,9 +90,7 @@ public class Utilisateur {
         if (PasswordValidator.isWeak(password)) {
             throw new InvalidPassword("Mot de passe trop faible !");
         }
-
-        PasswordCryp p = new PasswordCryp();
-        this.password = p.hashPassword(password);
+        this.password = password;
     }
 
     public Role getRole() {

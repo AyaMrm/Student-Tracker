@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.*;
 import java.util.ArrayList;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UtilisateurDAO {
     protected Connection cnx;
@@ -28,43 +29,30 @@ public class UtilisateurDAO {
         return false;
     }
 
-
     //On commence par creer un User
-    public boolean ajouterUtilisateur(Utilisateur utilisateur) {
-        String query = "INSERT INTO utilisateurs (idUser, nom, prenom, email, motdepasse, role) VALUES (?, ?, ?, ?, ?, ?)";
-        PasswordCryp p = new PasswordCryp();
-        String hashedPassword = p.hashPassword(utilisateur.getPassword());
-
-        try (PreparedStatement stmt = cnx.prepareStatement(query)) {
-            // Verifie si le Mat utilisateur existe deja
-            if (existe(utilisateur.getMatricule())) {
-                System.out.println("⚠️ Erreur : Cet ID utilisateur existe déjà !");
-                return false;
-            }
-
-            stmt.setInt(1, utilisateur.getMatricule());
-            stmt.setString(2, utilisateur.getNom());
-            stmt.setString(3, utilisateur.getPrenom());
-            stmt.setString(4, utilisateur.getEmail());
-            stmt.setString(5, hashedPassword);
-            stmt.setString(6, utilisateur.getRole().name());
-
-            int rowsInserted = stmt.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("✅ Utilisateur ajoutee avec succes !");
-                return true;
-            }
+    public boolean ajouterUtilisateur(Utilisateur user) {
+        String sql = "INSERT INTO utilisateurs (idUser, nom, prenom, email, motdepasse, role) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
+            stmt.setInt(1, user.getMatricule());
+            stmt.setString(2, user.getNom());
+            stmt.setString(3, user.getPrenom());
+            stmt.setString(4, user.getEmail());
+            String motdepasseHashe = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+            stmt.setString(5, motdepasseHashe);
+            stmt.setString(6, user.getRole().name());
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     // avoir l'user par matricule
     public Utilisateur getUtilisateurByMat(int matricule) {
         String requete = "SELECT * FROM utilisateurs WHERE idUser = ?";
 
-        try (Connection cnx = ConnectionDB.getConnection();
+        try (//Connection cnx = ConnectionDB.getConnection();
              PreparedStatement statement = cnx.prepareStatement(requete)) {
 
             statement.setInt(1, matricule);
@@ -100,7 +88,7 @@ public class UtilisateurDAO {
         String requete = "SELECT * FROM utilisateurs WHERE role = ?";
         ArrayList<Utilisateur> userList = new ArrayList<>();
 
-        try (Connection cnx = ConnectionDB.getConnection();
+        try (//Connection cnx = ConnectionDB.getConnection();
              PreparedStatement statement = cnx.prepareStatement(requete)) {
 
             statement.setString(1, role.name());
@@ -133,7 +121,7 @@ public class UtilisateurDAO {
         String requete = "SELECT * FROM utilisateurs WHERE nom = ?";
         ArrayList<Utilisateur> usr = new ArrayList<Utilisateur>();
 
-        try (Connection cnx = ConnectionDB.getConnection();
+        try (//Connection cnx = ConnectionDB.getConnection();
              PreparedStatement statement = cnx.prepareStatement(requete)) {
 
             statement.setString(1, nom);
@@ -160,13 +148,11 @@ public class UtilisateurDAO {
         return usr;
     }
 
-
     public ArrayList<Utilisateur> getAllUtilisateurs(){
         String requette = "SELECT idUser, nom, prenom, email, role FROM utilisateurs";
         ArrayList<Utilisateur> users = new ArrayList<>();
 
-        try(Connection cnx = ConnectionDB.getConnection();
-            PreparedStatement statement = cnx.prepareStatement(requette)){
+        try(PreparedStatement statement = cnx.prepareStatement(requette)){
 
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
@@ -203,7 +189,7 @@ public class UtilisateurDAO {
     public boolean modifierUtilisateur(Utilisateur user) {
         String requete = "UPDATE utilisateurs SET nom = ?, prenom = ?, email = ?, role = ? WHERE idUser = ?";
 
-        try (Connection cnx = ConnectionDB.getConnection();
+        try (//Connection cnx = ConnectionDB.getConnection();
              PreparedStatement statement = cnx.prepareStatement(requete)) {
 
             statement.setString(1, user.getNom());
@@ -239,7 +225,8 @@ public class UtilisateurDAO {
             return false;
         }
         String requette = "DELETE FROM utilisateurs WHERE idUser = ?";
-        try(Connection cnx = ConnectionDB.getConnection()){
+        try//(Connection cnx = ConnectionDB.getConnection())
+        {
             PreparedStatement statement = cnx.prepareStatement(requette);
 
             statement.setInt(1, matricule);
@@ -251,5 +238,84 @@ public class UtilisateurDAO {
         return false ;
     }
 
+    public boolean changePassword(int matricule, String ancienPassword, String newPassword) {
+        String queryRecuperer = "SELECT motdepasse FROM utilisateurs WHERE idUser = ?";
+        String passwordStocker = null;
+
+        try (PreparedStatement statementRecuper = cnx.prepareStatement(queryRecuperer)) {
+            statementRecuper.setInt(1, matricule);
+            ResultSet result = statementRecuper.executeQuery();
+
+            if (result.next()) {
+                passwordStocker = result.getString("motdepasse");
+            } else {
+                System.err.println("Aucun utilisateur trouvé !");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération du password : " + e.getMessage());
+            return false;
+        }
+
+        System.out.println("Mot de passe stocké : " + passwordStocker);
+        System.out.println("Ancien mot de passe saisi : " + ancienPassword);
+
+        if (passwordStocker == null || !BCrypt.checkpw(ancienPassword, passwordStocker)) {
+            System.err.println("⚠️ Ancien password incorrect !!");
+            return false;
+        }
+
+        // Hachage du nouveau mot de passe
+        String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt(12));
+
+        String queryUpdate = "UPDATE utilisateurs SET motdepasse = ? WHERE idUser = ?";
+        try (PreparedStatement statementUpdate = cnx.prepareStatement(queryUpdate)) {
+            statementUpdate.setString(1, hashedPassword);
+            statementUpdate.setInt(2, matricule);
+
+            int rowsUpdate = statementUpdate.executeUpdate();
+            if (rowsUpdate > 0) {
+                System.out.println("✅ Mot de passe mis à jour avec succès !");
+                return true;
+            } else {
+                System.err.println("❌ Erreur lors de la mise à jour");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL lors de la mise à jour : " + e.getMessage());
+            return false;
+        }
+    }
+
+    public Utilisateur authentifier(int idUser, String motdepasse) {
+        String sql = "SELECT * FROM utilisateurs WHERE idUser = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
+            stmt.setInt(1, idUser);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String motdepasseStocke = rs.getString("motdepasse");
+                System.out.println("Mot de passe stocké : " + motdepasseStocke);
+                System.out.println("Mot de passe fourni : " + motdepasse);
+                if (BCrypt.checkpw(motdepasse, motdepasseStocke)) {
+                    Utilisateur user = new Utilisateur();
+                    user.setMatricule(rs.getInt("idUser"));
+                    user.setNom(rs.getString("nom"));
+                    user.setPrenom(rs.getString("prenom"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPassword(motdepasseStocke);
+                    user.setRole(Role.valueOf(rs.getString("role")));
+                    return user;
+                } else {
+                    System.out.println("Echec de la verification du mot de passe");
+                }
+            } else {
+                System.out.println("Utilisateur non trouvé pour idUser = " + idUser);
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
