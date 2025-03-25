@@ -27,7 +27,7 @@ public class EtudiantDAO extends UtilisateurDAO{
     }
 
     public boolean ajouterEtudiant(Etudiant etudiant){
-        String queryEtudiant = "INSERT INTO etudiants (idEtudiant, specialite, section, groupe, idAnnee, idEmploiDuTemps) " +
+        String queryEtudiant = "INSERT INTO etudiants (idEtudiant, spetialite, section, groupe, idAnnee, idEmploiDuTemps) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection cnx = ConnectionDB.getConnection()) {
@@ -62,7 +62,7 @@ public class EtudiantDAO extends UtilisateurDAO{
     }
 
     public Etudiant getEtudiantByMat(int matricule){
-        String query = "SELECT u.nom, u.prenom, u.email, e.specialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps " +
+        String query = "SELECT u.nom, u.prenom, u.email, e.spetialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps " +
                 "FROM utilisateurs u " +
                 "JOIN etudiants e ON u.idUser = e.idEtudiant " +
                 "WHERE e.idEtudiant = ?";
@@ -77,7 +77,7 @@ public class EtudiantDAO extends UtilisateurDAO{
                 String nom = rs.getString("nom");
                 String prenom = rs.getString("prenom");
                 String email = rs.getString("email");
-                String specialite = rs.getString("specialite");
+                String specialite = rs.getString("spetialite");
                 String section = rs.getString("section");
                 String groupe = rs.getString("groupe");
                 int idAnnee = rs.getInt("idAnnee");
@@ -97,7 +97,7 @@ public class EtudiantDAO extends UtilisateurDAO{
     public ArrayList<Etudiant> getEtudiantByNom(String nom) {
         ArrayList<Etudiant> etudiants = new ArrayList<>();
 
-        String query = "SELECT u.idUser, u.prenom, u.email, e.specialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps " +
+        String query = "SELECT u.idUser, u.prenom, u.email, e.spetialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps " +
                 "FROM utilisateurs u " +
                 "JOIN etudiants e ON u.idUser = e.idEtudiant " +
                 "WHERE u.nom = ?";
@@ -112,7 +112,7 @@ public class EtudiantDAO extends UtilisateurDAO{
                 int matricule = rs.getInt("idUser");
                 String prenom = rs.getString("prenom");
                 String email = rs.getString("email");
-                String specialite = rs.getString("specialite");
+                String specialite = rs.getString("spetialite");
                 String section = rs.getString("section");
                 String groupe = rs.getString("groupe");
                 int idAnnee = rs.getInt("idAnnee");
@@ -131,7 +131,7 @@ public class EtudiantDAO extends UtilisateurDAO{
     public ArrayList<Etudiant> getAllEtudiants(){
         ArrayList<Etudiant> etudiants = new ArrayList<>();
 
-        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, e.specialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps " +
+        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, e.spetialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps " +
                 "FROM utilisateurs u " +
                 "JOIN etudiants e ON u.idUser = e.idEtudiant";
 
@@ -144,7 +144,7 @@ public class EtudiantDAO extends UtilisateurDAO{
                 String nom = rs.getString("nom");
                 String prenom = rs.getString("prenom");
                 String email = rs.getString("email");
-                String specialite = rs.getString("specialite");
+                String specialite = rs.getString("spetialite");
                 String section = rs.getString("section");
                 String groupe = rs.getString("groupe");
                 int idAnnee = rs.getInt("idAnnee");
@@ -164,10 +164,10 @@ public class EtudiantDAO extends UtilisateurDAO{
 
     public ArrayList<Etudiant> getEtudiantsBySpecialite(String specialite){
         ArrayList<Etudiant> etd = new ArrayList<>();
-        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, e.specialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps "+
+        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, e.spetialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps "+
                 "FROM utilisateurs u "+
                 "JOIN etudiants e ON u.idUser = e.idEtudiant "+
-                "WHERE e.specialite = ?";
+                "WHERE e.spetialite = ?";
         try(Connection cnx = ConnectionDB.getConnection();
         PreparedStatement statement = cnx.prepareStatement(query)) {
             statement.setString(1, specialite);
@@ -195,10 +195,10 @@ public class EtudiantDAO extends UtilisateurDAO{
     public ArrayList<Etudiant> getEtudiantsBySection(String specialite, String section){
         ArrayList<Etudiant> etd = new ArrayList<>();
 
-        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, e.specialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps " +
+        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, e.spetialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps " +
                 "FROM utilisateurs u " +
                 "JOIN etudiants e ON u.idUser = e.idEtudiant " +
-                "WHERE e.specialite = ? AND e.section = ?";
+                "WHERE e.spetialite = ? AND e.section = ?";
 
 
         try(Connection cnx = ConnectionDB.getConnection();
@@ -230,10 +230,10 @@ public class EtudiantDAO extends UtilisateurDAO{
     public ArrayList<Etudiant> getEtudiantsByGroupe(String specialite, String section, String groupe){
         ArrayList<Etudiant> etd = new ArrayList<>();
 
-        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, e.specialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps "+
+        String query = "SELECT u.idUser, u.nom, u.prenom, u.email, e.spetialite, e.section, e.groupe, e.idAnnee, e.idEmploiDuTemps "+
                 "FROM utilisateurs u "+
                 "JOIN etudiants e ON idUser = idEtudiant "+
-                "WHERE e.specialite = ? AND e.section = ? AND e.groupe = ? ";
+                "WHERE e.spetialite = ? AND e.section = ? AND e.groupe = ? ";
 
         try(Connection cnx = ConnectionDB.getConnection();
         PreparedStatement statement = cnx.prepareStatement(query)){
@@ -260,7 +260,7 @@ public class EtudiantDAO extends UtilisateurDAO{
     }
 
     public boolean modifierEtudiant(Etudiant etudiant) {
-        String query = "UPDATE etudiants SET specialite = ?, section = ?, groupe = ?, idAnnee = ?, idEmploiDuTemps = ? WHERE idEtudiant = ?";
+        String query = "UPDATE etudiants SET spetialite = ?, section = ?, groupe = ?, idAnnee = ?, idEmploiDuTemps = ? WHERE idEtudiant = ?";
         String queryUser = "UPDATE utilisateurs SET nom = ?, prenom = ?, email = ? WHERE idUser = ?";
 
         try (Connection cnx = ConnectionDB.getConnection();

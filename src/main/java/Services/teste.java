@@ -1,9 +1,6 @@
 package Services;
 
-import Model.Admin;
-import Model.Etudiant;
-import Model.Role;
-import Model.Utilisateur;
+import Model.*;
 import org.mindrot.jbcrypt.BCrypt;
 import java.lang.*;
 import java.util.ArrayList;
@@ -39,8 +36,26 @@ public class teste {
         //boolean a = service.supprimerAdmin(1);
 
         System.out.println(a);
+
+        EtudiantService service = new EtudiantService();
+
+        //boolean e = service.ajouterEtudiant(new Etudiant(10, "etu", "diant", "etudiant1@gmail.com", "Password!133@", "Informatique", "B", "2",1, 1 ));
+        //Etudiant e = service.getEtudiantByMat(10);
+        //ArrayList<Etudiant> e = service.getEtudiantByGroupe("Iue", "C", "2");
+        //boolean e = service.modifierEtudiant(new Etudiant(10, "etudiant", "1", "etudiant1@gmail.com", "WRE#de33", "Laformatique", "BI", "3", 2, 2));
+        boolean e = service.supprimerEtudiant(10);
+        System.out.println(e);
          */
 
+        ProfService service = new ProfService();
+
+        //boolean p = service.ajouterProf(new Prof(20, "prof", "esseur", "professeur1@gmail.com", "syER3%%", "Informatique", "Docteur","AI"));
+        //boolean p = service.profExist(20);
+        //Prof p = service.getProfByMat(20);
+        //ArrayList<Prof> p = service.getAllProfs();
+        //boolean p = service.modifierProf(new Prof(20, "prof", "professeur", "Professeur1@gmail.com", "idkKK@34", "Mathematique", "Docteur", "Analyse"));
+        boolean p = service.supprimerProf(20);
+        System.out.println(p);
 
     }
 }

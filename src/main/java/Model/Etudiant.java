@@ -27,6 +27,15 @@ public class Etudiant extends Utilisateur {
         this.idEmploiDuTemp = idEmploiDuTemp;
     }
 
+    public Etudiant(int matricule, String nom, String prenom, String email, String password, String specialite, String section, String groupe, int idAnnee, int idEmploiDuTemp){
+        super(matricule, nom, prenom, email, password, Role.ETUDIANT);
+        this.specialite = specialite;
+        this.section = section;
+        this.groupe = groupe;
+        this.idAnnee = idAnnee;
+        this.idEmploiDuTemp = idEmploiDuTemp;
+    }
+
 
     @Override
     public int getMatricule() {

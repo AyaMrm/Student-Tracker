@@ -57,11 +57,11 @@ public class ProfDAO extends UtilisateurDAO{
 
     public Prof getProfByMat(int matricule){
         String query = "SELECT u.nom, u.prenom, u.email, p.specialite, p.grade, p.departement "+
-                "FROM utilisaures u "+
+                "FROM utilisateurs u "+
                 "JOIN profs p ON u.idUser = idProf "+
-                "WHERE e.idProf = ?";
+                "WHERE p.idProf = ?";
 
-        try(Connection cnx = ConnectionDB.getConnection();
+        try(//Connection cnx = ConnectionDB.getConnection();
         PreparedStatement statement = cnx.prepareStatement(query)){
             statement.setInt(1, matricule);
             ResultSet result = statement.executeQuery();
@@ -201,7 +201,7 @@ public class ProfDAO extends UtilisateurDAO{
     public ArrayList<Prof> getAllProfs(){
         ArrayList<Prof> all = new ArrayList<>();
         String query = "SELECT u.idUser, u.nom, u.prenom, u.email, p.specialite, p.grade, p.departement "+
-                "FROM utlisateurs u "+
+                "FROM utilisateurs u "+
                 "JOIN profs p ON u.idUser = p.idProf";
 
         try(Connection cnx = ConnectionDB.getConnection();

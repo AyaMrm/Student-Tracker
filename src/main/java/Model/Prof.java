@@ -16,7 +16,7 @@ public class Prof extends Utilisateur {
     }
 
     public Prof(int matricule, String nom, String prenom, String email, String specialite, String grade, String departement){
-        super(matricule, nom, prenom, email);
+        super(matricule, nom, prenom, email, Role.PROF);
         this.specialite = specialite;
         this.grade = grade;
         this.departement = departement;
