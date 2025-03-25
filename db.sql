@@ -17,6 +17,10 @@ moyGeneral float ,
 methodeCalcul enum( '40% - 60%' , '50% - 50%', 'Personnalisée')not null default '40% - 60%', 
 anneeScolaire varchar(9) not null unique 
 );
+ alter table annees modify column moyGeneral decimal(4,2);
+
+ALTER TABLE annees ADD COLUMN idEtudiant INT NOT NULL UNIQUE;
+ALTER TABLE annees ADD CONSTRAINT fk_idEtudiant FOREIGN KEY (idEtudiant) REFERENCES etudiants(idEtudiant) ON DELETE CASCADE;
 
 create table profs(
 idProf int primary key not null ,
@@ -30,9 +34,10 @@ create table modules(
 idModule int primary key not null,
 nom varchar(30) not null,
 idProfResponsable int ,
-spetialite varchar(30) not null ,
+specialite varchar(30) not null ,
 foreign key (idProfResponsable) references profs(idProf) on  delete set null
 );
+
 
 create table emploisdutemps(
 idEmploiDuTemps int primary key not null,
@@ -61,6 +66,9 @@ idEmploiDuTemps int  ,
 foreign key (idEmploiDuTemps) references emploisdutemps(idEmploiDuTemps) on delete set null ,
 foreign key (idAnnee) references annees(idAnnee) on delete set null 
 );
+ALTER TABLE etudiants DROP FOREIGN KEY etudiants_ibfk_3;
+ALTER TABLE etudiants DROP COLUMN idAnnee;
+
 
 create table etudiants_modules(
 idEtudiant int ,
@@ -153,8 +161,24 @@ idNotification int primary key not null,
  idDestinataire int not null ,
  foreign key (idExpediteur) references utilisateurs(idUser) on delete cascade,
  foreign key (idDestinataire) references utilisateurs(idUser)  on delete cascade 
-
 );
+
+create table semestres (
+    idSemestre int primary key not null,
+    numero enum('Semestre 1', 'Semestre 2') not null,
+    moyenneSemestre DECIMAL(4,2) DEFAULT NULL,
+    idAnnee int  not null,
+    foreign key (idAnnee) references annees(idAnnee) on delete cascade
+);
+
+alter table notes add column idSemestre int not null;
+alter table notes add foreign key  (idSemestre) references semestres(idSemestre) on delete cascade;
+
+alter table etudiants add column moyenneGenerale decimal(4,2) default null;
+
+alter table modules add column methodeCalcul enum('40% - 60%', '50% - 50%', 'Personnalisée') default '40% - 60%';
+ALTER TABLE annees DROP COLUMN methodeCalcul;
+
 
 
 
@@ -169,5 +193,13 @@ select * from utilisateurs;
 
 ALTER TABLE utilisateurs MODIFY COLUMN motdepasse VARCHAR(255);
 
+SELECT * FROM modules ORDER BY nom ASC;
+/*INSERT INTO modules (idModule, nom, idProfResponsable, spetialite) 
+values (1, "Analyse1", 3 ,"Ingénieur en informatique") ;
 
+SELECT COUNT(*) FROM modules WHERE idModule = ? */
+
+INSERT INTO modules (idModule, nom, idProfResponsable, spetialite) VALUES (?, ?, ?, ?);
+
+DESC modules;
 
