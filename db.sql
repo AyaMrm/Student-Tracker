@@ -17,8 +17,8 @@ moyGeneral float ,
 methodeCalcul enum( '40% - 60%' , '50% - 50%', 'Personnalisée')not null default '40% - 60%', 
 anneeScolaire varchar(9) not null unique 
 );
- alter table annees modify column moyGeneral decimal(4,2);
-
+alter table annees modify column moyGeneral decimal(4,2);
+ALTER TABLE annees DROP COLUMN methodeCalcul;
 ALTER TABLE annees ADD COLUMN idEtudiant INT NOT NULL UNIQUE;
 ALTER TABLE annees ADD CONSTRAINT fk_idEtudiant FOREIGN KEY (idEtudiant) REFERENCES etudiants(idEtudiant) ON DELETE CASCADE;
 
@@ -37,7 +37,10 @@ idProfResponsable int ,
 specialite varchar(30) not null ,
 foreign key (idProfResponsable) references profs(idProf) on  delete set null
 );
-
+alter table modules add column methodeCalcul enum('40% - 60%', '50% - 50%', 'Personnalisée') default '40% - 60%';
+ALTER TABLE modules
+ADD COLUMN coefControle DOUBLE,
+ADD COLUMN coefExamen DOUBLE;
 
 create table emploisdutemps(
 idEmploiDuTemps int primary key not null,
@@ -54,6 +57,39 @@ foreign key (idModule) references modules(idModule) on delete cascade,
 foreign key (idProf) references profs(idProf) on delete set null,
 foreign key (idAnnee) references annees(idAnnee) on delete cascade
 );
+ALTER TABLE emploisdutemps
+DROP FOREIGN KEY emploisdutemps_ibfk_1,
+DROP FOREIGN KEY emploisdutemps_ibfk_2,
+DROP COLUMN jour,
+DROP COLUMN heure_debut,
+DROP COLUMN heure_fin,
+DROP COLUMN salle,
+DROP COLUMN idModule,
+DROP COLUMN idProf;
+
+alter table emploisdutemps add column idSpecialite int not null;
+alter table emploisdutemps add foreign key  (idSpecialite) references specialites(idSpecialite) on delete cascade;
+
+create table specialites(
+idSpecialite int primary key not null ,
+nomSpecialite varchar(50) not null);
+
+
+create table seances(
+idSeance int primary key not null ,
+heure_debut time not null ,
+heure_fin time not null ,
+idModule int not null ,
+idProf int ,
+salle varchar(30) not null ,
+idJour int not null ,
+foreign key (idJour) references jours(idJour) on delete cascade
+);
+
+create table jours(
+idJour int primary key not null,
+jour enum('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche') not null 
+);
 
 create table etudiants(
 idEtudiant int primary key  not null ,
@@ -68,6 +104,8 @@ foreign key (idAnnee) references annees(idAnnee) on delete set null
 );
 ALTER TABLE etudiants DROP FOREIGN KEY etudiants_ibfk_3;
 ALTER TABLE etudiants DROP COLUMN idAnnee;
+alter table etudiants add column moyenneGenerale decimal(4,2) default null;
+
 
 
 create table etudiants_modules(
@@ -108,6 +146,11 @@ foreign key (idModule) references modules(idModule) on delete cascade ,
 foreign key (idProf) references profs(idProf) on delete cascade  
 );
  alter table notes modify column moyenne decimal(4,2);
+ alter table notes add column idSemestre int not null;
+alter table notes add foreign key  (idSemestre) references semestres(idSemestre) on delete cascade;
+
+
+
  create table presence(
  idPresence int primary key not null ,
  statut enum("Présent" , "Absent" ,"Justifié") not null,
@@ -170,15 +213,6 @@ create table semestres (
     idAnnee int  not null,
     foreign key (idAnnee) references annees(idAnnee) on delete cascade
 );
-
-alter table notes add column idSemestre int not null;
-alter table notes add foreign key  (idSemestre) references semestres(idSemestre) on delete cascade;
-
-alter table etudiants add column moyenneGenerale decimal(4,2) default null;
-
-alter table modules add column methodeCalcul enum('40% - 60%', '50% - 50%', 'Personnalisée') default '40% - 60%';
-ALTER TABLE annees DROP COLUMN methodeCalcul;
-
 
 
 
