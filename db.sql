@@ -37,6 +37,9 @@ idProfResponsable int ,
 specialite varchar(30) not null ,
 foreign key (idProfResponsable) references profs(idProf) on  delete set null
 );
+ALTER TABLE modules DROP COLUMN spetialite;
+ALTER TABLE modules ADD COLUMN idSpecialite INT NOT NULL UNIQUE;
+ALTER TABLE modules ADD CONSTRAINT fk_idSpecialite FOREIGN KEY (idSpecialite) REFERENCES specialites(idSpecialite) ON DELETE CASCADE;
 alter table modules add column methodeCalcul enum('40% - 60%', '50% - 50%', 'Personnalisée') default '40% - 60%';
 ALTER TABLE modules
 ADD COLUMN coefControle DOUBLE,
@@ -69,10 +72,10 @@ DROP COLUMN idProf;
 
 alter table emploisdutemps add column idSpecialite int not null;
 alter table emploisdutemps add foreign key  (idSpecialite) references specialites(idSpecialite) on delete cascade;
-
 create table specialites(
 idSpecialite int primary key not null ,
 nomSpecialite varchar(50) not null);
+
 
 
 create table seances(
@@ -176,9 +179,9 @@ alter table notes add foreign key  (idSemestre) references semestres(idSemestre)
  foreign key (idModule) references modules(idModule) on delete cascade,
  foreign key (idEtudiant) references etudiants(idEtudiant) on delete cascade 
  );
+ alter table coursdevoirs add column type enum('COUR' , 'DEVOIR') not null;
 
-
-
+ 
 
 create table testsexams(
 idTestExam int primary key not null ,

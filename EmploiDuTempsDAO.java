@@ -3,224 +3,132 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class EmploiDuTempsDAO {
- private Connection connection;
+    private Connection connection;
+    private JourDAO jourDAO;
+    private SpecialiteDAO specialiteDAO;
 
-public EmploiDuTempsDAO(Connection connection) {
-	super();
-	this.connection = connection;
-}
-
-//1
-public boolean addEmploiDuTemps(EmploiDuTemps emploi) {
-    // Vérifier si l'emploi du temps existe déjà par son ID
-    if (emploiExists(emploi.getIdEmploiDuTemps())) {
-        System.out.println("L'emploi du temps avec ID " + emploi.getIdEmploiDuTemps() + " existe déjà.");
-        return false;
-    }
-    
-    if (hasTimeConflict(emploi)) {
-        System.out.println("Conflit d'horaires détecté pour la salle " + emploi.getSalle() + " à " + emploi.getJour());
-        return false;
+    public EmploiDuTempsDAO(Connection connection) {
+        this.connection = connection;
+        this.jourDAO = new JourDAO(connection);
+        this.specialiteDAO = new SpecialiteDAO(connection);
     }
 
-    String query = "INSERT INTO emploisdutemps (idEmploiDuTemps, jour, heure_debut, heure_fin, salle, idModule, idProf, section, groupe, idAnnee) " +
-                   "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    try (PreparedStatement statement = connection.prepareStatement(query)) {
-        statement.setInt(1, emploi.getIdEmploiDuTemps());
-        statement.setString(2, emploi.getJour());
-        statement.setTime(3, emploi.getHeureDebut());
-        statement.setTime(4, emploi.getHeureFin());
-        statement.setString(5, emploi.getSalle());
-        statement.setInt(6, emploi.getIdModule());
-        
-        if (emploi.getIdProf() != null) {
-            statement.setInt(7, emploi.getIdProf());
-        } else {
-            statement.setNull(7, Types.INTEGER);
-        }
-        
-        statement.setString(8, emploi.getSection());
-        statement.setString(9, emploi.getGroupe());
-        statement.setInt(10, emploi.getIdAnnee());
 
-        int rowsInserted = statement.executeUpdate();
-        if (rowsInserted > 0) {
-            System.out.println("Emploi du temps ajouté avec succès !");
-            return true;
-        }
-    } catch (SQLException e) {
-        System.out.println("Erreur lors de l'ajout de l'emploi du temps : " + e.getMessage());
-    }
-    return false;
-}
- 
-public boolean emploiExists(int idEmploiDuTemps) {
-    String query = "SELECT COUNT(*) FROM emploisdutemps WHERE idEmploiDuTemps = ?";
-    try (PreparedStatement statement = connection.prepareStatement(query)) {
-        statement.setInt(1, idEmploiDuTemps);
-
-        try (ResultSet resultSet = statement.executeQuery()) {
-            return resultSet.next() && resultSet.getInt(1) > 0;
-        }
-    } catch (SQLException e) {
-        System.out.println("Erreur lors de la vérification de l'existence de l'emploi du temps : " + e.getMessage());
-    }
-    return false;
-}
-
-//2
-public EmploiDuTemps getEmploiById(int idEmploiDuTemps) {
-    String query = "SELECT * FROM emploisdutemps WHERE idEmploiDuTemps = ?";
-    
-    try (PreparedStatement statement = connection.prepareStatement(query)) {
-        statement.setInt(1, idEmploiDuTemps);
-
-        try (ResultSet resultSet = statement.executeQuery()) {
-            if (resultSet.next()) {
-                return new EmploiDuTemps(
-                        resultSet.getInt("idEmploiDuTemps"),
-                        resultSet.getString("jour"),
-                        resultSet.getTime("heure_debut"),
-                        resultSet.getTime("heure_fin"),
-                        resultSet.getString("salle"),
-                        resultSet.getInt("idModule"),
-                        resultSet.getObject("idProf") != null ? resultSet.getInt("idProf") : null,
-                        resultSet.getString("section"),
-                        resultSet.getString("groupe"),
-                        resultSet.getInt("idAnnee")
-                );
+    // Vérifie si un emploi du temps existe
+    public boolean emploiExiste(int idEmploi) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM emploisdutemps WHERE idEmploiDuTemps = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, idEmploi);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() && rs.getInt(1) > 0;
             }
         }
-    } catch (SQLException e) {
-        System.out.println("Erreur lors de la récupération de l'emploi du temps : " + e.getMessage());
-    }
-    return null;
-}
-
-//3
-public List<EmploiDuTemps> getAllEmplois() {
-    List<EmploiDuTemps> emplois = new ArrayList<>();
-    String query = "SELECT * FROM emploisdutemps ORDER BY jour ASC, heure_debut ASC";
-
-    try (PreparedStatement statement = connection.prepareStatement(query);
-         ResultSet resultSet = statement.executeQuery()) {
-
-        while (resultSet.next()) {
-            EmploiDuTemps emploi = new EmploiDuTemps(
-                    resultSet.getInt("idEmploiDuTemps"),
-                    resultSet.getString("jour"),
-                    resultSet.getTime("heure_debut"),
-                    resultSet.getTime("heure_fin"),
-                    resultSet.getString("salle"),
-                    resultSet.getInt("idModule"),
-                    resultSet.getObject("idProf") != null ? resultSet.getInt("idProf") : null,
-                    resultSet.getString("section"),
-                    resultSet.getString("groupe"),
-                    resultSet.getInt("idAnnee")
-            );
-            emplois.add(emploi);
-        }
-    } catch (SQLException e) {
-        System.out.println("Erreur lors de la récupération des emplois du temps : " + e.getMessage());
-    }
-    return emplois;
-}
-
-
-//4
-public boolean hasTimeConflict(EmploiDuTemps emploi) {
-    String query = "SELECT COUNT(*) FROM emploisdutemps " +
-                   "WHERE jour = ? AND salle = ? AND idEmploiDuTemps != ? " + 
-                   "AND ((heure_debut BETWEEN ? AND ?) OR (heure_fin BETWEEN ? AND ?) OR " +
-                   "(? BETWEEN heure_debut AND heure_fin) OR (? BETWEEN heure_debut AND heure_fin))";
-
-    try (PreparedStatement statement = connection.prepareStatement(query)) {
-        statement.setString(1, emploi.getJour());
-        statement.setString(2, emploi.getSalle());
-        statement.setInt(3, emploi.getIdEmploiDuTemps());
-        statement.setTime(4, emploi.getHeureDebut());
-        statement.setTime(5, emploi.getHeureFin());
-        statement.setTime(6, emploi.getHeureDebut());
-        statement.setTime(7, emploi.getHeureFin());
-        statement.setTime(8, emploi.getHeureDebut());
-        statement.setTime(9, emploi.getHeureFin());
-
-        try (ResultSet resultSet = statement.executeQuery()) {
-            return resultSet.next() && resultSet.getInt(1) > 0;
-        }
-    } catch (SQLException e) {
-        System.out.println("Erreur lors de la vérification des conflits d'horaires : " + e.getMessage());
-    }
-    return false;
-}
-
-//5
-public boolean updateEmploiDuTemps(EmploiDuTemps emploi) {
-    if (!emploiExists(emploi.getIdEmploiDuTemps())) {
-        System.out.println("L'emploi du temps avec ID " + emploi.getIdEmploiDuTemps() + " n'existe pas.");
-        return false;
     }
 
-    if (hasTimeConflict(emploi)) {
-        System.out.println("Conflit d'horaires détecté pour la salle " + emploi.getSalle() + " à " + emploi.getJour());
-        return false;
-    }
-
-    String query = "UPDATE emploisdutemps SET jour = ?, heure_debut = ?, heure_fin = ?, salle = ?, idModule = ?, idProf = ?, section = ?, groupe = ?, idAnnee = ? " +
-                   "WHERE idEmploiDuTemps = ?";
-
-    try (PreparedStatement statement = connection.prepareStatement(query)) {
-        statement.setString(1, emploi.getJour());
-        statement.setTime(2, emploi.getHeureDebut());
-        statement.setTime(3, emploi.getHeureFin());
-        statement.setString(4, emploi.getSalle());
-        statement.setInt(5, emploi.getIdModule());
-
-        if (emploi.getIdProf() != null) {
-            statement.setInt(6, emploi.getIdProf());
-        } else {
-            statement.setNull(6, Types.INTEGER);
+    // Ajouter un emploi du temps
+    public boolean ajouterEmploiDuTemps(EmploiDuTemps edt) throws SQLException {
+        if (emploiExiste(edt.getIdEmploiDuTemps())) {
+            System.out.println("❌ Emploi du temps déjà existant !");
+            return false;
         }
 
-        statement.setString(7, emploi.getSection());
-        statement.setString(8, emploi.getGroupe());
-        statement.setInt(9, emploi.getIdAnnee());
-        statement.setInt(10, emploi.getIdEmploiDuTemps());
+        String sql = "INSERT INTO emploisdutemps (idEmploiDuTemps, section, groupe, idAnnee, idSpecialite) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, edt.getIdEmploiDuTemps());
+            ps.setString(2, edt.getSection());
+            ps.setString(3, edt.getGroupe());
+            ps.setInt(4, edt.getIdAnnee());
+            ps.setInt(5, edt.getSpecialite().getIdSpecialite());
+            boolean result = ps.executeUpdate() > 0;
 
-        int rowsUpdated = statement.executeUpdate();
-        if (rowsUpdated > 0) {
-            System.out.println("Emploi du temps mis à jour avec succès !");
-            return true;
+            // Ajouter les jours associés
+            for (Jour jour : edt.getJours()) {
+                jourDAO.ajouterJour(jour); // vérifie déjà l'existence
+            }
+
+            return result;
         }
-    } catch (SQLException e) {
-        System.out.println("Erreur lors de la mise à jour de l'emploi du temps : " + e.getMessage());
-    }
-    return false;
-}
-
-//6
-public boolean deleteEmploiDuTemps(int idEmploiDuTemps) {
-    if (!emploiExists(idEmploiDuTemps)) {
-        System.out.println("L'emploi du temps avec ID " + idEmploiDuTemps + " n'existe pas.");
-        return false;
     }
 
-    String query = "DELETE FROM emploisdutemps WHERE idEmploiDuTemps = ?";
-    try (PreparedStatement statement = connection.prepareStatement(query)) {
-        statement.setInt(1, idEmploiDuTemps);
-
-        int rowsDeleted = statement.executeUpdate();
-        if (rowsDeleted > 0) {
-            System.out.println("Emploi du temps supprimé avec succès !");
-            return true;
+    // Modifier un emploi du temps
+    public boolean modifierEmploiDuTemps(EmploiDuTemps edt) throws SQLException {
+        if (!emploiExiste(edt.getIdEmploiDuTemps())) {
+            System.out.println("❌ Emploi du temps inexistant !");
+            return false;
         }
-    } catch (SQLException e) {
-        System.out.println("Erreur lors de la suppression de l'emploi du temps : " + e.getMessage());
+
+        String sql = "UPDATE emploisdutemps SET section = ?, groupe = ?, idAnnee = ?, idSpecialite = ? WHERE idEmploiDuTemps = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, edt.getSection());
+            ps.setString(2, edt.getGroupe());
+            ps.setInt(3, edt.getIdAnnee());
+            ps.setInt(4, edt.getSpecialite().getIdSpecialite());
+            ps.setInt(5, edt.getIdEmploiDuTemps());
+            return ps.executeUpdate() > 0;
+        }
     }
-    return false;
-}
 
+    // Supprimer un emploi du temps
+    public boolean supprimerEmploiDuTemps(int idEmploi) throws SQLException {
+        if (!emploiExiste(idEmploi)) {
+            System.out.println("❌ L'emploi du temps à supprimer n'existe pas.");
+            return false;
+        }
 
+        String sql = "DELETE FROM emploisdutemps WHERE idEmploiDuTemps = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, idEmploi);
+            return ps.executeUpdate() > 0;
+        }
+    }
+
+    // Récupérer un emploi du temps par ID
+    public EmploiDuTemps getEmploiDuTempsParId(int idEmploi) throws SQLException {
+        String sql = "SELECT * FROM emploisdutemps WHERE idEmploiDuTemps = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, idEmploi);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String section = rs.getString("section");
+                    String groupe = rs.getString("groupe");
+                    int idAnnee = rs.getInt("idAnnee");
+                    int idSpecialite = rs.getInt("idSpecialite");
+
+                    Specialite specialite = specialiteDAO.getSpecialiteParId(idSpecialite);
+                    List<Jour> jours = jourDAO.getTousLesJours(); // tu peux filtrer les jours si besoin
+
+                    return new EmploiDuTemps(idEmploi, jours, section, groupe, idAnnee, specialite);
+                }
+            }
+        }
+        return null;
+    }
+
+    // Récupérer tous les emplois du temps
+    public List<EmploiDuTemps> getTousLesEmploisDuTemps() throws SQLException {
+        List<EmploiDuTemps> liste = new ArrayList<>();
+        String sql = "SELECT * FROM emploisdutemps";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int idEmploi = rs.getInt("idEmploiDuTemps");
+                String section = rs.getString("section");
+                String groupe = rs.getString("groupe");
+                int idAnnee = rs.getInt("idAnnee");
+                int idSpecialite = rs.getInt("idSpecialite");
+
+                Specialite specialite = specialiteDAO.getSpecialiteParId(idSpecialite);
+                List<Jour> jours = jourDAO.getTousLesJours(); // à filtrer si besoin
+
+                EmploiDuTemps edt = new EmploiDuTemps(idEmploi, jours, section, groupe, idAnnee, specialite);
+                liste.add(edt);
+            }
+        }
+        return liste;
+    }
 }
