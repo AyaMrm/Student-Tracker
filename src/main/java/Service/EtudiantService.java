@@ -4,7 +4,7 @@ import java.util.List;
 import Model.EtudiantDAO;
 import Model.Etudiant;
 
-public class EtudiantService {
+public class EtudiantService{
 
 	private EtudiantDAO etudiantDAO;
 
