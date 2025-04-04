@@ -5,7 +5,7 @@ import Service.AdminService;
 
 public class AdminController {
 	
-	private AdminService adminService;
+	private final AdminService adminService;
 
 	public AdminController() {
 	    this.adminService = new AdminService();

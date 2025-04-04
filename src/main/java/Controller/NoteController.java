@@ -6,7 +6,7 @@ import Service.NoteService;
 
 public class NoteController {
 
-	private NoteService noteService;
+	private final NoteService noteService;
 	
 	public NoteController() {
 		this.noteService = new NoteService();

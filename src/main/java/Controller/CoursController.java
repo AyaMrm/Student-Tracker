@@ -6,7 +6,7 @@ import Service.CoursService;
 
 public class CoursController {
 	
-	private CoursService coursService;
+	private final CoursService coursService;
 	
 	public CoursController() {
 		this.coursService = new CoursService();

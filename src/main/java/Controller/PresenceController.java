@@ -4,7 +4,7 @@ import Model.Presence;
 import Service.PresenceService;
 
 public class PresenceController {
-	private PresenceService presenceService;
+	private final PresenceService presenceService;
 	
 	public PresenceController() {
 		this.presenceService = new PresenceService();
