@@ -1,4 +1,3 @@
-// pas encore terminé
 package Controller;
 
 import Model.Admin;
@@ -12,23 +11,43 @@ public class AdminController {
 	    this.adminService = new AdminService();
 	}
 	
-	public boolean adminExist(int matricule) {
-	    return adminService.adminExist(matricule);
-	}
+    public void ajouterAdmin(Admin admin) {
+        if (adminService.adminExist(admin.getMatricule())) {
+            System.out.println("Erreur : L'administrateur existe déjà !");
+        } else if (adminService.ajouterAdmin(admin)) {
+            System.out.println("Administrateur ajouté avec succès !");
+        } else {
+            System.out.println("Échec de l'ajout de l'administrateur.");
+        }
+    }
+	
+    public void getAdminByMat(int matricule) {
+        Admin admin = adminService.getAdminByMat(matricule);
+        if (admin != null) {
+            System.out.println(admin);
+        } else {
+            System.out.println("Aucun administrateur trouvé avec ce matricule.");
+        }
+    }
+}
 
-	public boolean ajouterAdmin(Admin admin) {
-	    return adminService.ajouterAdmin(admin);
-	}
-
-	public Admin getAdminByMat(int matricule) {
-	    return adminService.getAdminByMat(matricule);
-	}
-
-	public boolean modifierAdmin(Admin admin) {
-	    return adminService.modifierAdmin(admin);
-	}
-
-	public boolean supprimerAdmin(int matricule) {
-	    return adminService.supprimerAdmin(matricule);
-	}
+    public void modifierAdmin(Admin admin) {
+        if (!adminService.adminExist(admin.getMatricule())) {
+            System.out.println("Erreur : Administrateur introuvable.");
+        } else if (adminService.modifierAdmin(admin)) {
+            System.out.println("Administrateur modifié avec succès !");
+        } else {
+            System.out.println("Échec de la modification de l'administrateur.");
+        }
+    }
+	
+    public void supprimerAdmin(int matricule) {
+        if (!adminService.adminExist(matricule)) {
+            System.out.println("Erreur : Administrateur non trouvé.");
+        } else if (adminService.supprimerAdmin(matricule)) {
+            System.out.println("Administrateur supprimé avec succès !");
+        } else {
+            System.out.println("Échec de la suppression de l'administrateur.");
+        }
+    }
 }
