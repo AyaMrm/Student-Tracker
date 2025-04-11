@@ -48,12 +48,14 @@ public boolean addAnnee(Annee annee) {
 		System.out.println("l'année" +annee.getAnneeScolaire()+ "existe déjà" );
 		return false;
 	}
-	String query = "INSERT INTO annees (idAnnee, moyGeneral, anneeScolaire, idEtudiant) VALUES (?, ?, ?, ?)";
+	String query = "INSERT INTO annees (idAnnee, moyGeneral, anneeScolaire, idEtudiant, idSpecialite) VALUES (?, ?, ?, ?, ?)";
 	try(PreparedStatement statement = connection.prepareStatement(query)){
 		statement.setInt(1, annee.getIdAnnee());
 		statement.setBigDecimal(2, annee.getMoyGeneral());
 		statement.setString(3, annee.getAnneeScolaire());
 		statement.setInt(4, annee.getIdEtudiant());
+		statement.setInt(5, annee.getIdSpecialite());
+
 
 		
 		int rowsInserted = statement.executeUpdate();
@@ -103,7 +105,11 @@ public List<Annee> getAllAnneesSorted() {
                     resultSet.getInt("idAnnee"),
                     resultSet.getBigDecimal("moyGeneral"),
                     resultSet.getString("anneeScolaire"),
-                    resultSet.getInt("idEtudiant")
+                    resultSet.getInt("idEtudiant"),
+                    resultSet.getInt("idSpecialite"),
+                    null,
+                    null
+
             );
             annees.add(annee);
         }
@@ -139,12 +145,15 @@ public boolean updateAnnee(Annee annee) {
         System.out.println(" L'année avec ID " + annee.getIdAnnee() + " n'existe pas.");
         return false;
     }
-    String query = "UPDATE annees SET moyGeneral = ?, anneeScolaire = ?, idEtudiant = ? WHERE idAnnee = ?";
+    String query = "UPDATE annees SET moyGeneral = ?, anneeScolaire = ?, idEtudiant = ?, idSpecialite = ? WHERE idAnnee = ?";
     try (PreparedStatement statement = connection.prepareStatement(query)) {
         statement.setBigDecimal(1, annee.getMoyGeneral()); 
         statement.setString(2, annee.getAnneeScolaire());
         statement.setInt(3, annee.getIdEtudiant());
-        statement.setInt(4, annee.getIdAnnee());
+        statement.setInt(4, annee.getIdSpecialite());
+
+        statement.setInt(5, annee.getIdAnnee());
+        
         int rowsUpdated = statement.executeUpdate();
         if (rowsUpdated > 0) {
             System.out.println(" Année mise à jour avec succès !");
@@ -166,7 +175,11 @@ public Annee getAnneeById(int idAnnee) {
                         resultSet.getInt("idAnnee"),
                         resultSet.getBigDecimal("moyGeneral"),
                         resultSet.getString("anneeScolaire"),
-                        resultSet.getInt("idEtudiant")
+                        resultSet.getInt("idEtudiant"),
+                        resultSet.getInt("idSpecialite"),
+                        null,
+                        null
+
                 );
             }
         }

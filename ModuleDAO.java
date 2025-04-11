@@ -29,7 +29,7 @@ public class ModuleDAO {
         if (existeModule(module.getIdModule())) {
             throw new SQLException("Le module avec cet ID existe déjà.");
         }
-        String sql = "INSERT INTO module (nom, idProfResponsable, specialite, methodeCalcul, coefControle, coefExamen) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO module (nom, idProfResponsable, idSpecialite, methodeCalcul, coefControle, coefExamen, idSemestre) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, module.getNom());
             stmt.setInt(2, module.getIdProfResponsable());
@@ -37,6 +37,7 @@ public class ModuleDAO {
             stmt.setString(4, module.getMethodeCalcul().name());
             stmt.setObject(5, module.getMethodeCalcul() == MethodeCalcul.PERSONNALISEE ? null : module.getMethodeCalcul().getCoefControle(), Types.DOUBLE);
             stmt.setObject(6, module.getMethodeCalcul() == MethodeCalcul.PERSONNALISEE ? null : module.getMethodeCalcul().getCoefExamen(), Types.DOUBLE);
+            stmt.setInt(7, module.getIdSemestre());
             stmt.executeUpdate();
         }
     }
@@ -51,11 +52,14 @@ public class ModuleDAO {
                         rs.getInt("idModule"),
                         rs.getString("nom"),
                         rs.getInt("idProfResponsable"),
-                        rs.getString("specialite"),
+                        rs.getString("idSpecialite"),
                         MethodeCalcul.valueOf(rs.getString("methodeCalcul")),
                         rs.getObject("coefControle", Double.class),
-                        rs.getObject("coefExamen", Double.class)
+                        rs.getObject("coefExamen", Double.class),
+                        rs.getInt("idSemestre")
+
                     );
+                    
                 }
             }
         }
@@ -71,10 +75,12 @@ public class ModuleDAO {
                     rs.getInt("idModule"),
                     rs.getString("nom"),
                     rs.getInt("idProfResponsable"),
-                    rs.getString("specialite"),
+                    rs.getString("idSpecialite"),
                     MethodeCalcul.valueOf(rs.getString("methodeCalcul")),
                     rs.getObject("coefControle", Double.class),
-                    rs.getObject("coefExamen", Double.class)
+                    rs.getObject("coefExamen", Double.class),
+                    rs.getInt("idSemestre")
+
                 ));
             }
         }
@@ -85,7 +91,7 @@ public class ModuleDAO {
         if (!existeModule(module.getIdModule())) {
             throw new SQLException("Le module avec cet ID n'existe pas.");
         }
-        String sql = "UPDATE module SET nom=?, idProfResponsable=?, specialite=?, methodeCalcul=?, coefControle=?, coefExamen=? WHERE idModule=?";
+        String sql = "UPDATE module SET nom=?, idProfResponsable=?, idSpecialite=?, methodeCalcul=?, coefControle=?, coefExamen=?, idSemestre=? WHERE idModule=?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, module.getNom());
             stmt.setInt(2, module.getIdProfResponsable());
@@ -103,7 +109,8 @@ public class ModuleDAO {
                 stmt.setDouble(6, module.getCoefExamen());  // sinon on utilise setDouble
             }
 
-            stmt.setInt(7, module.getIdModule());
+            stmt.setInt(7, module.getIdSemestre());
+            stmt.setInt(8, module.getIdModule());            
             stmt.executeUpdate();
         }
     }
@@ -132,10 +139,12 @@ public class ModuleDAO {
                         rs.getInt("idModule"),
                         rs.getString("nom"),
                         rs.getInt("idProfResponsable"),
-                        rs.getString("specialite"),
+                        rs.getString("idSpecialite"),
                         MethodeCalcul.valueOf(rs.getString("methodeCalcul")),
                         rs.getObject("coefControle", Double.class),
-                        rs.getObject("coefExamen", Double.class)
+                        rs.getObject("coefExamen", Double.class),
+                        rs.getInt("idSemestre")
+
                     ));
                 }
             }

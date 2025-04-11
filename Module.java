@@ -7,9 +7,12 @@ public class Module {
 	    private String idSpecialite ;
 	    private MethodeCalcul methodeCalcul;
 	    private Double coefControle; // Optionnel si méthode personnalisée
-	    private Double coefExamen;   // Optionnel si méthode personnalisée
-		public Module(int idModule, String nom, int idProfResponsable, String idSpecialite , MethodeCalcul methodeCalcul,
-				Double coefControle, Double coefExamen) {
+	   private Double coefExamen;   // Optionnel si méthode personnalisée
+		private int idSemestre;
+	   
+	   
+	   public Module(int idModule, String nom, int idProfResponsable, String idSpecialite , MethodeCalcul methodeCalcul,
+				Double coefControle, Double coefExamen, int idSemestre) {
 			super();
 			this.idModule = idModule;
 			this.nom = nom;
@@ -23,6 +26,7 @@ public class Module {
 				  this.coefControle = methodeCalcul.getCoefControle();
 				  this.coefExamen = methodeCalcul.getCoefExamen();
 			  }
+			  this.idSemestre = idSemestre;
 		}
 		public int getIdModule() {
 			return idModule;
@@ -63,6 +67,14 @@ public class Module {
 			return coefExamen;
 		}
 		
+		
+		
+		public int getIdSemestre() {
+			return idSemestre;
+		}
+		public void setIdSemestre(int idSemestre) {
+			this.idSemestre = idSemestre;
+		}
 		public void setCoeficientsPersonnalises(double coefControle, double coefExamen) {
 	        if (this.methodeCalcul == MethodeCalcul.PERSONNALISEE) {
 	            this.coefControle = coefControle;

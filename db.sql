@@ -21,6 +21,9 @@ alter table annees modify column moyGeneral decimal(4,2);
 ALTER TABLE annees DROP COLUMN methodeCalcul;
 ALTER TABLE annees ADD COLUMN idEtudiant INT NOT NULL UNIQUE;
 ALTER TABLE annees ADD CONSTRAINT fk_idEtudiant FOREIGN KEY (idEtudiant) REFERENCES etudiants(idEtudiant) ON DELETE CASCADE;
+ALTER TABLE annees ADD COLUMN idSpecialite INT NOT NULL UNIQUE;
+ALTER TABLE profs ADD CONSTRAINT fk_1idSpecialite FOREIGN KEY (idSpecialite) REFERENCES specialites(idSpecialite) ON DELETE CASCADE;
+
 
 create table profs(
 idProf int primary key not null ,
@@ -29,6 +32,9 @@ specialite varchar(50) not null ,
 grade varchar(20) not null ,
 departement varchar(30) not null 
 );
+ALTER TABLE profs DROP COLUMN specialite;
+ALTER TABLE profs ADD COLUMN idSpecialite INT NOT NULL UNIQUE;
+ALTER TABLE profs ADD CONSTRAINT idSpecialite FOREIGN KEY (idSpecialite) REFERENCES specialites(idSpecialite) ON DELETE CASCADE;
 
 create table modules(
 idModule int primary key not null,
@@ -37,6 +43,8 @@ idProfResponsable int ,
 specialite varchar(30) not null ,
 foreign key (idProfResponsable) references profs(idProf) on  delete set null
 );
+
+
 ALTER TABLE modules DROP COLUMN spetialite;
 ALTER TABLE modules ADD COLUMN idSpecialite INT NOT NULL UNIQUE;
 ALTER TABLE modules ADD CONSTRAINT fk_idSpecialite FOREIGN KEY (idSpecialite) REFERENCES specialites(idSpecialite) ON DELETE CASCADE;
@@ -44,6 +52,9 @@ alter table modules add column methodeCalcul enum('40% - 60%', '50% - 50%', 'Per
 ALTER TABLE modules
 ADD COLUMN coefControle DOUBLE,
 ADD COLUMN coefExamen DOUBLE;
+alter table modules add column idSemestre int not null unique;
+alter table modules add CONSTRAINT idSemestre FOREIGN KEY (idSpecialite) references semestres(idSemestre) on delete cascade;
+
 
 create table emploisdutemps(
 idEmploiDuTemps int primary key not null,
@@ -72,6 +83,7 @@ DROP COLUMN idProf;
 
 alter table emploisdutemps add column idSpecialite int not null;
 alter table emploisdutemps add foreign key  (idSpecialite) references specialites(idSpecialite) on delete cascade;
+
 create table specialites(
 idSpecialite int primary key not null ,
 nomSpecialite varchar(50) not null);
@@ -108,6 +120,10 @@ foreign key (idAnnee) references annees(idAnnee) on delete set null
 ALTER TABLE etudiants DROP FOREIGN KEY etudiants_ibfk_3;
 ALTER TABLE etudiants DROP COLUMN idAnnee;
 alter table etudiants add column moyenneGenerale decimal(4,2) default null;
+ALTER TABLE etudiants DROP COLUMN specialite;
+ALTER TABLE etudiants ADD COLUMN idSpecialite INT NOT NULL UNIQUE;
+ALTER TABLE etudiants ADD CONSTRAINT fk1_idSpecialite FOREIGN KEY (idSpecialite) REFERENCES specialites(idSpecialite) ON DELETE CASCADE;
+
 
 
 
