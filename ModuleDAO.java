@@ -33,7 +33,7 @@ public class ModuleDAO {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, module.getNom());
             stmt.setInt(2, module.getIdProfResponsable());
-            stmt.setString(3, module.getidSpecialite ());
+            stmt.setInt(3, module.getidSpecialite ());
             stmt.setString(4, module.getMethodeCalcul().name());
             stmt.setObject(5, module.getMethodeCalcul() == MethodeCalcul.PERSONNALISEE ? null : module.getMethodeCalcul().getCoefControle(), Types.DOUBLE);
             stmt.setObject(6, module.getMethodeCalcul() == MethodeCalcul.PERSONNALISEE ? null : module.getMethodeCalcul().getCoefExamen(), Types.DOUBLE);
@@ -52,7 +52,7 @@ public class ModuleDAO {
                         rs.getInt("idModule"),
                         rs.getString("nom"),
                         rs.getInt("idProfResponsable"),
-                        rs.getString("idSpecialite"),
+                        rs.getInt("idSpecialite"),
                         MethodeCalcul.valueOf(rs.getString("methodeCalcul")),
                         rs.getObject("coefControle", Double.class),
                         rs.getObject("coefExamen", Double.class),
@@ -75,7 +75,7 @@ public class ModuleDAO {
                     rs.getInt("idModule"),
                     rs.getString("nom"),
                     rs.getInt("idProfResponsable"),
-                    rs.getString("idSpecialite"),
+                    rs.getInt("idSpecialite"),
                     MethodeCalcul.valueOf(rs.getString("methodeCalcul")),
                     rs.getObject("coefControle", Double.class),
                     rs.getObject("coefExamen", Double.class),
@@ -95,7 +95,7 @@ public class ModuleDAO {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, module.getNom());
             stmt.setInt(2, module.getIdProfResponsable());
-            stmt.setString(3, module.getidSpecialite ());
+            stmt.setInt(3, module.getidSpecialite ());
             stmt.setString(4, module.getMethodeCalcul().name());
             if (module.getCoefControle() == null) {
                 stmt.setNull(5, Types.DOUBLE);  // si coefControle est null, on utilise setNull
@@ -139,7 +139,7 @@ public class ModuleDAO {
                         rs.getInt("idModule"),
                         rs.getString("nom"),
                         rs.getInt("idProfResponsable"),
-                        rs.getString("idSpecialite"),
+                        rs.getInt("idSpecialite"),
                         MethodeCalcul.valueOf(rs.getString("methodeCalcul")),
                         rs.getObject("coefControle", Double.class),
                         rs.getObject("coefExamen", Double.class),

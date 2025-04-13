@@ -1,4 +1,5 @@
 package model;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ public class NoteDAO {
 	        this.connection = connection;
 	    }
 
-	    // Méthode pour ajouter une note avec vérification des doublons
+	    // Méthode pour ajouter une note
 	    public boolean ajouterNote(Note note) throws SQLException {
 	        // Vérifier si l'étudiant a déjà une note pour ce module
 	        if (getNoteParEtudiantEtModule(note.getIdEtudiant(), note.getIdModule()) != null) {
@@ -18,17 +19,23 @@ public class NoteDAO {
 	        }
 
 	        // Vérifications des données de la note (validité des valeurs)
-	        if (note.getCoefficient() <= 0 || note.getCc() < 0 || note.getCc() > 20 || note.getExam() < 0 || note.getExam() > 20 || note.getMoyenne() < 0 || note.getMoyenne() > 20) {
-	            return false; // Les valeurs de la note ne sont pas valides
-	        }
+	        if (note.getCoefficient() <= 0.0 
+	        	    || note.getCc().compareTo(BigDecimal.ZERO) < 0 
+	        	    || note.getCc().compareTo(new BigDecimal("20.0")) > 0
+	        	    || note.getExam().compareTo(BigDecimal.ZERO) < 0
+	        	    || note.getExam().compareTo(new BigDecimal("20.0")) > 0
+	        	    || note.getMoyenne().compareTo(BigDecimal.ZERO) < 0
+	        	    || note.getMoyenne().compareTo(new BigDecimal("20.0")) > 0) {
+	        	    return false;
+	        	}
 
 	        String sql = "INSERT INTO notes (idNote, coefficient, cc, exam, moyenne, idEtudiant, idProf, idModule, idSemestre) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 	            stmt.setInt(1, note.getIdNote());
 	            stmt.setInt(2, note.getCoefficient());
-	            stmt.setFloat(3, note.getCc());
-	            stmt.setFloat(4, note.getExam());
-	            stmt.setFloat(5, note.getMoyenne());
+	            stmt.setBigDecimal(3, note.getCc());
+	            stmt.setBigDecimal(4, note.getExam());
+	            stmt.setBigDecimal(5, note.getMoyenne());
 	            stmt.setInt(6, note.getIdEtudiant());
 	            stmt.setInt(7, note.getIdProf());
 	            stmt.setInt(8, note.getIdModule());
@@ -45,16 +52,22 @@ public class NoteDAO {
 	        }
 
 	        // Vérifications des données de la note
-	        if (note.getCoefficient() <= 0 || note.getCc() < 0 || note.getCc() > 20 || note.getExam() < 0 || note.getExam() > 20 || note.getMoyenne() < 0 || note.getMoyenne() > 20) {
-	            return false; // Les valeurs de la note ne sont pas valides
-	        }
+	        if (note.getCoefficient() <= 0.0 
+	        	    || note.getCc().compareTo(BigDecimal.ZERO) < 0 
+	        	    || note.getCc().compareTo(new BigDecimal("20.0")) > 0
+	        	    || note.getExam().compareTo(BigDecimal.ZERO) < 0
+	        	    || note.getExam().compareTo(new BigDecimal("20.0")) > 0
+	        	    || note.getMoyenne().compareTo(BigDecimal.ZERO) < 0
+	        	    || note.getMoyenne().compareTo(new BigDecimal("20.0")) > 0) {
+	        	    return false;
+	        	}
 
 	        String sql = "UPDATE notes SET coefficient=?, cc=?, exam=?, moyenne=?, idEtudiant=?, idProf=?, idModule=?, idSemestre=? WHERE idNote=?";
 	        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 	            stmt.setInt(1, note.getCoefficient());
-	            stmt.setFloat(2, note.getCc());
-	            stmt.setFloat(3, note.getExam());
-	            stmt.setFloat(4, note.getMoyenne());
+	            stmt.setBigDecimal(2, note.getCc());
+	            stmt.setBigDecimal(3, note.getExam());
+	            stmt.setBigDecimal(4, note.getMoyenne());
 	            stmt.setInt(5, note.getIdEtudiant());
 	            stmt.setInt(6, note.getIdProf());
 	            stmt.setInt(7, note.getIdModule());
@@ -88,9 +101,9 @@ public class NoteDAO {
 	                return new Note(
 	                    rs.getInt("idNote"),
 	                    rs.getInt("coefficient"),
-	                    rs.getFloat("cc"),
-	                    rs.getFloat("exam"),
-	                    rs.getFloat("moyenne"),
+	                    rs.getBigDecimal("cc"),
+	                    rs.getBigDecimal("exam"),
+	                    rs.getBigDecimal("moyenne"),
 	                    rs.getInt("idEtudiant"),
 	                    rs.getInt("idProf"),
 	                    rs.getInt("idModule"),
@@ -111,9 +124,9 @@ public class NoteDAO {
 	                notes.add(new Note(
 	                    rs.getInt("idNote"),
 	                    rs.getInt("coefficient"),
-	                    rs.getFloat("cc"),
-	                    rs.getFloat("exam"),
-	                    rs.getFloat("moyenne"),
+	                    rs.getBigDecimal("cc"),
+	                    rs.getBigDecimal("exam"),
+	                    rs.getBigDecimal("moyenne"),
 	                    rs.getInt("idEtudiant"),
 	                    rs.getInt("idProf"),
 	                    rs.getInt("idModule"),
@@ -135,9 +148,9 @@ public class NoteDAO {
 	                return new Note(
 	                    rs.getInt("idNote"),
 	                    rs.getInt("coefficient"),
-	                    rs.getFloat("cc"),
-	                    rs.getFloat("exam"),
-	                    rs.getFloat("moyenne"),
+	                    rs.getBigDecimal("cc"),
+	                    rs.getBigDecimal("exam"),
+	                    rs.getBigDecimal("moyenne"),
 	                    rs.getInt("idEtudiant"),
 	                    rs.getInt("idProf"),
 	                    rs.getInt("idModule"),

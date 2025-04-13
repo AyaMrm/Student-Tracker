@@ -30,15 +30,16 @@ public boolean ajouterSeance(Seance seance) throws SQLException {
         return false;
     }
 
-    String sql = "INSERT INTO seances (idSeance, heure_debut, heure_fin, idModule, idProf, salle, idJour) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO seances (idSeance, heure_debut, heure_fin, idModule, idProf, salle, idJour ) VALUES (?, ?, ?, ?, ?, ?, ?)";
     try (PreparedStatement ps = connection.prepareStatement(sql)) {
         ps.setInt(1, seance.getIdSeance());
         ps.setTime(2, Time.valueOf(seance.getDebutSeance()));
         ps.setTime(3, Time.valueOf(seance.getFinSeance()));
         ps.setInt(4, seance.getIdModule());
         ps.setInt(5, seance.getIdProf());
-        ps.setString(6, "Salle par défaut"); // à modifier selon ton modèle
+        ps.setString(6, seance.getSalle()); 
         ps.setInt(7, seance.getIdJour());
+       
 
         return ps.executeUpdate() > 0;
     }
@@ -57,7 +58,7 @@ public boolean modifierSeance(Seance seance) throws SQLException {
         ps.setTime(2, Time.valueOf(seance.getFinSeance()));
         ps.setInt(3, seance.getIdModule());
         ps.setInt(4, seance.getIdProf());
-        ps.setString(5, "Salle modifiée"); // à adapter
+        ps.setString(5, seance.getSalle()); 
         ps.setInt(6, seance.getIdJour());
         ps.setInt(7, seance.getIdSeance());
 
@@ -92,6 +93,7 @@ public List<Seance> getToutesLesSeances() throws SQLException {
                     rs.getTime("heure_fin").toLocalTime(),
                     rs.getInt("idModule"),
                     rs.getInt("idProf"),
+                    rs.getString("salle"),
                     rs.getInt("idJour")
             );
             seances.add(seance);
@@ -113,6 +115,7 @@ public Seance getSeanceParId(int idSeance) throws SQLException {
                         rs.getTime("heure_fin").toLocalTime(),
                         rs.getInt("idModule"),
                         rs.getInt("idProf"),
+                        rs.getString("salle"),
                         rs.getInt("idJour")
                 );
             }

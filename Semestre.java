@@ -1,12 +1,14 @@
 package model;
 
+import java.math.BigDecimal;
+
 public class Semestre {
 	private int idSemestre;
     private NumeroSemestre numero;
-    private Double moyenneSemestre;
+    private BigDecimal moyenneSemestre;
     private int idAnnee;
 
-    public Semestre(int idSemestre, NumeroSemestre numero, Double moyenneSemestre, int idAnnee) {
+    public Semestre(int idSemestre, NumeroSemestre numero, BigDecimal moyenneSemestre, int idAnnee) {
         this.idSemestre = idSemestre;
         this.numero = numero;
         this.moyenneSemestre = moyenneSemestre;
@@ -29,11 +31,11 @@ public class Semestre {
         this.numero = numero;
     }
 
-    public Double getMoyenneSemestre() {
+    public BigDecimal getMoyenneSemestre() {
         return moyenneSemestre;
     }
 
-    public void setMoyenneSemestre(Double moyenneSemestre) {
+    public void setMoyenneSemestre(BigDecimal moyenneSemestre) {
         this.moyenneSemestre = moyenneSemestre;
     }
 

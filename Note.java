@@ -1,17 +1,19 @@
 package model;
 
+import java.math.BigDecimal;
+
 public class Note {
 	 private int idNote;
 	    private int coefficient;
-	    private float cc;
-	    private float exam;
-	    private float moyenne;
+	    private BigDecimal cc;
+	    private BigDecimal exam;
+	    private BigDecimal moyenne;
 	    private int idEtudiant;
 	    private int idProf;
 	    private int idModule;
 	    private int idSemestre;
 		
-	    public Note(int idNote, int coefficient, float cc, float exam, float moyenne, int idEtudiant, int idProf,
+	    public Note(int idNote, int coefficient, BigDecimal cc, BigDecimal exam, BigDecimal moyenne, int idEtudiant, int idProf,
 				int idModule, int idSemestre) {
 			super();
 			this.idNote = idNote;
@@ -41,27 +43,27 @@ public class Note {
 			this.coefficient = coefficient;
 		}
 
-		public float getCc() {
+		public BigDecimal getCc() {
 			return cc;
 		}
 
-		public void setCc(float cc) {
+		public void setCc(BigDecimal cc) {
 			this.cc = cc;
 		}
 
-		public float getExam() {
+		public BigDecimal getExam() {
 			return exam;
 		}
 
-		public void setExam(float exam) {
+		public void setExam(BigDecimal exam) {
 			this.exam = exam;
 		}
 
-		public float getMoyenne() {
+		public BigDecimal getMoyenne() {
 			return moyenne;
 		}
 
-		public void setMoyenne(float moyenne) {
+		public void setMoyenne(BigDecimal moyenne) {
 			this.moyenne = moyenne;
 		}
 

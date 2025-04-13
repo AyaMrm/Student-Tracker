@@ -4,24 +4,26 @@ import java.math.BigDecimal;
 
 public class Annee {
  private int idAnnee ;
- private BigDecimal moyGeneral;
  private String anneeScolaire; //aaaa/aaaa
  private int idEtudiant;
  private int idSpecialite;
+ private BigDecimal moyenneGenerale;
+
 
  private Semestre semestre1;
  private Semestre semestre2;
  
 
 
-public Annee(int idAnnee, BigDecimal moyGeneral, String anneeScolaire, int idEtudiant, int idSpecialite,
+public Annee(int idAnnee,  String anneeScolaire, int idEtudiant, int idSpecialite,BigDecimal moyenneGenerale,
 		Semestre semestre1, Semestre semestre2) {
 	super();
 	this.idAnnee = idAnnee;
-	this.moyGeneral = moyGeneral;
+	this.moyenneGenerale = moyenneGenerale;
 	this.anneeScolaire = anneeScolaire;
 	this.idEtudiant = idEtudiant;
 	this.idSpecialite = idSpecialite;
+	this.moyenneGenerale = moyenneGenerale;
 	this.semestre1 = semestre1;
 	this.semestre2 = semestre2;
 }
@@ -42,12 +44,12 @@ public void setIdAnnee(int idAnnee) {
 	this.idAnnee = idAnnee;
 }
 
-public BigDecimal getMoyGeneral() {
-	return moyGeneral;
+public BigDecimal getmoyenneGenerale() {
+	return moyenneGenerale;
 }
 
-public void setMoyGeneral(BigDecimal moyGeneral) {
-	this.moyGeneral = moyGeneral;
+public void setMoyGeneral(BigDecimal moyenneGenerale) {
+	this.moyenneGenerale = moyenneGenerale;
 }
 
 
@@ -88,7 +90,7 @@ public void setIdSpecialite(int idSpecialite) {
 
 @Override
 public String toString() {
-	return "Annee [idAnnee=" + idAnnee + ", moyGeneral=" + moyGeneral + ", anneeScolaire=" + anneeScolaire
+	return "Annee [idAnnee=" + idAnnee + ", moyenneGenerale=" + moyenneGenerale + ", anneeScolaire=" + anneeScolaire
 			+ ", idEtudiant=" + idEtudiant + ", idSpecialite=" + idSpecialite + ", semestre1=" + semestre1
 			+ ", semestre2=" + semestre2 + "]";
 }

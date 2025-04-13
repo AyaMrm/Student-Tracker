@@ -4,14 +4,14 @@ public class Module {
 	 private int idModule;
 	    private String nom;
 	    private int idProfResponsable;
-	    private String idSpecialite ;
+	    private int idSpecialite ;
 	    private MethodeCalcul methodeCalcul;
 	    private Double coefControle; // Optionnel si méthode personnalisée
 	   private Double coefExamen;   // Optionnel si méthode personnalisée
 		private int idSemestre;
 	   
 	   
-	   public Module(int idModule, String nom, int idProfResponsable, String idSpecialite , MethodeCalcul methodeCalcul,
+	   public Module(int idModule, String nom, int idProfResponsable, int idSpecialite , MethodeCalcul methodeCalcul,
 				Double coefControle, Double coefExamen, int idSemestre) {
 			super();
 			this.idModule = idModule;
@@ -46,10 +46,10 @@ public class Module {
 		public void setIdProfResponsable(int idProfResponsable) {
 			this.idProfResponsable = idProfResponsable;
 		}
-		public String getidSpecialite () {
+		public int getidSpecialite () {
 			return idSpecialite ;
 		}
-		public void setidSpecialite (String idSpecialite ) {
+		public void setidSpecialite (int idSpecialite ) {
 			this.idSpecialite  = idSpecialite ;
 		}
 		public MethodeCalcul getMethodeCalcul() {

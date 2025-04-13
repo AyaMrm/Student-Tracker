@@ -3,23 +3,23 @@ package model;
 public class CourDevoir {
 	private int idCoursDevoirs;
     private String message;
-    private String coursEnPDF; // chemin du fichier PDF
+    private String coursEnPDF;
+    private TypeCourDevoir type;// chemin du fichier PDF
     private int idProf;
     private int idModule;
     private boolean devoirDone;
     private int idEtudiant;
-    private TypeCourDevoir type;
-	public CourDevoir(int idCoursDevoirs, String message, String coursEnPDF, int idProf, int idModule,
-			boolean devoirDone, int idEtudiant, TypeCourDevoir type) {
+	public CourDevoir(int idCoursDevoirs, String message, String coursEnPDF,TypeCourDevoir type, int idProf, int idModule,
+			boolean devoirDone, int idEtudiant) {
 		super();
 		this.idCoursDevoirs = idCoursDevoirs;
 		this.message = message;
 		this.coursEnPDF = coursEnPDF;
+		this.type = type;
 		this.idProf = idProf;
 		this.idModule = idModule;
 		this.devoirDone = devoirDone;
 		this.idEtudiant = idEtudiant;
-		this.type = type;
 	}
 	public int getIdCoursDevoirs() {
 		return idCoursDevoirs;

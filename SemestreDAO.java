@@ -1,4 +1,5 @@
 package model;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class SemestreDAO {
             stmt.setObject(3, semestre.getMoyenneSemestre(), Types.DECIMAL);
             stmt.setInt(4, semestre.getIdAnnee());
             stmt.executeUpdate();
-            System.out.println("✅ Semestre ajouté avec succès.");
+            System.out.println("Semestre ajouté avec succès.");
         }
     }
     
@@ -75,7 +76,7 @@ public class SemestreDAO {
             stmt.setInt(3, semestre.getIdAnnee());
             stmt.setInt(4, semestre.getIdSemestre());
             stmt.executeUpdate();
-            System.out.println("✅ Semestre modifié avec succès.");
+            System.out.println(" Semestre modifié avec succès.");
         }
     }
     
@@ -95,7 +96,7 @@ public class SemestreDAO {
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, idSemestre);
             stmt.executeUpdate();
-            System.out.println("✅ Semestre supprimé avec succès.");
+            System.out.println(" Semestre supprimé avec succès.");
         }
     }
    // Récupérer un semestre par son ID
@@ -105,10 +106,12 @@ public class SemestreDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+                BigDecimal moyenneSemestre = rs.getBigDecimal("moyenneSemestre");
+
                 return new Semestre(
                     rs.getInt("idSemestre"),
                     NumeroSemestre.fromString(rs.getString("numero")),
-                    rs.getObject("moyenneSemestre") != null ? rs.getDouble("moyenneSemestre") : null,
+                    moyenneSemestre,
                     rs.getInt("idAnnee")
                 );
             }
@@ -123,10 +126,12 @@ public class SemestreDAO {
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
+                BigDecimal moyenneSemestre = rs.getBigDecimal("moyenneSemestre");
+
                 semestres.add(new Semestre(
                     rs.getInt("idSemestre"),
                     NumeroSemestre.fromString(rs.getString("numero")),
-                    rs.getObject("moyenneSemestre") != null ? rs.getDouble("moyenneSemestre") : null,
+                    moyenneSemestre,
                     rs.getInt("idAnnee")
                 ));
             }

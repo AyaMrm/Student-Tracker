@@ -23,16 +23,16 @@ public class CourDevoirDAO {
     public boolean ajouterCourDevoir(CourDevoir cd) throws SQLException {
         if (courDevoirExiste(cd.getIdCoursDevoirs())) return false;
 
-        String sql = "INSERT INTO coursdevoirs (idCoursDevoirs, message, coursEnPDF, idProf, idModule, devoirDone, idEtudiant, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO coursdevoirs (idCoursDevoirs, message, coursEnPDF, type ,idProf, idModule, devoirDone, idEtudiant, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, cd.getIdCoursDevoirs());
             stmt.setString(2, cd.getMessage());
             stmt.setString(3, cd.getCoursEnPDF());
-            stmt.setInt(4, cd.getIdProf());
-            stmt.setInt(5, cd.getIdModule());
-            stmt.setBoolean(6, cd.isDevoirDone());
-            stmt.setInt(7, cd.getIdEtudiant());
-            stmt.setString(8, cd.getType().name());  // Enregistrer le type sous forme de String
+            stmt.setString(4, cd.getType().name());  // Enregistrer le type sous forme de String
+            stmt.setInt(5, cd.getIdProf());
+            stmt.setInt(6, cd.getIdModule());
+            stmt.setBoolean(7, cd.isDevoirDone());
+            stmt.setInt(8, cd.getIdEtudiant());
             return stmt.executeUpdate() > 0;
         }
     }
@@ -40,15 +40,15 @@ public class CourDevoirDAO {
     public boolean modifierCourDevoir(CourDevoir cd) throws SQLException {
         if (!courDevoirExiste(cd.getIdCoursDevoirs())) return false;
 
-        String sql = "UPDATE coursdevoirs SET message = ?, coursEnPDF = ?, idProf = ?, idModule = ?, devoirDone = ?, idEtudiant = ?, type = ? WHERE idCoursDevoirs = ?";
+        String sql = "UPDATE coursdevoirs SET message = ?, coursEnPDF = ?, type =? idProf = ?, idModule = ?, devoirDone = ?, idEtudiant = ? WHERE idCoursDevoirs = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cd.getMessage());
             stmt.setString(2, cd.getCoursEnPDF());
-            stmt.setInt(3, cd.getIdProf());
-            stmt.setInt(4, cd.getIdModule());
-            stmt.setBoolean(5, cd.isDevoirDone());
-            stmt.setInt(6, cd.getIdEtudiant());
-            stmt.setString(7, cd.getType().name());  // Mettre à jour le type
+            stmt.setString(3, cd.getType().name());  // Mettre à jour le type
+            stmt.setInt(4, cd.getIdProf());
+            stmt.setInt(5, cd.getIdModule());
+            stmt.setBoolean(6, cd.isDevoirDone());
+            stmt.setInt(7, cd.getIdEtudiant());
             stmt.setInt(8, cd.getIdCoursDevoirs());
             return stmt.executeUpdate() > 0;
         }
@@ -112,11 +112,11 @@ public class CourDevoirDAO {
                 rs.getInt("idCoursDevoirs"),
                 rs.getString("message"),
                 rs.getString("coursEnPDF"),
+                TypeCourDevoir.valueOf(rs.getString("type")) , // Convertir le type en enum
                 rs.getInt("idProf"),
                 rs.getInt("idModule"),
                 rs.getBoolean("devoirDone"),
-                rs.getInt("idEtudiant"),
-                TypeCourDevoir.valueOf(rs.getString("type"))  // Convertir le type en enum
+                rs.getInt("idEtudiant")
         );
     }
 }

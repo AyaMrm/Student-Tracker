@@ -1,4 +1,5 @@
 package model;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +24,12 @@ public Annee recupererAnneeAvecSemestres(int idAnnee) throws SQLException {
 
             int count = 0;
             while (rs.next() && count < 2) {
+                BigDecimal moyenneGenerale = rs.getBigDecimal("moyenneGenerale");
+
                 Semestre semestre = new Semestre(
                     rs.getInt("idSemestre"),
                     NumeroSemestre.fromString(rs.getString("numero")),
-                    rs.getObject("moyenneSemestre") != null ? rs.getDouble("moyenneSemestre") : null,
+                    moyenneGenerale,
                     rs.getInt("idAnnee")
                 );
 
@@ -48,13 +51,14 @@ public boolean addAnnee(Annee annee) {
 		System.out.println("l'année" +annee.getAnneeScolaire()+ "existe déjà" );
 		return false;
 	}
-	String query = "INSERT INTO annees (idAnnee, moyGeneral, anneeScolaire, idEtudiant, idSpecialite) VALUES (?, ?, ?, ?, ?)";
+	String query = "INSERT INTO annees (idAnnee, anneeScolaire, idEtudiant, idSpecialite,moyenneGenerale ) VALUES (?, ?, ?, ?, ?)";
 	try(PreparedStatement statement = connection.prepareStatement(query)){
 		statement.setInt(1, annee.getIdAnnee());
-		statement.setBigDecimal(2, annee.getMoyGeneral());
-		statement.setString(3, annee.getAnneeScolaire());
-		statement.setInt(4, annee.getIdEtudiant());
-		statement.setInt(5, annee.getIdSpecialite());
+		statement.setString(2, annee.getAnneeScolaire());
+		statement.setInt(3, annee.getIdEtudiant());
+		statement.setInt(4, annee.getIdSpecialite());
+		statement.setBigDecimal(5, annee.getmoyenneGenerale());
+
 
 
 		
@@ -103,10 +107,11 @@ public List<Annee> getAllAnneesSorted() {
         while (resultSet.next()) {
             Annee annee = new Annee(
                     resultSet.getInt("idAnnee"),
-                    resultSet.getBigDecimal("moyGeneral"),
                     resultSet.getString("anneeScolaire"),
                     resultSet.getInt("idEtudiant"),
                     resultSet.getInt("idSpecialite"),
+                    resultSet.getBigDecimal("moyenneGenerale"),
+
                     null,
                     null
 
@@ -145,13 +150,12 @@ public boolean updateAnnee(Annee annee) {
         System.out.println(" L'année avec ID " + annee.getIdAnnee() + " n'existe pas.");
         return false;
     }
-    String query = "UPDATE annees SET moyGeneral = ?, anneeScolaire = ?, idEtudiant = ?, idSpecialite = ? WHERE idAnnee = ?";
+    String query = "UPDATE annees SET  anneeScolaire = ?, idEtudiant = ?, idSpecialite = ? moyenneGenerale = ? WHERE idAnnee = ?";
     try (PreparedStatement statement = connection.prepareStatement(query)) {
-        statement.setBigDecimal(1, annee.getMoyGeneral()); 
-        statement.setString(2, annee.getAnneeScolaire());
-        statement.setInt(3, annee.getIdEtudiant());
-        statement.setInt(4, annee.getIdSpecialite());
-
+        statement.setString(1, annee.getAnneeScolaire());
+        statement.setInt(2, annee.getIdEtudiant());
+        statement.setInt(3, annee.getIdSpecialite());
+        statement.setBigDecimal(4, annee.getmoyenneGenerale()); 
         statement.setInt(5, annee.getIdAnnee());
         
         int rowsUpdated = statement.executeUpdate();
@@ -173,10 +177,11 @@ public Annee getAnneeById(int idAnnee) {
             if (resultSet.next()) {
                 return new Annee(
                         resultSet.getInt("idAnnee"),
-                        resultSet.getBigDecimal("moyGeneral"),
                         resultSet.getString("anneeScolaire"),
                         resultSet.getInt("idEtudiant"),
                         resultSet.getInt("idSpecialite"),
+                        resultSet.getBigDecimal("moyenneGenerale"),
+
                         null,
                         null
 
