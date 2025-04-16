@@ -46,7 +46,7 @@ public Annee recupererAnneeAvecSemestres(int idAnnee) throws SQLException {
     return annee;
 }
 
-public boolean addAnnee(Annee annee) {
+public  boolean addAnnee(Annee annee) {
 	if(anneeExists("anneeScolaire",annee.getAnneeScolaire())) {
 		System.out.println("l'année" +annee.getAnneeScolaire()+ "existe déjà" );
 		return false;
@@ -150,7 +150,7 @@ public boolean updateAnnee(Annee annee) {
         System.out.println(" L'année avec ID " + annee.getIdAnnee() + " n'existe pas.");
         return false;
     }
-    String query = "UPDATE annees SET  anneeScolaire = ?, idEtudiant = ?, idSpecialite = ? moyenneGenerale = ? WHERE idAnnee = ?";
+    String query = "UPDATE annees SET  anneeScolaire = ?, idEtudiant = ?, idSpecialite = ?, moyenneGenerale = ? WHERE idAnnee = ?";
     try (PreparedStatement statement = connection.prepareStatement(query)) {
         statement.setString(1, annee.getAnneeScolaire());
         statement.setInt(2, annee.getIdEtudiant());

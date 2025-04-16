@@ -24,7 +24,7 @@ public class SpecialiteDAO {
     // Ajouter une spécialité
     public boolean ajouterSpecialite(Specialite s) throws SQLException {
         if (specialiteExiste(s.getIdSpecialite())) {
-            System.out.println("❌ La spécialité existe déjà !");
+            System.out.println(" La spécialité existe déjà !");
             return false;
         }
 
@@ -39,7 +39,7 @@ public class SpecialiteDAO {
     // Modifier une spécialité
     public boolean modifierSpecialite(Specialite s) throws SQLException {
         if (!specialiteExiste(s.getIdSpecialite())) {
-            System.out.println("❌ La spécialité à modifier n'existe pas !");
+            System.out.println(" La spécialité à modifier n'existe pas !");
             return false;
         }
 

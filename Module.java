@@ -11,13 +11,15 @@ public class Module {
 		private int idSemestre;
 	   
 	   
-	   public Module(int idModule, String nom, int idProfResponsable, int idSpecialite , MethodeCalcul methodeCalcul,
-				Double coefControle, Double coefExamen, int idSemestre) {
+	   public Module(int idModule, String nom, int idProfResponsable, int idSpecialite , int idSemestre ,MethodeCalcul methodeCalcul,
+				Double coefControle, Double coefExamen) {
 			super();
 			this.idModule = idModule;
 			this.nom = nom;
 			this.idProfResponsable = idProfResponsable;
 			this.idSpecialite  = idSpecialite ;
+			  this.idSemestre = idSemestre;
+
 			this.methodeCalcul = methodeCalcul;
 			  if(methodeCalcul == MethodeCalcul.PERSONNALISEE) {
 			     this.coefControle = null;// utilisateur li imed la valeur 
@@ -26,7 +28,6 @@ public class Module {
 				  this.coefControle = methodeCalcul.getCoefControle();
 				  this.coefExamen = methodeCalcul.getCoefExamen();
 			  }
-			  this.idSemestre = idSemestre;
 		}
 		public int getIdModule() {
 			return idModule;

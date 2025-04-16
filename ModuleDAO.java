@@ -12,10 +12,10 @@ public class ModuleDAO {
         this.connection = connection;
     }
 
-    public boolean existeModule(int id) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM module WHERE idModule = ?";
+    public boolean existeModule(int idModule) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM modules WHERE idModule = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
+            stmt.setInt(1, idModule);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt(1) > 0;
@@ -29,21 +29,22 @@ public class ModuleDAO {
         if (existeModule(module.getIdModule())) {
             throw new SQLException("Le module avec cet ID existe déjà.");
         }
-        String sql = "INSERT INTO module (nom, idProfResponsable, idSpecialite, methodeCalcul, coefControle, coefExamen, idSemestre) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO modules (idModule ,nom, idProfResponsable, idSpecialite, idSemestre, methodeCalcul, coefControle, coefExamen) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, module.getNom());
-            stmt.setInt(2, module.getIdProfResponsable());
-            stmt.setInt(3, module.getidSpecialite ());
-            stmt.setString(4, module.getMethodeCalcul().name());
-            stmt.setObject(5, module.getMethodeCalcul() == MethodeCalcul.PERSONNALISEE ? null : module.getMethodeCalcul().getCoefControle(), Types.DOUBLE);
-            stmt.setObject(6, module.getMethodeCalcul() == MethodeCalcul.PERSONNALISEE ? null : module.getMethodeCalcul().getCoefExamen(), Types.DOUBLE);
-            stmt.setInt(7, module.getIdSemestre());
+            stmt.setInt(1, module.getIdModule());
+            stmt.setString(2, module.getNom());
+            stmt.setInt(3, module.getIdProfResponsable());
+            stmt.setInt(4, module.getidSpecialite ());
+            stmt.setInt(5, module.getIdSemestre());
+            stmt.setString(6, module.getMethodeCalcul().getLabel());
+            stmt.setObject(7, module.getMethodeCalcul() == MethodeCalcul.PERSONNALISEE ? null : module.getMethodeCalcul().getCoefControle(), Types.DOUBLE);
+            stmt.setObject(8, module.getMethodeCalcul() == MethodeCalcul.PERSONNALISEE ? null : module.getMethodeCalcul().getCoefExamen(), Types.DOUBLE);
             stmt.executeUpdate();
         }
     }
 
     public Module getModuleById(int id) throws SQLException {
-        String sql = "SELECT * FROM module WHERE idModule = ?";
+        String sql = "SELECT * FROM modules WHERE idModule = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -53,10 +54,10 @@ public class ModuleDAO {
                         rs.getString("nom"),
                         rs.getInt("idProfResponsable"),
                         rs.getInt("idSpecialite"),
-                        MethodeCalcul.valueOf(rs.getString("methodeCalcul")),
+                        rs.getInt("idSemestre"),
+                        MethodeCalcul.fromLabel(rs.getString("methodeCalcul")),
                         rs.getObject("coefControle", Double.class),
-                        rs.getObject("coefExamen", Double.class),
-                        rs.getInt("idSemestre")
+                        rs.getObject("coefExamen", Double.class)
 
                     );
                     
@@ -68,19 +69,19 @@ public class ModuleDAO {
 
     public List<Module> getAllModules() throws SQLException {
         List<Module> modules = new ArrayList<>();
-        String sql = "SELECT * FROM module";
+        String sql = "SELECT * FROM modules";
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 modules.add(new Module(
                     rs.getInt("idModule"),
                     rs.getString("nom"),
                     rs.getInt("idProfResponsable"),
-                    rs.getInt("idSpecialite"),
-                    MethodeCalcul.valueOf(rs.getString("methodeCalcul")),
-                    rs.getObject("coefControle", Double.class),
-                    rs.getObject("coefExamen", Double.class),
-                    rs.getInt("idSemestre")
+                    rs.getInt("idSpecialite"),    
+                    rs.getInt("idSemestre"),
 
+                    MethodeCalcul.fromLabel(rs.getString("methodeCalcul")),
+                    rs.getObject("coefControle", Double.class),
+                    rs.getObject("coefExamen", Double.class)
                 ));
             }
         }
@@ -91,12 +92,12 @@ public class ModuleDAO {
         if (!existeModule(module.getIdModule())) {
             throw new SQLException("Le module avec cet ID n'existe pas.");
         }
-        String sql = "UPDATE module SET nom=?, idProfResponsable=?, idSpecialite=?, methodeCalcul=?, coefControle=?, coefExamen=?, idSemestre=? WHERE idModule=?";
+        String sql = "UPDATE modules SET nom=?, idProfResponsable=?, idSpecialite=?, methodeCalcul=?, coefControle=?, coefExamen=?, idSemestre=? WHERE idModule=?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, module.getNom());
             stmt.setInt(2, module.getIdProfResponsable());
             stmt.setInt(3, module.getidSpecialite ());
-            stmt.setString(4, module.getMethodeCalcul().name());
+            stmt.setString(4, module.getMethodeCalcul().getLabel());
             if (module.getCoefControle() == null) {
                 stmt.setNull(5, Types.DOUBLE);  // si coefControle est null, on utilise setNull
             } else {
@@ -119,19 +120,19 @@ public class ModuleDAO {
         if (!existeModule(id)) {
             throw new SQLException("Le module avec cet ID n'existe pas.");
         }
-        String sql = "DELETE FROM module WHERE idModule = ?";
+        String sql = "DELETE FROM modules WHERE idModule = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         }
     }
     
-    public List<Module> getAllModulesBySpecialite(String specialite) throws SQLException {
+    public List<Module> getAllModulesBySpecialite(String idSpecialite) throws SQLException {
         List<Module> modules = new ArrayList<>();
         String sql = "SELECT * FROM modules WHERE specialite = ?";
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, specialite);  // On remplace ? par la spécialité passée en paramètre
+            stmt.setString(1, idSpecialite);  // On remplace ? par la spécialité passée en paramètre
             
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -140,11 +141,10 @@ public class ModuleDAO {
                         rs.getString("nom"),
                         rs.getInt("idProfResponsable"),
                         rs.getInt("idSpecialite"),
-                        MethodeCalcul.valueOf(rs.getString("methodeCalcul")),
+                        rs.getInt("idSemestre"),
+                        MethodeCalcul.fromLabel(rs.getString("methodeCalcul")),
                         rs.getObject("coefControle", Double.class),
-                        rs.getObject("coefExamen", Double.class),
-                        rs.getInt("idSemestre")
-
+                        rs.getObject("coefExamen", Double.class)
                     ));
                 }
             }

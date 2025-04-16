@@ -23,12 +23,12 @@ public class CourDevoirDAO {
     public boolean ajouterCourDevoir(CourDevoir cd) throws SQLException {
         if (courDevoirExiste(cd.getIdCoursDevoirs())) return false;
 
-        String sql = "INSERT INTO coursdevoirs (idCoursDevoirs, message, coursEnPDF, type ,idProf, idModule, devoirDone, idEtudiant, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO coursdevoirs (idCoursDevoirs, message, coursEnPDF, type ,idProf, idModule, devoirDone, idEtudiant) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, cd.getIdCoursDevoirs());
             stmt.setString(2, cd.getMessage());
             stmt.setString(3, cd.getCoursEnPDF());
-            stmt.setString(4, cd.getType().name());  // Enregistrer le type sous forme de String
+            stmt.setString(4, cd.getType().name());
             stmt.setInt(5, cd.getIdProf());
             stmt.setInt(6, cd.getIdModule());
             stmt.setBoolean(7, cd.isDevoirDone());
@@ -40,11 +40,11 @@ public class CourDevoirDAO {
     public boolean modifierCourDevoir(CourDevoir cd) throws SQLException {
         if (!courDevoirExiste(cd.getIdCoursDevoirs())) return false;
 
-        String sql = "UPDATE coursdevoirs SET message = ?, coursEnPDF = ?, type =? idProf = ?, idModule = ?, devoirDone = ?, idEtudiant = ? WHERE idCoursDevoirs = ?";
+        String sql = "UPDATE coursdevoirs SET message = ?, coursEnPDF = ?, type =?, idProf = ?, idModule = ?, devoirDone = ?, idEtudiant = ? WHERE idCoursDevoirs = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cd.getMessage());
             stmt.setString(2, cd.getCoursEnPDF());
-            stmt.setString(3, cd.getType().name());  // Mettre à jour le type
+            stmt.setString(3, cd.getType().name());
             stmt.setInt(4, cd.getIdProf());
             stmt.setInt(5, cd.getIdModule());
             stmt.setBoolean(6, cd.isDevoirDone());
@@ -112,7 +112,7 @@ public class CourDevoirDAO {
                 rs.getInt("idCoursDevoirs"),
                 rs.getString("message"),
                 rs.getString("coursEnPDF"),
-                TypeCourDevoir.valueOf(rs.getString("type")) , // Convertir le type en enum
+                TypeCourDevoir.valueOf(rs.getString("type")) , 
                 rs.getInt("idProf"),
                 rs.getInt("idModule"),
                 rs.getBoolean("devoirDone"),
