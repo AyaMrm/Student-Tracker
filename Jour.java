@@ -8,7 +8,11 @@ public class Jour {
     private JourSemaine jour; 
     private List<Seance> seances;  // Liste des séances associées à ce jour
 
-   
+
+    public Jour(int idJour, JourSemaine jour){
+        this.idJour = idJour;
+        this.jour=jour;
+    }
     public Jour(int idJour, JourSemaine jour, List<Seance> seances) {
         this.idJour = idJour;
         this.jour = jour;

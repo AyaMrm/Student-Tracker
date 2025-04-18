@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class Annee {
  private int idAnnee ;
  private String anneeScolaire; //aaaa/aaaa
- private int idEtudiant;
+// private int idEtudiant;
  private int idSpecialite;
  private BigDecimal moyenneGenerale;
 
@@ -15,13 +15,25 @@ public class Annee {
  
 
 
-public Annee(int idAnnee,  String anneeScolaire, int idEtudiant, int idSpecialite,BigDecimal moyenneGenerale,
+ public Annee(int idAnnee,  String anneeScolaire, int idSpecialite,BigDecimal moyenneGenerale) {
+		super();
+		this.idAnnee = idAnnee;
+		this.anneeScolaire = anneeScolaire;
+		this.idSpecialite = idSpecialite;
+		this.moyenneGenerale = moyenneGenerale;
+	}
+	public Annee(int idAnnee,  String anneeScolaire, int idSpecialite) {
+		super();
+		this.idAnnee = idAnnee;
+		this.anneeScolaire = anneeScolaire;
+		this.idSpecialite = idSpecialite;
+	}
+
+public Annee(int idAnnee,  String anneeScolaire, int idSpecialite,BigDecimal moyenneGenerale,
 		Semestre semestre1, Semestre semestre2) {
 	super();
 	this.idAnnee = idAnnee;
-	this.moyenneGenerale = moyenneGenerale;
 	this.anneeScolaire = anneeScolaire;
-	this.idEtudiant = idEtudiant;
 	this.idSpecialite = idSpecialite;
 	this.moyenneGenerale = moyenneGenerale;
 	this.semestre1 = semestre1;
@@ -32,13 +44,6 @@ public int getIdAnnee() {
 	return idAnnee;
 }
 
-public int getIdEtudiant() {
-	return idEtudiant;
-}
-
-public void setIdEtudiant(int idEtudiant) {
-	this.idEtudiant = idEtudiant;
-}
 
 public void setIdAnnee(int idAnnee) {
 	this.idAnnee = idAnnee;
@@ -91,7 +96,7 @@ public void setIdSpecialite(int idSpecialite) {
 @Override
 public String toString() {
 	return "Annee [idAnnee=" + idAnnee + ", moyenneGenerale=" + moyenneGenerale + ", anneeScolaire=" + anneeScolaire
-			+ ", idEtudiant=" + idEtudiant + ", idSpecialite=" + idSpecialite + ", semestre1=" + semestre1
+			+  ", idSpecialite=" + idSpecialite + ", semestre1=" + semestre1
 			+ ", semestre2=" + semestre2 + "]";
 }
 

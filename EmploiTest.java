@@ -42,7 +42,7 @@ public class EmploiTest {
             if (edtRecup != null) {
                 System.out.println(" Emploi du temps récupéré : " + edtRecup);
             } else {
-                System.out.println("❌ Emploi du temps non trouvé.");
+                System.out.println(" Emploi du temps non trouvé.");
             }
 
             // Étape 6 : Tester la modification

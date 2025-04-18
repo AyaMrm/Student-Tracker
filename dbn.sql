@@ -34,12 +34,20 @@ CREATE TABLE etudiants (
 CREATE TABLE annees (
     idAnnee INT PRIMARY KEY NOT NULL,
     anneeScolaire VARCHAR(9) NOT NULL UNIQUE,
-    idEtudiant INT NOT NULL,
     idSpecialite INT NOT NULL,
     moyenneGenerale DECIMAL(4,2) DEFAULT NULL,
-    FOREIGN KEY (idEtudiant) REFERENCES etudiants(idEtudiant) ON DELETE CASCADE,
     FOREIGN KEY (idSpecialite) REFERENCES specialites(idSpecialite) ON DELETE CASCADE
 );
+
+CREATE TABLE etudiants_annees (
+    idEtudiant INT NOT NULL,
+    idAnnee INT NOT NULL,
+    PRIMARY KEY (idEtudiant, idAnnee),
+    FOREIGN KEY (idEtudiant) REFERENCES etudiants(idEtudiant) ON DELETE CASCADE,
+    FOREIGN KEY (idAnnee) REFERENCES annees(idAnnee) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+ALTER TABLE Annees DROP INDEX anneeScolaire;
 
 -- Table semestres (dépend de annees)
 CREATE TABLE semestres (

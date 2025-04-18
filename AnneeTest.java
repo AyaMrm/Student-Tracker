@@ -15,7 +15,7 @@ public class AnneeTest {
 	            
 	            // 1. Test d'ajout
 	            System.out.println("\n--- Test Ajout ---");
-	            Annee annee = new Annee(1, "2023/2024", 101, 5, new BigDecimal("12.5"), null, null);
+	            Annee annee = new Annee(1, "2023/2024",  5, new BigDecimal("12.5"), null, null);
 	            boolean ajoutReussi = anneeDAO.addAnnee(annee);
 	            System.out.println("Ajout réussi ? " + ajoutReussi);
 	            
