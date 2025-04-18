@@ -54,7 +54,7 @@ public class EtudiantDAO {
             etudiantPs.setString(4, etudiant.getGroupe());
             etudiantPs.setInt(5, etudiant.getIdEmploiDuTemps());
             boolean result = etudiantPs.executeUpdate() > 0;
-            System.out.println("✅ Étudiant ajouté avec succès !");
+            //System.out.println("✅ Étudiant ajouté avec succès !");
             return result;
         } catch (SQLException e) {
             System.err.println("Erreur lors de l'ajout de l'étudiant : " + e.getMessage());
@@ -92,10 +92,10 @@ public class EtudiantDAO {
             etudiantPs.setInt(4, etudiant.getIdEmploiDuTemps());
             etudiantPs.setInt(5, etudiant.getIdEtudiant());
             boolean result = etudiantPs.executeUpdate() > 0;
-            System.out.println("✅ Étudiant mis à jour avec succès !");
+            //System.out.println("✅ Étudiant mis à jour avec succès !");
             return result;
         } catch (SQLException e) {
-            System.err.println("Erreur lors de la mise à jour de l'étudiant : " + e.getMessage());
+            //System.err.println("Erreur lors de la mise à jour de l'étudiant : " + e.getMessage());
             return false;
         }
     }
@@ -118,10 +118,10 @@ public class EtudiantDAO {
         try (PreparedStatement userPs = connection.prepareStatement(userSql)) {
             userPs.setInt(1, idEtudiant);
             boolean result = userPs.executeUpdate() > 0;
-            System.out.println("✅ Étudiant supprimé avec succès !");
+            //System.out.println("✅ Étudiant supprimé avec succès !");
             return result;
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de la suppression de l'étudiant : " + e.getMessage());
+            //System.err.println("❌ Erreur lors de la suppression de l'étudiant : " + e.getMessage());
             return false;
         }
     }
@@ -237,6 +237,5 @@ public class EtudiantDAO {
 
         return listeEtudiants;
     }
-
 
 }

@@ -24,7 +24,7 @@ public class AdminDAO extends UtilisateurDAO{
                 return response.getInt(1)>0;
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return false;
     }
@@ -47,7 +47,7 @@ public class AdminDAO extends UtilisateurDAO{
             }
 
             cnx.commit();
-            System.out.println("✅ Admin ajouté avec succès !");
+            //System.out.println("✅ Admin ajouté avec succès !");
             return true;
         } catch (SQLException e) {
             try {
@@ -55,12 +55,12 @@ public class AdminDAO extends UtilisateurDAO{
             } catch (SQLException rollbackEx) {
                 rollbackEx.printStackTrace();
             }
-            System.err.println("❌ Erreur lors de l'ajout de l'admin : " + e.getMessage());
+            //System.err.println("❌ Erreur lors de l'ajout de l'admin : " + e.getMessage());
         } finally {
             try {
                 cnx.setAutoCommit(true);
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
             }
         }
         return false;
@@ -92,7 +92,7 @@ public class AdminDAO extends UtilisateurDAO{
                 );
             }
         } catch (SQLException e) {
-            throw new RuntimeException("❌ Erreur lors de la récupération de l'admin", e);
+            //throw new RuntimeException("❌ Erreur lors de la récupération de l'admin", e);
         }
 
         return null;
@@ -116,7 +116,7 @@ public class AdminDAO extends UtilisateurDAO{
             return modifierUtilisateur(admin);
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de la modification de l'admin : " + e.getMessage());
+            //System.err.println("❌ Erreur lors de la modification de l'admin : " + e.getMessage());
             return false;
         }
     }
@@ -143,14 +143,14 @@ public class AdminDAO extends UtilisateurDAO{
 
                 if (rowsDeleted > 0) {
                     cnx.commit();
-                    System.out.println("✅ Admin supprimé avec succès !");
+                    //System.out.println("✅ Admin supprimé avec succès !");
                     return true;
                 }
             }
 
             cnx.rollback();
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de la suppression de l'admin : " + e.getMessage());
+            //System.err.println("❌ Erreur lors de la suppression de l'admin : " + e.getMessage());
         }
         return false;
     }

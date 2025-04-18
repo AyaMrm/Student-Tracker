@@ -17,16 +17,12 @@ public class Auth {
         this.cnx = cnx;
     }
 
-    private boolean isAdmin(Utilisateur utilisateur) {
-        return utilisateur != null && utilisateur.getRole() == Role.ADMIN;
-    }
 
-    public boolean ajouterUtilisateur(/*Utilisateur admin,*/ Utilisateur nouvelUtilisateur, String motdepasse) {
-        //if (!isAdmin(admin)) {
-        //    System.err.println("Erreur : seul un administrateur peut créer un nouvel utilisateur");
-        //    return false;
-        //}
-
+    public boolean ajouterUtilisateur(Utilisateur nouvelUtilisateur, String motdepasse) {
+        PasswordValidator val = new PasswordValidator();
+        if(val.isWeak(motdepasse)){
+            return false;
+        }
         String hashedMotDePasse = BCrypt.hashpw(motdepasse, BCrypt.gensalt());
         String sql = "INSERT INTO utilisateurs (idUser, nom, prenom, email, motdepasse, role) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -40,8 +36,8 @@ public class Auth {
 
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Erreur lors de l'ajout d'utilisateur : " + e.getMessage());
-            e.printStackTrace();
+            //System.err.println("Erreur lors de l'ajout d'utilisateur : " + e.getMessage());
+            //e.printStackTrace();
             return false;
         }
     }
@@ -66,8 +62,8 @@ public class Auth {
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Erreur lors de la connexion : " + e.getMessage());
-            e.printStackTrace();
+            //System.err.println("Erreur lors de la connexion : " + e.getMessage());
+            //e.printStackTrace();
         }
         return null;
     }
@@ -78,6 +74,11 @@ public class Auth {
 
     public boolean changePassword(int idUser, String oldPassword, String newPassword) {
         String sql = "SELECT motdepasse FROM utilisateurs WHERE idUser = ?";
+
+        PasswordValidator val = new PasswordValidator();
+        if(val.isWeak(newPassword)){
+            return false;
+        }
 
         try (PreparedStatement selectStmt = cnx.prepareStatement(sql)) {
             selectStmt.setInt(1, idUser);
@@ -95,16 +96,16 @@ public class Auth {
                             return updateStmt.executeUpdate() > 0;
                         }
                     } else {
-                        System.err.println("Erreur : mot de passe actuel incorrect");
+                        //System.err.println("Erreur : mot de passe actuel incorrect");
                         return false;
                     }
                 } else {
-                    System.err.println("Erreur : utilisateur avec idUser " + idUser + " non trouvé");
+                    //System.err.println("Erreur : utilisateur avec idUser " + idUser + " non trouvé");
                     return false;
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Erreur lors du changement de mot de passe : " + e.getMessage());
+            //System.err.println("Erreur lors du changement de mot de passe : " + e.getMessage());
             e.printStackTrace();
             return false;
         }

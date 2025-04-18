@@ -2,7 +2,7 @@ package Model;
 
 
 public class PasswordValidator {
-    private static final int minLength = 5;
+    private static final int minLength = 8;
 
     // a implementer plus tard !
     private static boolean containUppercase(String password){

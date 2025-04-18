@@ -33,8 +33,8 @@ public class UtilisateurDAO{
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Erreur lors de la vérification de l'utilisateur (matricule=" + matricule + ") : " + e.getMessage());
-            e.printStackTrace();
+            //System.err.println("Erreur lors de la vérification de l'utilisateur (matricule=" + matricule + ") : " + e.getMessage());
+            //e.printStackTrace();
             return false;
         }
         return false;
@@ -70,7 +70,7 @@ public class UtilisateurDAO{
                 );
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de la récupération de l'utilisateur", e);
+            //throw new RuntimeException("Erreur lors de la récupération de l'utilisateur", e);
         }
 
         return null;
@@ -98,11 +98,11 @@ public class UtilisateurDAO{
                     );
                     userList.add(user);
                 } catch (IllegalArgumentException e) {
-                    System.err.println("❌ Rôle inconnu dans la base de données : " + response.getString("role"));
+                    //System.err.println("Rôle inconnu dans la base de données : " + response.getString("role"));
                 }
             }
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de la recherche des utilisateurs : " + e.getMessage());
+            //System.err.println("Erreur lors de la recherche des utilisateurs : " + e.getMessage());
         }
 
         return userList;
@@ -131,11 +131,11 @@ public class UtilisateurDAO{
                     );
                     usr.add(user);
                 } catch (IllegalArgumentException e) {
-                    System.err.println("❌ Rôle inconnu dans la base de données : " + response.getString("role"));
+                    //System.err.println("Rôle inconnu dans la base de données : " + response.getString("role"));
                 }
             }
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de la recherche des utilisateurs : " + e.getMessage());
+            //System.err.println("Erreur lors de la recherche des utilisateurs : " + e.getMessage());
         }
         return usr;
     }
@@ -167,12 +167,12 @@ public class UtilisateurDAO{
                     Utilisateur user = new Utilisateur(matricule, nom, prenom, email, role);
                     users.add(user);
                 }catch (SQLException e){
-                    System.err.println("Erreur lors de la recuperation d'un utilisateur !!");
+                    //System.err.println("Erreur lors de la recuperation d'un utilisateur !!");
                 }
             }
         }catch (SQLException e){
-            System.err.format("❌ Erreur SQL lors de la récupération des utilisateurs : %s (Code: %d, État: %s)%n",
-                    e.getMessage(), e.getErrorCode(), e.getSQLState());
+            //System.err.format("❌ Erreur SQL lors de la récupération des utilisateurs : %s (Code: %d, État: %s)%n",
+                    //e.getMessage(), e.getErrorCode(), e.getSQLState());
         }
 
         return users;
@@ -225,7 +225,7 @@ public class UtilisateurDAO{
             int rowsDeleted = statement.executeUpdate();
             return rowsDeleted >0;
         }catch (SQLException e){
-            System.err.println("Erreur lors de la suppression de l'utilisateur !");
+            //System.err.println("Erreur lors de la suppression de l'utilisateur !");
         }
         return false ;
     }

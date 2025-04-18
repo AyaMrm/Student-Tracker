@@ -24,7 +24,7 @@ public class ProfDAO extends UtilisateurDAO {
                 return response.getInt(1)>0;
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return false;
     }
@@ -36,7 +36,6 @@ public class ProfDAO extends UtilisateurDAO {
         {
             cnx.setAutoCommit(false);
 
-            // Vérifier si idSpecialite existe
             String checkSpecialite = "SELECT COUNT(*) FROM specialites WHERE idSpecialite=?";
             try (PreparedStatement checkStmt = cnx.prepareStatement(checkSpecialite)) {
                 checkStmt.setInt(1, prof.getIdSpecialite());
@@ -48,16 +47,14 @@ public class ProfDAO extends UtilisateurDAO {
             }
 
             Auth auth = new Auth(cnx);
-            // Ajouter l'utilisateur
             if (!auth.ajouterUtilisateur(new Utilisateur(prof.getIdProf(), prof.getNom(), prof.getPrenom(), prof.getEmail(), prof.getMotdepasse(), Role.PROF), prof.getMotdepasse())) {
                 cnx.rollback();
                 System.err.println("Erreur lors de l'ajout de l'utilisateur !");
                 return false;
             }
 
-            // Insérer le prof
             try (PreparedStatement statement = cnx.prepareStatement(query)) {
-                statement.setInt(1, prof.getIdProf()); // Assure-toi que getIdProf() retourne idUser
+                statement.setInt(1, prof.getIdProf());
                 statement.setInt(2, prof.getIdSpecialite());
                 statement.setString(3, prof.getGrade());
                 statement.setString(4, prof.getDepartement());
@@ -65,17 +62,17 @@ public class ProfDAO extends UtilisateurDAO {
             }
 
             cnx.commit();
-            System.out.println("Prof ajouté avec succès ! 😊");
+            //System.out.println("Prof ajouté avec succès ! 😊");
             return true;
         } catch (SQLException e) {
-            System.err.println("Une erreur est survenue lors de l'ajout du nouveau Prof !! 😔");
-            e.printStackTrace();
+            //System.err.println("Une erreur est survenue lors de l'ajout du nouveau Prof !! 😔");
+            //e.printStackTrace();
             try {
                 if (cnx != null && !cnx.isClosed()) {
                     cnx.rollback();
                 }
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
             }
             return false;
         }
@@ -103,7 +100,7 @@ public class ProfDAO extends UtilisateurDAO {
                 return new Prof(matricule, nom, prenom, email, idSpecialite, grade, departement);
             }
         }catch (SQLException e){
-            System.err.println("aucune prof trouver avec le matricule "+ matricule+" 😔!!");
+            //System.err.println("aucune prof trouver avec le matricule "+ matricule+" 😔!!");
         }
         return null;
     }
@@ -132,7 +129,7 @@ public class ProfDAO extends UtilisateurDAO {
                 profs.add(p);
             }
         }catch(SQLException e){
-            System.err.println("Erreur lors de la recherche du prof avec le nom "+nom+" 😔!!");
+            //System.err.println("Erreur lors de la recherche du prof avec le nom "+nom+" 😔!!");
         }
         return profs;
     }
@@ -163,8 +160,8 @@ public class ProfDAO extends UtilisateurDAO {
                 profs.add(p);
             }
         } catch (SQLException e) {
-            System.err.println("Erreur lors de la recherche des profs avec spécialité " + specialite + " : " + e.getMessage());
-            e.printStackTrace();
+            //System.err.println("Erreur lors de la recherche des profs avec spécialité " + specialite + " : " + e.getMessage());
+            //e.printStackTrace();
         }
         return profs;
     }
@@ -194,7 +191,7 @@ public class ProfDAO extends UtilisateurDAO {
                 profs.add(p);
             }
         }catch (SQLException e){
-            System.err.println("Erreur lors de la recherche des profs avec grade "+grade+" 😔!!");
+            //System.err.println("Erreur lors de la recherche des profs avec grade "+grade+" 😔!!");
         }
         return profs;
     }
@@ -222,7 +219,7 @@ public class ProfDAO extends UtilisateurDAO {
                 profs.add(p);
             }
         }catch(SQLException e){
-            System.err.println("Erreur lors de la recherche des profs avec grade "+departement+" 😔!!");
+            //System.err.println("Erreur lors de la recherche des profs avec grade "+departement+" 😔!!");
         }
         return profs;
     }
@@ -254,7 +251,6 @@ public class ProfDAO extends UtilisateurDAO {
         return all;
     }
 
-    //ELLE NE MARCHE PASSSSSSS
     public boolean modifierProf(Prof prof) {
         String updateProfQuery = "UPDATE profs SET idSpecialite = ?, grade = ?, departement = ? WHERE idProf = ?";
 
@@ -262,13 +258,11 @@ public class ProfDAO extends UtilisateurDAO {
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO(cnx);
 
         try {
-            // Vérification que la spécialité existe
             if (!specialiteDAO.specialiteExiste(prof.getIdSpecialite())) {
                 System.out.println("❌ La spécialité avec l'ID " + prof.getIdSpecialite() + " n'existe pas.");
                 return false;
             }
 
-            // Mise à jour des informations utilisateur associées
             Utilisateur utilisateur = new Utilisateur(
                     prof.getIdUser(),
                     prof.getNom(),
@@ -278,11 +272,10 @@ public class ProfDAO extends UtilisateurDAO {
             );
 
             if (!utilisateurDAO.modifierUtilisateur(utilisateur)) {
-                System.out.println("❌ Échec de la mise à jour de l'utilisateur associé.");
+                //System.out.println("❌ Échec de la mise à jour de l'utilisateur associé.");
                 return false;
             }
 
-            // Mise à jour des données dans la table profs
             try (PreparedStatement stmt = cnx.prepareStatement(updateProfQuery)) {
                 stmt.setInt(1, prof.getIdSpecialite());
                 stmt.setString(2, prof.getGrade());
@@ -293,12 +286,12 @@ public class ProfDAO extends UtilisateurDAO {
                 return rowsAffected > 0;
 
             } catch (SQLException e) {
-                System.err.println("❌ Erreur lors de la mise à jour de la table 'profs' : " + e.getMessage());
+                //System.err.println("❌ Erreur lors de la mise à jour de la table 'profs' : " + e.getMessage());
                 return false;
             }
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors des vérifications initiales : " + e.getMessage());
+            //System.err.println("❌ Erreur lors des vérifications initiales : " + e.getMessage());
             return false;
         }
     }
