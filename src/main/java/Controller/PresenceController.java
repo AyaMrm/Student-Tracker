@@ -1,29 +1,39 @@
-// pas encore termine
+// terminé !
 package Controller;
+
 import java.util.List;
 import Model.Presence;
 import Service.PresenceService;
 
 public class PresenceController {
-	private final PresenceService presenceService;
 	
-	public PresenceController() {
-		this.presenceService = new PresenceService();
-	}
-	
-	public void marquerPresence(Presence presence) {
-		presenceService.marquerPresence(presence);
-	}
-	
-	public void modifierPresence(int idPresence, String nouveauStatut) {
-		presenceService.modifierPresence(idPresence, nouveauStatut);
-	}
-	
-	public void supprimerPresence(int idPresence) {
-		presenceService.supprimerPresence(idPresence);
-	}
-	
-	public List<Presence> getPresencesParEtudiant(int idEtudiant){
-		return presenceService.getPresencesParEtudiant(idEtudiant);
-	}
+    private final PresenceService presenceService;
+
+    public PresenceController(PresenceService presenceService) {
+        this.presenceService = presenceService;
+    }
+
+    public boolean ajouterPresence(Presence p) {
+        return presenceService.ajouterPresence(p);
+    }
+
+    public boolean modifierPresence(Presence p) {
+        return presenceService.modifierPresence(p);
+    }
+
+    public boolean supprimerPresence(int id) {
+        return presenceService.supprimerPresence(id);
+    }
+
+    public Presence getPresenceParId(int id) {
+        return presenceService.getPresenceParId(id);
+    }
+
+    public List<Presence> getPresenceParModule(int idModule) {
+        return presenceService.getPresenceParModule(idModule);
+    }
+
+    public List<Presence> getPresencesParEtudiant(int idEtudiant) {
+        return presenceService.getPresencesParEtudiant(idEtudiant);
+    }
 }

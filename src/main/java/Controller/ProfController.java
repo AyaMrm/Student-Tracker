@@ -1,3 +1,4 @@
+// terminé !
 package Controller;
 
 import Model.Prof;
@@ -8,91 +9,43 @@ public class ProfController {
 
     private final ProfService profService;
 
-    public ProfController() {
-        this.profService = new ProfService();
+    public ProfController(ProfService profService) {
+        this.profService = profService;
     }
 
-    public void ajouterProf(Prof prof) {
-        if (profService.profExist(prof.getMatricule())) {
-            System.out.println("Erreur : Le professeur existe déjà.");
-        } else if (profService.ajouterProf(prof)) {
-            System.out.println("Professeur ajouté avec succès !");
-        } else {
-            System.out.println("Échec de l'ajout du professeur.");
-        }
+    public boolean ajouterProf(Prof prof) {
+        return profService.ajouterProf(prof);
     }
 
-    public void modifierProf(Prof prof) {
-        if (!profService.profExist(prof.getMatricule())) {
-            System.out.println("Erreur : Professeur introuvable.");
-        } else if (profService.modifierProf(prof)) {
-            System.out.println("Professeur modifié avec succès !");
-        } else {
-            System.out.println("Échec de la modification du professeur.");
-        }
+    public boolean modifierProf(Prof prof) {
+        return profService.modifierProf(prof);
     }
 
-    public void supprimerProf(int matricule) {
-        if (!profService.profExist(matricule)) {
-            System.out.println("Erreur : Professeur non trouvé.");
-        } else if (profService.supprimerProf(matricule)) {
-            System.out.println("Professeur supprimé avec succès !");
-        } else {
-            System.out.println("Échec de la suppression du professeur.");
-        }
+    public boolean supprimerProf(int id) {
+        return profService.supprimerProf(id);
     }
 
-    public void afficherProfByMatricule(int matricule) {
-        Prof prof = profService.getProfByMat(matricule);
-        if (prof != null) {
-            System.out.println(prof);
-        } else {
-            System.out.println("Aucun professeur trouvé avec ce matricule.");
-        }
+    public Prof getProfByMat(int id) {
+        return profService.getProfByMat(id);
     }
 
-    public void afficherProfsByNom(String nom) {
-        List<Prof> profs = profService.getProfByNom(nom);
-        if (!profs.isEmpty()) {
-            profs.forEach(System.out::println);
-        } else {
-            System.out.println("Aucun professeur trouvé avec ce nom.");
-        }
+    public List<Prof> getProfByNom(String nom) {
+        return profService.getProfByNom(nom);
     }
 
-    public void afficherProfsBySpecialite(String specialite) {
-        List<Prof> profs = profService.getProfBySpecialite(specialite);
-        if (!profs.isEmpty()) {
-            profs.forEach(System.out::println);
-        } else {
-            System.out.println("Aucun professeur trouvé pour cette spécialité.");
-        }
+    public List<Prof> getProfBySpecialite(String specialite) {
+        return profService.getProfBySpecialite(specialite);
     }
 
-    public void afficherProfsByGrade(String grade) {
-        List<Prof> profs = profService.getProfByGrade(grade);
-        if (!profs.isEmpty()) {
-            profs.forEach(System.out::println);
-        } else {
-            System.out.println("Aucun professeur trouvé pour ce grade.");
-        }
+    public List<Prof> getProfByGrade(String grade) {
+        return profService.getProfByGrade(grade);
     }
 
-    public void afficherProfsByDepartement(String departement) {
-        List<Prof> profs = profService.getProfByDepartement(departement);
-        if (!profs.isEmpty()) {
-            profs.forEach(System.out::println);
-        } else {
-            System.out.println("Aucun professeur trouvé pour ce département.");
-        }
+    public List<Prof> getProfByDepartement(String departement) {
+        return profService.getProfByDepartement(departement);
     }
 
-    public void afficherTousLesProfs() {
-        List<Prof> profs = profService.getAllProfs();
-        if (!profs.isEmpty()) {
-            profs.forEach(System.out::println);
-        } else {
-            System.out.println("Aucun professeur enregistré.");
-        }
+    public boolean profExiste(int id) {
+        return profService.profExiste(id);
     }
 }

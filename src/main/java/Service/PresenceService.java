@@ -1,33 +1,73 @@
+// terminé !
 package Service;
 
 import Model.PresenceDAO;
 import Model.Presence;
 import java.util.List;
+import java.sql.SQLException;
+
 
 public class PresenceService {
 
-	private PresenceDAO presenceDAO;
+    private final PresenceDAO presenceDAO;
 
-    public PresenceService() {
-        this.presenceDAO = new PresenceDAO();
+    public PresenceService(PresenceDAO presenceDAO) {
+        this.presenceDAO = presenceDAO;
     }
 
-    public void marquerPresence(Presence presence) {
-        presenceDAO.marquerPresence(presence);
-    }
+    public boolean ajouterPresence(Presence p) {
+        if (p == null || p.getStatut() == null || p.getDatePresence() == null || p.getHeure() == null) return false;
 
-    public void modifierPresence(int idPresence, String nouveauStatut) {
-        if (!nouveauStatut.equals("Présent") && !nouveauStatut.equals("Absent") && !nouveauStatut.equals("Justifié")) {
-            throw new IllegalArgumentException("Statut invalide !");
+        try {
+            return presenceDAO.ajouterPresence(p);
+        } catch (SQLException e) {
+            return false;
         }
-        presenceDAO.modifierPresence(idPresence, nouveauStatut);
     }
 
-    public void supprimerPresence(int idPresence) {
-        presenceDAO.supprimerPresence(idPresence);
+    public boolean modifierPresence(Presence p) {
+        if (p == null || p.getIdPresence() <= 0) return false;
+
+        try {
+            return presenceDAO.modifierPresence(p);
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean supprimerPresence(int id) {
+        if (id <= 0) return false;
+
+        try {
+            return presenceDAO.supprimerPresence(id);
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public Presence getPresenceParId(int id) {
+        if (id <= 0) return null;
+
+        try {
+            return presenceDAO.getPresenceParId(id);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public List<Presence> getPresenceParModule(int idModule) {
+        try {
+            return presenceDAO.getPresenceParModule(idModule);
+        } catch (SQLException e) {
+            return null;
+        }
     }
 
     public List<Presence> getPresencesParEtudiant(int idEtudiant) {
-        return presenceDAO.getPresencesParEtudiant(idEtudiant);
+        try {
+            return presenceDAO.getPresencesParEtudiant(idEtudiant);
+        } catch (SQLException e) {
+            return null;
+        }
     }
 }

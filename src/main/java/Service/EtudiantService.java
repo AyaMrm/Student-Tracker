@@ -1,37 +1,93 @@
+// terminé !
 package Service;
 
-import java.util.List;
-import Model.EtudiantDAO;
 import Model.Etudiant;
+import Model.EtudiantDAO;
 
-public class EtudiantService{
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 
-	private EtudiantDAO etudiantDAO;
 
-    public EtudiantService() {
-        this.etudiantDAO = new EtudiantDAO();
+public class EtudiantService {
+
+    private final EtudiantDAO etudiantDAO;
+
+    public EtudiantService(Connection cnx) {
+        this.etudiantDAO = new EtudiantDAO(cnx);
     }
 
-    public void ajouterEtudiant(Etudiant etudiant) {
-        if (etudiant.getNom().isEmpty() || etudiant.getPrenom().isEmpty()) {
-            throw new IllegalArgumentException("Nom et prénom ne peuvent pas être vides !");
+    public boolean etudiantExiste(int id) {
+        if (id <= 0) return false;
+        try {
+            return etudiantDAO.etudiantExiste(id);
+        } catch (SQLException e) {
+            return false;
         }
-        etudiantDAO.ajouterEtudiant(etudiant);
     }
 
-    public void modifierEtudiant(Etudiant etudiant) {
-        etudiantDAO.modifierEtudiant(etudiant);
+    public boolean ajouterEtudiant(Etudiant etd) {
+        if (etd == null || etd.getMatricule() <= 0) return false;
+        try {
+            if (etudiantDAO.etudiantExiste(etd.getMatricule())) return false;
+            return etudiantDAO.ajouterEtudiant(etd);
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
-    public void supprimerEtudiant(int idEtudiant) {
-        etudiantDAO.supprimerEtudiant(idEtudiant);
+    public boolean modifierEtudiant(Etudiant etd) {
+        if (etd == null || etd.getMatricule() <= 0) return false;
+        try {
+            if (!etudiantDAO.etudiantExiste(etd.getMatricule())) return false;
+            return etudiantDAO.modifierEtudiant(etd);
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
-    public Etudiant getEtudiant(int idEtudiant) {
-        return etudiantDAO.getEtudiant(idEtudiant);
+    public boolean supprimerEtudiant(int id) {
+        if (id <= 0) return false;
+        try {
+            return etudiantDAO.supprimerEtudiant(id);
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public Etudiant getEtudiantById(int id) {
+        if (id <= 0) return null;
+        try {
+            return etudiantDAO.getEtudiantParId(id);
+        } catch (SQLException e) {
+            return null;
+        }
     }
 
     public List<Etudiant> getAllEtudiants() {
-        return etudiantDAO.getAllEtudiants();
+        try {
+            return etudiantDAO.getTousLesEtudiants();
+        } catch (SQLException e) {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<Etudiant> getEtudiantByNom(String nom) {
+        if (nom == null || nom.isEmpty()) return Collections.emptyList();
+        try {
+            return etudiantDAO.getEtudiantParNom(nom);
+        } catch (SQLException e) {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<Etudiant> getEtudiantBySpecialite(int idSpecialite) {
+        if (idSpecialite <= 0) return Collections.emptyList();
+        try {
+            return etudiantDAO.getEtudiantParSpecialite(idSpecialite);
+        } catch (SQLException e) {
+            return Collections.emptyList();
+        }
     }
 }
