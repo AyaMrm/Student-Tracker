@@ -15,9 +15,7 @@ public class EtudiantModuleTestController {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
 
-            EtudiantModuleDAO etudiantModuleDAO = new EtudiantModuleDAO(connection);
-            EtudiantModuleService etudiantModuleService = new EtudiantModuleService(etudiantModuleDAO);
-            EtudiantModuleController etudiantModuleController = new EtudiantModuleController(etudiantModuleService);
+            EtudiantModuleController etudiantModuleController = new EtudiantModuleController(connection);
 
             // 1. Test Ajout d'un lien étudiant-module
             System.out.println("\n--- Test Ajout EtudiantModule ---");

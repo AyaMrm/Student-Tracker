@@ -18,9 +18,7 @@ public class PresenceTestController {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
 
-            PresenceDAO presenceDAO = new PresenceDAO(connection);
-            PresenceService presenceService = new PresenceService(presenceDAO);
-            PresenceController presenceController = new PresenceController(presenceService);
+            PresenceController presenceController = new PresenceController(connection);
 
             // 1. Test Ajout d'une présence
             System.out.println("\n--- Test Ajout Presence ---");

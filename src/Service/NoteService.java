@@ -5,14 +5,15 @@ import java.util.List;
 import Model.Note;
 import Model.NoteDAO;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class NoteService {
 
 	 private final NoteDAO noteDAO;
 
-	 public NoteService(NoteDAO noteDAO) {
-	     this.noteDAO = noteDAO;
+	 public NoteService(Connection cnx) {
+	     this.noteDAO = new NoteDAO(cnx);
 	 }
 	 public boolean ajouterNote(Note note) {
 		 if(note == null || note.getIdEtudiant() <= 0) return false;

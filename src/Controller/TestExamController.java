@@ -3,6 +3,8 @@ package Controller;
 
 import Model.TestExam;
 import Service.TestExamService;
+
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -12,8 +14,8 @@ public class TestExamController {
 	
     private final TestExamService testExamService;
 
-    public TestExamController(TestExamService testExamService) {
-        this.testExamService = testExamService;
+    public TestExamController(Connection cnx) {
+        this.testExamService = new TestExamService(cnx);
     }
 
     public boolean ajouterTestExam(TestExam testExam) {

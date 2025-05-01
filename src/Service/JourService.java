@@ -3,6 +3,8 @@ package Service;
 
 import Model.JourDAO;
 import Model.Jour;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,8 +13,8 @@ public class JourService {
 
     private final JourDAO jourDAO;
 
-    public JourService(JourDAO jourDAO) {
-        this.jourDAO = jourDAO;
+    public JourService(Connection cnx) {
+        this.jourDAO = new JourDAO(cnx);
     }
 
     public boolean ajouterJour(Jour jour) {

@@ -4,6 +4,7 @@ package Service;
 import Model.TestExamDAO;
 import Model.TestExam;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -14,8 +15,8 @@ public class TestExamService {
 	
     private final TestExamDAO testExamDAO;
 
-    public TestExamService(TestExamDAO testExamDAO) {
-        this.testExamDAO = testExamDAO;
+    public TestExamService(Connection cnx) {
+        this.testExamDAO = new TestExamDAO(cnx);
     }
 
     public boolean ajouterTestExam(TestExam testExam) {
@@ -26,6 +27,7 @@ public class TestExamService {
         try {
             return testExamDAO.ajouterTestExam(testExam);
         } catch (Exception e) {
+        	System.out.println(e.getMessage());
             return false;
         }
     }

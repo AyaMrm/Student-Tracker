@@ -1,6 +1,8 @@
 // terminé !
 package Controller;
 
+import java.sql.Connection;
+
 import Model.Admin;
 import Service.AdminService;
 
@@ -8,12 +10,12 @@ public class AdminController {
 	
 	private final AdminService adminService;
 
-	public AdminController(AdminService adminService) {
-	    this.adminService = adminService;
+	public AdminController(Connection cnx) {
+	    this.adminService = new AdminService(cnx);
 	}
 	
     public boolean ajouterAdmin(Admin admin) {
-        if (adminService.adminExist(admin.getMatricule())) {
+        if (adminService.adminExiste(admin.getIdAdmin())) {
         	return false;
         } 
         return adminService.ajouterAdmin(admin);
@@ -24,7 +26,7 @@ public class AdminController {
 }
 
     public boolean modifierAdmin(Admin admin) {
-        if (!adminService.adminExist(admin.getMatricule())) {
+        if (!adminService.adminExiste(admin.getIdAdmin())) {
         	return false;
         } 
         return adminService.modifierAdmin(admin);

@@ -4,14 +4,15 @@ package Controller;
 import Model.EmploiDuTemps;
 import Service.EmploiDuTempsService;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class EmploiDuTempsController {
 
     private final EmploiDuTempsService emploiService;
 
-    public EmploiDuTempsController(EmploiDuTempsService emploiService) {
-        this.emploiService = emploiService;
+    public EmploiDuTempsController(Connection cnx) {
+        this.emploiService = new EmploiDuTempsService(cnx);
     }
 
     public boolean ajouterEmploiDuTemps(EmploiDuTemps edt) {

@@ -2,21 +2,18 @@
 package Controller;
 
 import Model.Utilisateur;
+import Service.AuthService;
 import Service.UtilisateurService;
 
-import javax.security.auth.login.LoginException;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class UtilisateurController {
 	
     private final UtilisateurService utilisateurService;
 
-    public UtilisateurController(UtilisateurService utilisateurService) {
-        this.utilisateurService = utilisateurService;
-    }
-
-    public boolean ajouterUtilisateur(Utilisateur user) {
-        return utilisateurService.modifierUtilisateur(user);
+    public UtilisateurController(Connection cnx) {
+        this.utilisateurService = new UtilisateurService(cnx);
     }
 
     public boolean modifierUtilisateur(Utilisateur user) {

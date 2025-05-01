@@ -2,14 +2,16 @@
 package Controller;
 
 import Service.ProfModuleService;
+
+import java.sql.Connection;
 import java.util.List;
 
 public class ProfModuleController {
 
     private final ProfModuleService profModuleService;
 
-    public ProfModuleController(ProfModuleService profModuleService) {
-        this.profModuleService = profModuleService;
+    public ProfModuleController(Connection cnx) {
+        this.profModuleService = new ProfModuleService(cnx);
     }
 
     public boolean ajouterRelation(int idProf, int idModule) {

@@ -4,14 +4,15 @@ package Service;
 import Model.CourDevoirDAO;
 import Model.CourDevoir;
 import java.util.List;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class CourDevoirService {
 	
     private final CourDevoirDAO courDevoirDAO;
 
-    public CourDevoirService(CourDevoirDAO courDevoirDAO) {
-        this.courDevoirDAO = courDevoirDAO;
+    public CourDevoirService(Connection cnx) {
+        this.courDevoirDAO = new CourDevoirDAO(cnx);
     }
 
     public boolean ajouterCourDevoir(CourDevoir cd) {

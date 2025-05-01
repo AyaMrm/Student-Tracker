@@ -15,10 +15,9 @@ public class ProfModuleTest {
                 System.err.println("Connexion échouée.");
                 return;
             }
-
-            ProfModuleDAO dao = new ProfModuleDAO(connection);
-            ProfModuleService service = new ProfModuleService(dao);
-            ProfModuleController controller = new ProfModuleController(service);
+            
+            
+            ProfModuleController controller = new ProfModuleController(connection);
 
             // Test ajout d'une relation valide
             boolean ajout = controller.ajouterRelation(1, 101); // Prof 1, Module 101

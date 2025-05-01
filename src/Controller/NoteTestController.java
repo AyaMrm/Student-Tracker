@@ -16,9 +16,7 @@ public class NoteTestController {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
 
-            NoteDAO noteDAO = new NoteDAO(connection);
-            NoteService noteService = new NoteService(noteDAO);
-            NoteController noteController = new NoteController(noteService);
+            NoteController noteController = new NoteController(connection);
 
             // 1. Test Ajout d'une note
             System.out.println("\n--- Test Ajout Note ---");

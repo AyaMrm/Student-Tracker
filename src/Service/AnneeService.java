@@ -3,6 +3,8 @@ package Service;
 
 import Model.AnneeDAO;
 import Model.Annee;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,8 +13,8 @@ public class AnneeService {
 
     private final AnneeDAO anneeDAO;
 
-    public AnneeService(AnneeDAO anneeDAO) {
-        this.anneeDAO = anneeDAO;
+    public AnneeService(Connection cnx) {
+        this.anneeDAO = new AnneeDAO(cnx);
     }
 
     public boolean ajouterAnnee(Annee annee) {

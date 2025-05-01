@@ -3,14 +3,16 @@ package Controller;
 
 import Model.Prof;
 import Service.ProfService;
+
+import java.sql.Connection;
 import java.util.List;
 
 public class ProfController {
 
     private final ProfService profService;
 
-    public ProfController(ProfService profService) {
-        this.profService = profService;
+    public ProfController(Connection cnx) {
+        this.profService = new ProfService(cnx);
     }
 
     public boolean ajouterProf(Prof prof) {

@@ -3,6 +3,8 @@ package Controller;
 
 import Model.Specialite;
 import Service.SpecialiteService;
+
+import java.sql.Connection;
 import java.util.List;
 
 
@@ -10,8 +12,8 @@ public class SpecialiteController {
 
     private final SpecialiteService specialiteService;
 
-    public SpecialiteController(SpecialiteService specialiteService) {
-        this.specialiteService = specialiteService;
+    public SpecialiteController(Connection cnx) {
+        this.specialiteService = new SpecialiteService(cnx);
     }
 
     public boolean ajouterSpecialite(Specialite s) {

@@ -15,9 +15,7 @@ public class SpecialiteTestController {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
 
-            SpecialiteDAO specialiteDAO = new SpecialiteDAO(connection);
-            SpecialiteService specialiteService = new SpecialiteService(specialiteDAO);
-            SpecialiteController specialiteController = new SpecialiteController(specialiteService);
+            SpecialiteController specialiteController = new SpecialiteController(connection);
 
             // 1. Test Ajout spécialité
             System.out.println("\n--- Test Ajout Spécialité ---");

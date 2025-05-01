@@ -16,13 +16,11 @@ public class ModuleTestController {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
 
-            ModuleDAO moduleDAO = new ModuleDAO(connection);
-            ModuleService moduleService = new ModuleService(moduleDAO);
-            ModuleController moduleController = new ModuleController(moduleService);
+            ModuleController moduleController = new ModuleController(connection);
 
             // 1. Test Ajout d'un module
             System.out.println("\n--- Test Ajout Module ---");
-            Module module = new Module(1, "POO", 1, 1, 1, MethodeCalcul.CLASSIQUE_40_60, 0.40, 0.60);
+            Module module = new Module(2, "POO", 1, 1, 1, MethodeCalcul.CLASSIQUE_40_60, 0.40, 0.60);
             boolean ajoutReussi = moduleController.ajouterModule(module);
             System.out.println("Ajout réussi ? " + ajoutReussi);
 

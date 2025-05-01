@@ -1,6 +1,8 @@
 // terminé !
 package Controller;
 
+import java.sql.Connection;
+
 import Model.Utilisateur;
 import Service.AuthService;
 
@@ -9,8 +11,8 @@ public class AuthController {
 
     private final AuthService authService;
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+    public AuthController(Connection cnx) {
+        this.authService = new AuthService(cnx);
     }
 
     public boolean ajouterUtilisateur(Utilisateur user, String password) {

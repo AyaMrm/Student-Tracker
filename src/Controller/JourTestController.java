@@ -16,13 +16,11 @@ public class JourTestController {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
 
-            JourDAO jourDAO = new JourDAO(connection);
-            JourService jourService = new JourService(jourDAO);
-            JourController jourController = new JourController(jourService);
+            JourController jourController = new JourController(connection);
 
             // 1. Test Ajout
             System.out.println("\n--- Test Ajout Jour ---");
-            Jour jour = new Jour(3, JourSemaine.Dimanche, null);
+            Jour jour = new Jour(6, JourSemaine.Dimanche, null);
             boolean ajoutReussi = jourController.ajouterJour(jour);
             System.out.println("Ajout réussi ? " + ajoutReussi);
 

@@ -4,6 +4,7 @@ package Service;
 import Model.SpecialiteDAO;
 import Model.Specialite;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,8 +13,8 @@ public class SpecialiteService {
 
     private final SpecialiteDAO specialiteDAO;
 
-    public SpecialiteService(SpecialiteDAO specialiteDAO) {
-        this.specialiteDAO = specialiteDAO;
+    public SpecialiteService(Connection cnx) {
+        this.specialiteDAO = new SpecialiteDAO(cnx);
     }
 
     public boolean ajouterSpecialite(Specialite specialite) {

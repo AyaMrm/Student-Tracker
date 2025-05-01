@@ -3,14 +3,16 @@ package Controller;
 
 import Model.Seance;
 import Service.SeanceService;
+
+import java.sql.Connection;
 import java.util.List;
 
 public class SeanceController {
 
     private final SeanceService seanceService;
 
-    public SeanceController(SeanceService seanceService) {
-        this.seanceService = seanceService;
+    public SeanceController(Connection cnx) {
+        this.seanceService = new SeanceService(cnx);
     }
 
     public boolean ajouterSeance(Seance seance) {

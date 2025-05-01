@@ -1,6 +1,7 @@
 // terminé !
 package Controller;
 
+import java.sql.Connection;
 import java.util.List;
 import Model.Etudiant;
 import Service.EtudiantService;
@@ -9,8 +10,8 @@ public class EtudiantController {
 
     private final EtudiantService etudiantService;
 
-    public EtudiantController(EtudiantService etudiantService) {
-        this.etudiantService = etudiantService;
+    public EtudiantController(Connection cnx) {
+        this.etudiantService = new EtudiantService(cnx);
     }
 
     public boolean ajouterEtudiant(Etudiant etd) {

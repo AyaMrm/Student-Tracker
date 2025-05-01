@@ -3,13 +3,14 @@ package Controller;
 
 import Service.EtudiantModuleService;
 
+import java.sql.Connection;
 import java.util.List;
 public class EtudiantModuleController {
 
     private final EtudiantModuleService service;
 
-    public EtudiantModuleController(EtudiantModuleService service) {
-        this.service = service;
+    public EtudiantModuleController(Connection cnx) {
+        this.service = new EtudiantModuleService(cnx);
     }
 
     public boolean ajouterRelation(int idEtudiant, int idModule) {

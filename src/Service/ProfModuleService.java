@@ -3,6 +3,7 @@ package Service;
 
 import Model.ProfModuleDAO;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,8 +12,8 @@ public class ProfModuleService {
 
     private final ProfModuleDAO profModuleDAO;
 
-    public ProfModuleService(ProfModuleDAO profModuleDAO) {
-        this.profModuleDAO = profModuleDAO;
+    public ProfModuleService(Connection cnx) {
+        this.profModuleDAO = new ProfModuleDAO(cnx);
     }
 
     public boolean ajouterRelation(int idProf, int idModule) {

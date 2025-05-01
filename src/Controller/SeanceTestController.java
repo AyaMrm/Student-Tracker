@@ -16,9 +16,7 @@ public class SeanceTestController {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
 
-            SeanceDAO seanceDAO = new SeanceDAO(connection);
-            SeanceService seanceService = new SeanceService(seanceDAO);
-            SeanceController seanceController = new SeanceController(seanceService);
+            SeanceController seanceController = new SeanceController(connection);
             
             // 1. Test Ajout séance
             System.out.println("\n--- Test Ajout Séance ---");

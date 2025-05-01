@@ -1,6 +1,7 @@
 // terminé !
 package Controller;
 
+import java.sql.Connection;
 import java.util.List;
 import Model.Presence;
 import Service.PresenceService;
@@ -9,8 +10,8 @@ public class PresenceController {
 	
     private final PresenceService presenceService;
 
-    public PresenceController(PresenceService presenceService) {
-        this.presenceService = presenceService;
+    public PresenceController(Connection cnx) {
+        this.presenceService = new PresenceService(cnx);
     }
 
     public boolean ajouterPresence(Presence p) {

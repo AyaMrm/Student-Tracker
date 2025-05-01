@@ -4,14 +4,15 @@ package Controller;
 import Model.Jour;
 import Service.JourService;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class JourController {
 
     private final JourService jourService;
 
-    public JourController(JourService jourService) {
-        this.jourService = jourService;
+    public JourController(Connection cnx) {
+        this.jourService = new JourService(cnx);
     }
 
     public boolean ajouterJour(Jour jour) {

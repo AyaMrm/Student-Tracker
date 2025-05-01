@@ -3,6 +3,8 @@ package Controller;
 
 import Model.Annee;
 import Service.AnneeService;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,8 +12,8 @@ public class AnneeController {
 
     private final AnneeService anneeService;
 
-    public AnneeController(AnneeService anneeService) {
-        this.anneeService = anneeService;
+    public AnneeController(Connection cnx) {
+        this.anneeService = new AnneeService(cnx);
     }
 
     public boolean ajouterAnnee(Annee annee) {
@@ -37,4 +39,5 @@ public class AnneeController {
     public Annee getAnneeAvecSemestres(int idAnnee){
         return anneeService.getAnneeAvecSemestres(idAnnee);
     }
+ 
 }

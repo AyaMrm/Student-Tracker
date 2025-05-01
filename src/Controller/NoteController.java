@@ -1,6 +1,7 @@
 //terminé !
 package Controller;
 
+import java.sql.Connection;
 import java.util.List;
 import Model.Note;
 import Service.NoteService;
@@ -9,8 +10,8 @@ public class NoteController {
 
 	private final NoteService noteService;
 	
-	public NoteController(NoteService noteService) {
-		this.noteService = noteService;
+	public NoteController(Connection cnx) {
+		this.noteService = new NoteService(cnx);
 	}
 	
     public boolean ajouterNote(Note note) {

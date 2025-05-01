@@ -3,10 +3,12 @@ package Controller;
 import Service.EmploiDuTempsService;
 import Model.EmploiDuTemps;
 import Model.EmploiDuTempsDAO;
+import Model.Specialite;
 import Model.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmploiDuTempsTestController {
@@ -15,13 +17,12 @@ public class EmploiDuTempsTestController {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
 
-            EmploiDuTempsDAO emploiDAO = new EmploiDuTempsDAO(connection);
-            EmploiDuTempsService emploiService = new EmploiDuTempsService(emploiDAO);
-            EmploiDuTempsController emploiController = new EmploiDuTempsController(emploiService);
+            EmploiDuTempsController emploiController = new EmploiDuTempsController(connection);
 
             // 1. Test Ajout emploi du temps
             System.out.println("\n--- Test Ajout EmploiDuTemps ---");
-            EmploiDuTemps emploi = new EmploiDuTemps(1, null, "A", "4", 7, null);
+            Specialite sp = new Specialite(12, "Reseux");
+            EmploiDuTemps emploi = new EmploiDuTemps(64, new ArrayList<>(), "A", "4", 7, sp);
             boolean ajoutReussi = emploiController.ajouterEmploiDuTemps(emploi);
             System.out.println("Ajout réussi ? " + ajoutReussi);
 

@@ -4,6 +4,7 @@ package Service;
 import Model.PresenceDAO;
 import Model.Presence;
 import java.util.List;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 
@@ -11,8 +12,8 @@ public class PresenceService {
 
     private final PresenceDAO presenceDAO;
 
-    public PresenceService(PresenceDAO presenceDAO) {
-        this.presenceDAO = presenceDAO;
+    public PresenceService(Connection cnx) {
+        this.presenceDAO = new PresenceDAO(cnx);
     }
 
     public boolean ajouterPresence(Presence p) {

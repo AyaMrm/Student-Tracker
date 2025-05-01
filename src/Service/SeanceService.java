@@ -3,6 +3,8 @@ package Service;
 
 import Model.SeanceDAO;
 import Model.Seance;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,8 +13,8 @@ public class SeanceService {
 
     private final SeanceDAO seanceDAO;
 
-    public SeanceService(SeanceDAO seanceDAO) {
-        this.seanceDAO = seanceDAO;
+    public SeanceService(Connection cnx) {
+        this.seanceDAO = new SeanceDAO(cnx);
     }
 
     public boolean ajouterSeance(Seance seance) {

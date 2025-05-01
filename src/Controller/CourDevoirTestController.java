@@ -16,13 +16,11 @@ public class CourDevoirTestController {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
 
-            CourDevoirDAO courDevoirDAO = new CourDevoirDAO(connection);
-            CourDevoirService courDevoirService = new CourDevoirService(courDevoirDAO);
-            CourDevoirController courDevoirController = new CourDevoirController(courDevoirService);
+            CourDevoirController courDevoirController = new CourDevoirController(connection);
 
             // 1. Test Ajout
             System.out.println("\n--- Test Ajout CourDevoir ---");
-            CourDevoir courDevoir = new CourDevoir(5, "message", "Les Automates.pdf", TypeCourDevoir.COUR, 2, 3, true, 4);
+            CourDevoir courDevoir = new CourDevoir(79, "message", "Les Automates.pdf", TypeCourDevoir.DEVOIR, 2, 3, true, 4);
             boolean ajoutReussi = courDevoirController.ajouterCourDevoir(courDevoir);
             System.out.println("Ajout réussi ? " + ajoutReussi);
 

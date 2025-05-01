@@ -4,6 +4,7 @@ package Service;
 import Model.EmploiDuTempsDAO;
 import Model.EmploiDuTemps;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,8 +13,8 @@ public class EmploiDuTempsService {
 
     private final EmploiDuTempsDAO emploiDAO;
 
-    public EmploiDuTempsService(EmploiDuTempsDAO emploiDAO) {
-        this.emploiDAO = emploiDAO;
+    public EmploiDuTempsService(Connection cnx) {
+        this.emploiDAO = new EmploiDuTempsDAO(cnx);
     }
 
     public boolean ajouterEmploiDuTemps(EmploiDuTemps edt) {

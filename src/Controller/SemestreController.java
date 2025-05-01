@@ -3,14 +3,16 @@ package Controller;
 
 import Model.Semestre;
 import Service.SemestreService;
+
+import java.sql.Connection;
 import java.util.List;
 
 public class SemestreController {
 
     private final SemestreService semestreService;
 
-    public SemestreController(SemestreService semestreService) {
-        this.semestreService = semestreService;
+    public SemestreController(Connection cnx) {
+        this.semestreService = new SemestreService(cnx);
     }
 
     public boolean ajouterSemestre(Semestre semestre) {

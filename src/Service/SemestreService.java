@@ -4,6 +4,7 @@ package Service;
 import Model.SemestreDAO;
 import Model.Semestre;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,8 +12,8 @@ public class SemestreService {
 
     private final SemestreDAO semestreDAO;
 
-    public SemestreService(SemestreDAO semestreDAO) {
-        this.semestreDAO = semestreDAO;
+    public SemestreService(Connection cnx) {
+        this.semestreDAO = new SemestreDAO(cnx);
     }
 
     public boolean ajouterSemestre(Semestre semestre) {

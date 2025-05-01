@@ -4,10 +4,13 @@ package Controller;
 import Service.TestExamService;
 import Model.TestExam;
 import Model.TestExamDAO;
+import Model.TypeTestExam;
 import Model.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Date;
 import java.util.List;
 
 public class TestExamTestController {
@@ -16,13 +19,11 @@ public class TestExamTestController {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
 
-            TestExamDAO testExamDAO = new TestExamDAO(connection);
-            TestExamService testExamService = new TestExamService(testExamDAO);
-            TestExamController testExamController = new TestExamController(testExamService);
+            TestExamController testExamController = new TestExamController(connection);
 
             // 1. Test Ajout TestExam
             System.out.println("\n--- Test Ajout TestExam ---");
-            TestExam testExam = new TestExam(1, null, null, null, 0, 0, "Final Exam", "2025-06-15", null);
+            TestExam testExam = new TestExam(25, TypeTestExam.EXAM, Date.valueOf("2025-05-23"), Time.valueOf("08:30:00"), 1, 3, "A", "1", "Description");
             boolean ajoutReussi = testExamController.ajouterTestExam(testExam);
             System.out.println("Ajout réussi ? " + ajoutReussi);
 

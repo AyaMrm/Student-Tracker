@@ -3,14 +3,16 @@ package Controller;
 
 import Model.CourDevoir;
 import Service.CourDevoirService;
+
+import java.sql.Connection;
 import java.util.List;
 
 public class CourDevoirController {
 	
     private final CourDevoirService courDevoirService;
 
-    public CourDevoirController(CourDevoirService courDevoirService) {
-        this.courDevoirService = courDevoirService;
+    public CourDevoirController(Connection cnx) {
+        this.courDevoirService = new CourDevoirService(cnx);
     }
 
     public boolean ajouterCourDevoir(CourDevoir cd) {

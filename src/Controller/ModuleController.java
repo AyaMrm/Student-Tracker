@@ -4,6 +4,7 @@ package Controller;
 import Model.Module;
 import Service.ModuleService;
 
+import java.sql.Connection;
 import java.util.List;
 
 
@@ -11,8 +12,8 @@ public class ModuleController {
 
     private final ModuleService moduleService;
 
-    public ModuleController(ModuleService moduleService) {
-        this.moduleService = moduleService;
+    public ModuleController(Connection cnx) {
+        this.moduleService = new ModuleService(cnx);
     }
 
     public boolean ajouterModule(Module module) {

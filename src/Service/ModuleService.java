@@ -4,6 +4,7 @@ package Service;
 import Model.ModuleDAO;
 import Model.Module;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,8 +13,8 @@ public class ModuleService {
 
     private final ModuleDAO moduleDAO;
 
-    public ModuleService(ModuleDAO moduleDAO) {
-        this.moduleDAO = moduleDAO;
+    public ModuleService(Connection cnx) {
+        this.moduleDAO = new ModuleDAO(cnx);
     }
 
     public boolean ajouterModule(Module module) {
