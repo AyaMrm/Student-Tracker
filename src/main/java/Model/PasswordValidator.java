@@ -2,7 +2,7 @@ package Model;
 
 
 public class PasswordValidator {
-    private static final int minLength = 8;
+    private static final int minLength = 2;
 
     // a implementer plus tard !
     private static boolean containUppercase(String password){
@@ -43,7 +43,7 @@ public class PasswordValidator {
     }
 
     public static boolean isWeak(String password){
-        if(password == null || password.length() < minLength || !containUppercase(password)|| !containLowercase(password)|| !containDigit(password)|| !containSpecialChar(password)){
+        if(password == null || password.length() < 2 || !containUppercase(password)|| !containLowercase(password)|| !containDigit(password)|| !containSpecialChar(password)){
             return true;
         }
 

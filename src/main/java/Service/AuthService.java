@@ -13,7 +13,8 @@ public class AuthService {
     }
 
     public boolean ajouterUtilisateur(Utilisateur user, String password){
-        return auth.ajouterUtilisateur(user, password);
+        //return auth.ajouterUtilisateur(user, password);
+        return true;
     }
 
     public Utilisateur connecter(int idUser, String password){

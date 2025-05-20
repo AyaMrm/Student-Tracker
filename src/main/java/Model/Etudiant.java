@@ -7,32 +7,32 @@ public class Etudiant extends Utilisateur {
     private int idSpecialite;
     private String section;
     private String groupe;
-    private int idEmploiDuTemps;
+    private Integer idEmploiDuTemps; // Changé de int à Integer
     private ArrayList<Annee> annees;
 
     public Etudiant() {
     }
 
     public Etudiant(int idUser, String nom, String prenom, String email, String motDePasse,
-                    int idSpecialite, String section, String groupe, int idEmploiDuTemps,
+                    int idSpecialite, String section, String groupe, Integer idEmploiDuTemps,
                     ArrayList<Annee> annees) {
         super(idUser, nom, prenom, email, motDePasse, Role.ETUDIANT);
         this.idEtudiant = idUser;
         this.idSpecialite = idSpecialite;
         this.section = section;
         this.groupe = groupe;
-        this.idEmploiDuTemps = idEmploiDuTemps;
+        this.idEmploiDuTemps = idEmploiDuTemps; // Accepte null
         this.annees = (annees != null) ? new ArrayList<>(annees) : new ArrayList<>();
     }
 
     public Etudiant(int idUser, String nom, String prenom, String email,
-                    int idSpecialite, String section, String groupe, int idEmploiDuTemps) {
+                    int idSpecialite, String section, String groupe, Integer idEmploiDuTemps) {
         super(idUser, nom, prenom, email, Role.ETUDIANT);
         this.idEtudiant = idUser;
         this.idSpecialite = idSpecialite;
         this.section = section;
         this.groupe = groupe;
-        this.idEmploiDuTemps = idEmploiDuTemps;
+        this.idEmploiDuTemps = idEmploiDuTemps; // Accepte null
         this.annees = new ArrayList<>();
     }
 
@@ -53,18 +53,18 @@ public class Etudiant extends Utilisateur {
         return groupe;
     }
 
-    public int getIdEmploiDuTemps() {
+    public Integer getIdEmploiDuTemps() { // Changé de int à Integer
         return idEmploiDuTemps;
     }
 
     public ArrayList<Annee> getAnnees() {
-        return new ArrayList<>(annees); // Retourne une copie pour encapsulation
+        return new ArrayList<>(annees);
     }
 
     // Setters
     public void setIdEtudiant(int idEtudiant) {
         this.idEtudiant = idEtudiant;
-        super.setIdUser(idEtudiant); // Maintient la cohérence avec idUser
+        super.setIdUser(idEtudiant);
     }
 
     public void setIdSpecialite(int idSpecialite) {
@@ -79,7 +79,7 @@ public class Etudiant extends Utilisateur {
         this.groupe = groupe;
     }
 
-    public void setIdEmploiDuTemps(int idEmploiDuTemps) {
+    public void setIdEmploiDuTemps(Integer idEmploiDuTemps) { // Changé de int à Integer
         this.idEmploiDuTemps = idEmploiDuTemps;
     }
 

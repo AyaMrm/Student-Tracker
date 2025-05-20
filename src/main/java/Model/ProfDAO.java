@@ -29,30 +29,39 @@ public class ProfDAO extends UtilisateurDAO {
         return false;
     }
 
-    public boolean ajouterProf(Prof prof) {
-        String query = "INSERT INTO profs (idProf, idSpecialite, grade, departement) VALUES (?, ?, ?, ?)";
+    public boolean ajouterProf(Prof prof) throws SQLException {
 
-        try //(Connection cnx = ConnectionDB.getConnection())
-        {
+        if (prof == null) {
+            System.err.println("Admin est Null!!");
+            return false;
+        }
+
+        if (existe(prof.getIdProf())) {
+            System.err.println("L'admin avec ID " + prof.getIdProf() + " existe déjà !");
+            return false;
+        }
+
+        try {
             cnx.setAutoCommit(false);
 
-            String checkSpecialite = "SELECT COUNT(*) FROM specialites WHERE idSpecialite=?";
-            try (PreparedStatement checkStmt = cnx.prepareStatement(checkSpecialite)) {
-                checkStmt.setInt(1, prof.getIdSpecialite());
-                ResultSet rs = checkStmt.executeQuery();
-                if (rs.next() && rs.getInt(1) == 0) {
-                    System.err.println("Erreur : idSpecialite " + prof.getIdSpecialite() + " n'existe pas dans specialites !");
-                    return false;
-                }
-            }
-
             Auth auth = new Auth(cnx);
-            if (!auth.ajouterUtilisateur(new Utilisateur(prof.getIdProf(), prof.getNom(), prof.getPrenom(), prof.getEmail(), prof.getMotdepasse(), Role.PROF), prof.getMotdepasse())) {
+            boolean addUser = auth.ajouterUtilisateur(
+                    new Utilisateur(
+                            prof.getIdUser(),
+                            prof.getNom(),
+                            prof.getPrenom(),
+                            prof.getEmail(),
+                            prof.getMotdepasse(),
+                            Role.ADMIN
+                    ),
+                    prof.getMotdepasse()
+            );
+            if (!addUser) {
                 cnx.rollback();
-                System.err.println("Erreur lors de l'ajout de l'utilisateur !");
                 return false;
             }
 
+            String query = "INSERT INTO profs (idProf, idSpecialite, grade, departement) VALUES (?, ?, ?, ?)";
             try (PreparedStatement statement = cnx.prepareStatement(query)) {
                 statement.setInt(1, prof.getIdProf());
                 statement.setInt(2, prof.getIdSpecialite());
@@ -62,19 +71,21 @@ public class ProfDAO extends UtilisateurDAO {
             }
 
             cnx.commit();
-            //System.out.println("Prof ajouté avec succès ! 😊");
             return true;
         } catch (SQLException e) {
-            //System.err.println("Une erreur est survenue lors de l'ajout du nouveau Prof !! 😔");
-            //e.printStackTrace();
+            System.err.println(e.getMessage());
             try {
-                if (cnx != null && !cnx.isClosed()) {
-                    cnx.rollback();
-                }
-            } catch (SQLException ex) {
-                //ex.printStackTrace();
+                cnx.rollback();
+            } catch (SQLException rollbackEx) {
+                System.err.println(rollbackEx.getMessage());
             }
-            return false;
+            throw e;
+        } finally {
+            try {
+                cnx.setAutoCommit(true);
+            } catch (SQLException ex) {
+                System.err.println("Erreur lors de la restauration de l'auto-commit : " + ex.getMessage());
+            }
         }
     }
 

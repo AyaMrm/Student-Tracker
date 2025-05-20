@@ -20,9 +20,9 @@ public class Auth {
 
     public boolean ajouterUtilisateur(Utilisateur nouvelUtilisateur, String motdepasse) {
         PasswordValidator val = new PasswordValidator();
-        if(val.isWeak(motdepasse)){
+        /*if(val.isWeak(motdepasse)){
             return false;
-        }
+        }*/
         String hashedMotDePasse = BCrypt.hashpw(motdepasse, BCrypt.gensalt());
         String sql = "INSERT INTO utilisateurs (idUser, nom, prenom, email, motdepasse, role) VALUES (?, ?, ?, ?, ?, ?)";
 

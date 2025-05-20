@@ -21,7 +21,12 @@ public class AdminService {
     public boolean ajouterAdmin(Admin admin) {
         if (admin == null || admin.getIdAdmin() <= 0) return false;
         if (adminDAO.existe(admin.getIdAdmin())) return false;
-        return adminDAO.ajouterAdmin(admin);
+
+        try {
+            return adminDAO.ajouterAdmin(admin);
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public Admin getAdminByMat(int id) {
