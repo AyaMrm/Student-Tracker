@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.NoteService;
+import Controller.NoteService;
 import Model.Note;
 import Model.NoteDAO;
 import Model.DatabaseConnection;

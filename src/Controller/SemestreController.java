@@ -2,7 +2,7 @@
 package Controller;
 
 import Model.Semestre;
-import Service.SemestreService;
+import Controller.SemestreService;
 
 import java.sql.Connection;
 import java.util.List;

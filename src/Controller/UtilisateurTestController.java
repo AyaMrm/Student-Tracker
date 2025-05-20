@@ -3,7 +3,7 @@ package Controller;
 import Controller.UtilisateurController;
 import Model.Role;
 import Model.Utilisateur;
-import Service.UtilisateurService;
+import Controller.UtilisateurService;
 import Model.UtilisateurDAO;
 
 import java.sql.Connection;

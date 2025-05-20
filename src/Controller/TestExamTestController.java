@@ -1,7 +1,7 @@
 
 package Controller;
 
-import Service.TestExamService;
+import Controller.TestExamService;
 import Model.TestExam;
 import Model.TestExamDAO;
 import Model.TypeTestExam;

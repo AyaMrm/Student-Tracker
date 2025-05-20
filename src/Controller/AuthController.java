@@ -4,7 +4,7 @@ package Controller;
 import java.sql.Connection;
 
 import Model.Utilisateur;
-import Service.AuthService;
+import Controller.AuthService;
 
 
 public class AuthController {

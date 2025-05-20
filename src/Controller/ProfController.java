@@ -2,7 +2,7 @@
 package Controller;
 
 import Model.Prof;
-import Service.ProfService;
+import Controller.ProfService;
 
 import java.sql.Connection;
 import java.util.List;

@@ -2,7 +2,7 @@
 package Controller;
 
 import Model.TestExam;
-import Service.TestExamService;
+import Controller.TestExamService;
 
 import java.sql.Connection;
 import java.sql.Date;

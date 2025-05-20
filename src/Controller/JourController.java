@@ -2,7 +2,7 @@
 package Controller;
 
 import Model.Jour;
-import Service.JourService;
+import Controller.JourService;
 
 import java.sql.Connection;
 import java.util.List;

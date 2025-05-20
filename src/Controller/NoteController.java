@@ -4,7 +4,7 @@ package Controller;
 import java.sql.Connection;
 import java.util.List;
 import Model.Note;
-import Service.NoteService;
+import Controller.NoteService;
 
 public class NoteController {
 

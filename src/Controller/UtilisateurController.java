@@ -2,9 +2,8 @@
 package Controller;
 
 import Model.Utilisateur;
-import Service.AuthService;
-import Service.UtilisateurService;
-
+import Controller.AuthService;
+import Controller.UtilisateurService;
 import java.sql.Connection;
 import java.util.ArrayList;
 

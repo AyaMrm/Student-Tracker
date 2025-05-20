@@ -4,7 +4,7 @@ package Controller;
 import java.sql.Connection;
 import java.util.List;
 import Model.Etudiant;
-import Service.EtudiantService;
+import Controller.EtudiantService;
 
 public class EtudiantController {
 

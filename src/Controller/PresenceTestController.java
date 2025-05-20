@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.PresenceService;
+import Controller.PresenceService;
 import Model.Presence;
 import Model.PresenceDAO;
 import Model.StatutPresence;

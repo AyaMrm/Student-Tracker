@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.EmploiDuTempsService;
+import Controller.EmploiDuTempsService;
 import Model.EmploiDuTemps;
 import Model.EmploiDuTempsDAO;
 import Model.Specialite;

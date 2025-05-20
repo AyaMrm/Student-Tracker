@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.ProfModuleService;
+import Controller.ProfModuleService;
 import Model.DatabaseConnection;
 import Model.ProfModuleDAO;
 import java.sql.Connection;

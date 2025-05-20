@@ -2,7 +2,7 @@
 package Controller;
 
 import Model.EmploiDuTemps;
-import Service.EmploiDuTempsService;
+import Controller.EmploiDuTempsService;
 
 import java.sql.Connection;
 import java.util.List;

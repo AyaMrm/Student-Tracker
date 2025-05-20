@@ -4,8 +4,8 @@ package Controller;
 import Model.Etudiant;
 import Model.Role;
 import Model.Utilisateur;
-import Service.AuthService;
-import Service.EtudiantService;
+import Controller.AuthService;
+import Controller.EtudiantService;
 
 import java.sql.Connection;
 import java.util.List;

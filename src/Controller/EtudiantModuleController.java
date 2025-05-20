@@ -1,7 +1,7 @@
 // terminé !
 package Controller;
 
-import Service.EtudiantModuleService;
+import Controller.EtudiantModuleService;
 
 import java.sql.Connection;
 import java.util.List;

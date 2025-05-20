@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.SpecialiteService;
+import Controller.SpecialiteService;
 import Model.Specialite;
 import Model.SpecialiteDAO;
 import Model.DatabaseConnection;

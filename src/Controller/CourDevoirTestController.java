@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.CourDevoirService;
+import Controller.CourDevoirService;
 import Model.CourDevoir;
 import Model.CourDevoirDAO;
 import Model.DatabaseConnection;

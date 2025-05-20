@@ -4,7 +4,7 @@ package Controller;
 import java.sql.Connection;
 import java.util.List;
 import Model.Presence;
-import Service.PresenceService;
+import Controller.PresenceService;
 
 public class PresenceController {
 	

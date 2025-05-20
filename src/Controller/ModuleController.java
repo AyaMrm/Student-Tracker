@@ -2,7 +2,7 @@
 package Controller;
 
 import Model.Module;
-import Service.ModuleService;
+import Controller.ModuleService;
 
 import java.sql.Connection;
 import java.util.List;

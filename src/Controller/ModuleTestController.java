@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.ModuleService;
+import Controller.ModuleService;
 import Model.Module;
 import Model.ModuleDAO;
 import Model.DatabaseConnection;

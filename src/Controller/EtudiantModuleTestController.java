@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.EtudiantModuleService;
+import Controller.EtudiantModuleService;
 import Model.EtudiantModule;
 import Model.EtudiantModuleDAO;
 import Model.DatabaseConnection;

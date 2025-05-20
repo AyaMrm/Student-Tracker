@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.JourService;
+import Controller.JourService;
 import Model.Jour;
 import Model.JourDAO;
 import Model.JourSemaine;

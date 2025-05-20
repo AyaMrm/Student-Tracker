@@ -2,7 +2,7 @@
 package Controller;
 
 import Model.Specialite;
-import Service.SpecialiteService;
+import Controller.SpecialiteService;
 
 import java.sql.Connection;
 import java.util.List;

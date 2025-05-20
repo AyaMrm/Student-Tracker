@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.SeanceService;
+import Controller.SeanceService;
 import Model.Seance;
 import Model.SeanceDAO;
 import Model.DatabaseConnection;

@@ -2,7 +2,7 @@
 package Controller;
 
 import Model.Seance;
-import Service.SeanceService;
+import Controller.SeanceService;
 
 import java.sql.Connection;
 import java.util.List;

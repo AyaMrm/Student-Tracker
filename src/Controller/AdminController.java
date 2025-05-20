@@ -4,7 +4,7 @@ package Controller;
 import java.sql.Connection;
 
 import Model.Admin;
-import Service.AdminService;
+import Controller.AdminService;
 
 public class AdminController {
 	

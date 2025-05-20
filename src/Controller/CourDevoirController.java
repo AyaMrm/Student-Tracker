@@ -2,7 +2,7 @@
 package Controller;
 
 import Model.CourDevoir;
-import Service.CourDevoirService;
+import Controller.CourDevoirService;
 
 import java.sql.Connection;
 import java.util.List;
