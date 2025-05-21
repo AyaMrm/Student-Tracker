@@ -1,0 +1,1448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="1371.0" style="-fx-background-color: #FFF2F2;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DashboardPController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="716.0" prefWidth="232.0" style="-fx-background-color: #355C7D;">
+         <children>
+            <Label alignment="CENTER" text="Grade" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets right="55.0" top="50.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="DashboardBT" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="30.0" prefWidth="212.0" styleClass="button-flex" stylesheets="@application.css" text=" Dashboard " textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
+               <VBox.margin>
+                  <Insets left="5.0" top="30.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="21.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/accueil.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="TimetabBT" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="30.0" prefWidth="212.0" stylesheets="@application.css" text=" Time Table" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="5.0" top="7.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../Images/time-and-calendar(2).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="button-flex" />
+                  <String fx:value="toggle-button" />
+               </styleClass>
+            </Button>
+            <Button fx:id="CoursesBT" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="30.0" prefWidth="212.0" stylesheets="@application.css" text=" Corses" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../Images/papiers.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="button-flex" />
+                  <String fx:value="toggle-button" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets left="5.0" top="7.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="GradesBT" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="30.0" prefWidth="212.0" stylesheets="@application.css" text=" Grades" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../Images/statistiques.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="button-flex" />
+                  <String fx:value="toggle-button" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets left="5.0" top="7.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="TranscriptBT" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleclicks" prefHeight="30.0" prefWidth="212.0" stylesheets="@application.css" text=" Transcripts" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../Images/dossier.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="button-flex" />
+                  <String fx:value="toggle-button" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets left="5.0" top="7.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" spread="0.09" width="10.0">
+               <color>
+                  <Color red="0.3368055522441864" green="0.5640624761581421" blue="0.75" />
+               </color>
+            </DropShadow>
+         </effect>
+      </VBox>
+      <Line endX="-101.0" endY="81.0" layoutX="333.0" layoutY="637.0" opacity="0.85" startX="-101.0" startY="-637.0" stroke="#d1e6f1" strokeWidth="3.0" />
+      <Line endX="-109.5" endY="-601.0" layoutX="343.0" layoutY="688.0" opacity="0.85" startX="763.0" startY="-601.0" stroke="#d1e6f1" strokeWidth="3.0" />
+      <Label fx:id="lbiStatus" alignment="TOP_LEFT" layoutX="254.0" layoutY="50.0" prefHeight="32.0" prefWidth="314.0" text=" Dash Board" wrapText="true">
+         <font>
+            <Font name="Segoe UI Bold" size="25.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="transcriptA" layoutX="231.0" layoutY="88.0" prefHeight="628.0" prefWidth="876.0" style="-fx-background-color: #FFF2F2;">
+         <children>
+            <Rectangle fx:id="rec01" arcHeight="30.0" arcWidth="30.0" fill="#d1e6f1" height="65.0" layoutX="68.0" layoutY="98.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="735.0">
+               <effect>
+                  <InnerShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+            </Rectangle>
+            <Label fx:id="specialite1" alignment="CENTER" contentDisplay="CENTER" layoutX="361.0" layoutY="106.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="annee1" alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="106.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="moyenneG1" alignment="CENTER" contentDisplay="CENTER" layoutX="667.0" layoutY="106.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="rec02" arcHeight="30.0" arcWidth="30.0" fill="#d1e6f1" height="65.0" layoutX="68.0" layoutY="163.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="735.0">
+               <effect>
+                  <InnerShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+            </Rectangle>
+            <Label fx:id="specialite2" alignment="CENTER" contentDisplay="CENTER" layoutX="361.0" layoutY="171.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="annee2" alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="171.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="moyenneG2" alignment="CENTER" contentDisplay="CENTER" layoutX="667.0" layoutY="171.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="rec03" arcHeight="30.0" arcWidth="30.0" fill="#d1e6f1" height="65.0" layoutX="68.0" layoutY="228.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="735.0">
+               <effect>
+                  <InnerShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+            </Rectangle>
+            <Label fx:id="specialite3" alignment="CENTER" contentDisplay="CENTER" layoutX="361.0" layoutY="236.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="annee3" alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="236.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="moyenneG3" alignment="CENTER" contentDisplay="CENTER" layoutX="667.0" layoutY="236.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="rec04" arcHeight="30.0" arcWidth="30.0" fill="#d1e6f1" height="65.0" layoutX="68.0" layoutY="293.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="735.0">
+               <effect>
+                  <InnerShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+            </Rectangle>
+            <Label fx:id="specialite4" alignment="CENTER" contentDisplay="CENTER" layoutX="361.0" layoutY="301.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="annee4" alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="301.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="moyenneG4" alignment="CENTER" contentDisplay="CENTER" layoutX="667.0" layoutY="301.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="rec05" arcHeight="30.0" arcWidth="30.0" fill="#d1e6f1" height="65.0" layoutX="68.0" layoutY="358.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="735.0">
+               <effect>
+                  <InnerShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+            </Rectangle>
+            <Label fx:id="specialite5" alignment="CENTER" contentDisplay="CENTER" layoutX="361.0" layoutY="366.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="annee5" alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="366.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="moyenneG5" alignment="CENTER" contentDisplay="CENTER" layoutX="667.0" layoutY="366.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="rec06" arcHeight="30.0" arcWidth="30.0" fill="#d1e6f1" height="65.0" layoutX="68.0" layoutY="423.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="735.0">
+               <effect>
+                  <InnerShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+            </Rectangle>
+            <Label fx:id="specialite6" alignment="CENTER" contentDisplay="CENTER" layoutX="361.0" layoutY="431.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="annee6" alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="431.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="moyenneG6" alignment="CENTER" contentDisplay="CENTER" layoutX="667.0" layoutY="431.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff2f2" height="347.0" layoutX="52.0" layoutY="163.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="768.0" />
+         </children>
+      </AnchorPane>
+      <StackPane layoutX="232.0" layoutY="88.0" prefHeight="616.0" prefWidth="1126.0">
+         <children>
+            <AnchorPane fx:id="Grade" prefHeight="631.0" prefWidth="1284.0" style="-fx-background-color: #FFF2F2;">
+               <children>
+                  <Rectangle fx:id="rec0" arcHeight="30.0" arcWidth="30.0" fill="#d1e6f1" height="65.0" layoutX="197.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="735.0">
+                     <effect>
+                        <InnerShadow height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="rec1" fill="#d1e6f1" height="50.0" layoutX="198.0" layoutY="135.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="733.0">
+                     <effect>
+                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="rec2" fill="#d1e6f1" height="50.0" layoutX="198.0" layoutY="184.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="733.0">
+                     <effect>
+                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="rec3" fill="#d1e6f1" height="50.0" layoutX="198.0" layoutY="233.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="733.0">
+                     <effect>
+                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="rec4" fill="#d1e6f1" height="50.0" layoutX="198.0" layoutY="282.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="733.0">
+                     <effect>
+                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="rec5" fill="#d1e6f1" height="50.0" layoutX="198.0" layoutY="331.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="733.0">
+                     <effect>
+                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="rec6" fill="#d1e6f1" height="50.0" layoutX="198.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="733.0">
+                     <effect>
+                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="rec7" fill="#d1e6f1" height="50.0" layoutX="198.0" layoutY="429.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="733.0">
+                     <effect>
+                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="rec8" fill="#d1e6f1" height="50.0" layoutX="198.0" layoutY="478.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="733.0">
+                     <effect>
+                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                  </Rectangle>
+                  <Label fx:id="mod0" alignment="CENTER" contentDisplay="CENTER" layoutX="196.0" layoutY="96.0" prefHeight="49.0" prefWidth="155.0" text="Module" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cc0" alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="96.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="examain0" alignment="CENTER" contentDisplay="CENTER" layoutX="506.0" layoutY="96.0" prefHeight="49.0" prefWidth="155.0" text="Examain" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="moyenne0" alignment="CENTER" contentDisplay="CENTER" layoutX="661.0" layoutY="96.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="coef0" alignment="CENTER" contentDisplay="CENTER" layoutX="816.0" layoutY="96.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="mod1" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="135.0" prefHeight="49.0" prefWidth="155.0" text="Module" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cc1" alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="135.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="exam1" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="135.0" prefHeight="49.0" prefWidth="155.0" text="Examain" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="moyenne1" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="135.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="coef1" alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="135.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="mod2" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="184.0" prefHeight="49.0" prefWidth="155.0" text="Module" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cc2" alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="184.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="exam2" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="184.0" prefHeight="49.0" prefWidth="155.0" text="Examain" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="moyenne2" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="184.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="coef2" alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="184.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="mod3" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="233.0" prefHeight="49.0" prefWidth="155.0" text="Module" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cc3" alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="233.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="exam3" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="233.0" prefHeight="49.0" prefWidth="155.0" text="Examain" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="moyenne3" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="233.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="coef3" alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="233.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="mod4" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="282.0" prefHeight="49.0" prefWidth="155.0" text="Module" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cc4" alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="282.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="exam4" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="282.0" prefHeight="49.0" prefWidth="155.0" text="Examain" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="moyenne4" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="282.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="coef4" alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="282.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="mod5" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="331.0" prefHeight="49.0" prefWidth="155.0" text="Module" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cc5" alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="331.0" prefHeight="49.0" prefWidth="155.0" stylesheets="@application.css" text="CC" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="exam5" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="331.0" prefHeight="49.0" prefWidth="155.0" text="Examain" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="moyenne5" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="331.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="coef5" alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="331.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="mod6" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="380.0" prefHeight="49.0" prefWidth="155.0" text="Module" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cc6" alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="380.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="exam6" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="380.0" prefHeight="49.0" prefWidth="155.0" text="Examain" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="moyenne6" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="380.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="coef6" alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="380.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="mod7" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="429.0" prefHeight="49.0" prefWidth="155.0" text="Module" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cc7" alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="429.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="exam7" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="429.0" prefHeight="49.0" prefWidth="155.0" text="Examain" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="moyenne7" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="429.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="coef7" alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="429.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="mod8" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="478.0" prefHeight="49.0" prefWidth="155.0" text="Module" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cc8" alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="478.0" prefHeight="49.0" prefWidth="155.0" text="CC" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="exam8" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="478.0" prefHeight="49.0" prefWidth="155.0" text="Examain" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="moyenne8" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="478.0" prefHeight="49.0" prefWidth="155.0" text="Moyenne" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="coef8" alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="478.0" prefHeight="49.0" prefWidth="115.0" text="Coef" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff2f2" height="419.0" layoutX="179.0" layoutY="131.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="755.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="emploiT" prefHeight="631.0" prefWidth="1284.0" style="-fx-background-color: #FFF2F2;">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff2f2" height="585.0" layoutX="68.0" layoutY="22.0" stroke="#355c7d" strokeType="INSIDE" width="1003.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#355c7d" height="582.0" layoutX="69.0" layoutY="24.0" opacity="0.3" stroke="#355c7d" strokeType="INSIDE" strokeWidth="3.0" width="93.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1e6f1" height="44.0" layoutX="68.0" layoutY="22.0" opacity="0.6" stroke="#355c7d" strokeType="INSIDE" strokeWidth="3.0" width="1003.0" />
+                  <Line endX="919.5" endY="-8.0" layoutX="150.0" layoutY="151.0" opacity="0.5" startX="-80.5" startY="-8.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="919.5" endY="-8.0" layoutX="150.0" layoutY="228.0" opacity="0.5" startX="-80.5" startY="-8.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="919.5" endY="-8.0" layoutX="150.0" layoutY="305.0" opacity="0.5" startX="-80.5" startY="-8.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="919.5" endY="-8.0" layoutX="150.0" layoutY="382.0" opacity="0.5" startX="-80.5" startY="-8.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="919.5" endY="-8.0" layoutX="150.0" layoutY="459.0" opacity="0.5" startX="-80.5" startY="-8.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="919.5" endY="-8.0" layoutX="150.0" layoutY="536.0" opacity="0.5" startX="-80.5" startY="-8.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="919.5" endY="-8.0" layoutX="150.0" layoutY="613.0" opacity="0.5" startX="-80.5" startY="-8.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="-43.0" endY="12.5" layoutX="112.0" layoutY="591.0" opacity="0.5" startX="-43.0" startY="-566.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="-43.0" endY="12.5" layoutX="204.0" layoutY="591.0" opacity="0.5" startX="-43.0" startY="-566.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="-43.0" endY="12.5" layoutX="355.7" layoutY="591.0" opacity="0.5" startX="-43.0" startY="-566.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="-43.0" endY="12.5" layoutX="504.7" layoutY="591.0" opacity="0.5" startX="-43.0" startY="-566.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="-43.0" endY="12.5" layoutX="652.7" layoutY="591.0" opacity="0.5" startX="-43.0" startY="-566.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="-43.0" endY="12.5" layoutX="800.7" layoutY="591.0" opacity="0.5" startX="-43.0" startY="-566.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="-43.0" endY="12.5" layoutX="952.7" layoutY="591.0" opacity="0.5" startX="-43.0" startY="-566.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Line endX="-43.0" endY="12.5" layoutX="1113.0" layoutY="591.0" opacity="0.5" startX="-43.0" startY="-566.0" stroke="#355c7d" strokeWidth="3.0" />
+                  <Label alignment="CENTER" layoutX="69.0" layoutY="64.0" prefHeight="78.0" prefWidth="93.0" text="Friday">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="69.0" layoutY="142.0" prefHeight="78.0" prefWidth="93.0" text="Saturday">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="69.0" layoutY="218.0" prefHeight="78.0" prefWidth="93.0" text="Sunday">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="69.0" layoutY="296.0" prefHeight="78.0" prefWidth="93.0" text="Monday">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="69.0" layoutY="373.0" prefHeight="78.0" prefWidth="93.0" text="Tuesday">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="69.0" layoutY="449.0" prefHeight="78.0" prefWidth="93.0" text="Wednesday">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="69.0" layoutY="527.0" prefHeight="78.0" prefWidth="93.0" text="Thursday">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="163.0" layoutY="22.0" prefHeight="44.0" prefWidth="149.0" text="8h -&gt; 9h30">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="314.0" layoutY="22.0" prefHeight="44.0" prefWidth="149.0" text="9h40 -&gt; 11h10">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="462.0" layoutY="22.0" prefHeight="44.0" prefWidth="149.0" text="11h20 -&gt; 12h50">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="611.0" layoutY="22.0" prefHeight="44.0" prefWidth="149.0" text="13h -&gt; 14h30">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="762.0" layoutY="22.0" prefHeight="44.0" prefWidth="149.0" text="14h40 -&gt; 16h10">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="910.0" layoutY="22.0" prefHeight="44.0" prefWidth="149.0" text="16h10 -&gt; 17h40">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses11" alignment="CENTER" layoutX="163.0" layoutY="64.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class11" alignment="CENTER" layoutX="163.0" layoutY="103.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses12" alignment="CENTER" layoutX="314.0" layoutY="64.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class12" alignment="CENTER" layoutX="314.0" layoutY="103.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses13" alignment="CENTER" layoutX="461.0" layoutY="64.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class13" alignment="CENTER" layoutX="461.0" layoutY="103.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses14" alignment="CENTER" layoutX="612.0" layoutY="64.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class14" alignment="CENTER" layoutX="612.0" layoutY="103.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses15" alignment="CENTER" layoutX="758.0" layoutY="64.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class15" alignment="CENTER" layoutX="758.0" layoutY="103.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses16" alignment="CENTER" layoutX="909.0" layoutY="64.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class16" alignment="CENTER" layoutX="909.0" layoutY="103.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses21" alignment="CENTER" layoutX="162.0" layoutY="142.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class21" alignment="CENTER" layoutX="162.0" layoutY="181.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses22" alignment="CENTER" layoutX="313.0" layoutY="142.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class22" alignment="CENTER" layoutX="313.0" layoutY="181.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses23" alignment="CENTER" layoutX="460.0" layoutY="142.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class23" alignment="CENTER" layoutX="460.0" layoutY="181.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses24" alignment="CENTER" layoutX="611.0" layoutY="142.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class24" alignment="CENTER" layoutX="611.0" layoutY="181.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses25" alignment="CENTER" layoutX="757.0" layoutY="142.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class25" alignment="CENTER" layoutX="757.0" layoutY="181.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses26" alignment="CENTER" layoutX="908.0" layoutY="142.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class26" alignment="CENTER" layoutX="908.0" layoutY="181.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses31" alignment="CENTER" layoutX="161.0" layoutY="218.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class31" alignment="CENTER" layoutX="161.0" layoutY="257.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses32" alignment="CENTER" layoutX="312.0" layoutY="218.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class32" alignment="CENTER" layoutX="312.0" layoutY="257.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses33" alignment="CENTER" layoutX="459.0" layoutY="218.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class33" alignment="CENTER" layoutX="459.0" layoutY="257.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses34" alignment="CENTER" layoutX="610.0" layoutY="218.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class34" alignment="CENTER" layoutX="610.0" layoutY="257.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses35" alignment="CENTER" layoutX="756.0" layoutY="218.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class35" alignment="CENTER" layoutX="756.0" layoutY="257.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses36" alignment="CENTER" layoutX="907.0" layoutY="218.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class36" alignment="CENTER" layoutX="907.0" layoutY="257.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses41" alignment="CENTER" layoutX="161.0" layoutY="297.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class41" alignment="CENTER" layoutX="161.0" layoutY="336.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses42" alignment="CENTER" layoutX="312.0" layoutY="297.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class42" alignment="CENTER" layoutX="312.0" layoutY="336.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses43" alignment="CENTER" layoutX="459.0" layoutY="297.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class43" alignment="CENTER" layoutX="459.0" layoutY="336.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses44" alignment="CENTER" layoutX="610.0" layoutY="297.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class44" alignment="CENTER" layoutX="610.0" layoutY="336.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses45" alignment="CENTER" layoutX="756.0" layoutY="297.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class45" alignment="CENTER" layoutX="756.0" layoutY="336.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses46" alignment="CENTER" layoutX="907.0" layoutY="297.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class46" alignment="CENTER" layoutX="907.0" layoutY="336.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses51" alignment="CENTER" layoutX="160.0" layoutY="373.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class51" alignment="CENTER" layoutX="160.0" layoutY="412.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses52" alignment="CENTER" layoutX="311.0" layoutY="373.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class52" alignment="CENTER" layoutX="311.0" layoutY="412.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses53" alignment="CENTER" layoutX="458.0" layoutY="373.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class53" alignment="CENTER" layoutX="458.0" layoutY="412.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses54" alignment="CENTER" layoutX="609.0" layoutY="373.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class54" alignment="CENTER" layoutX="609.0" layoutY="412.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses55" alignment="CENTER" layoutX="755.0" layoutY="373.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class55" alignment="CENTER" layoutX="755.0" layoutY="412.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses56" alignment="CENTER" layoutX="906.0" layoutY="373.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class56" alignment="CENTER" layoutX="906.0" layoutY="412.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses61" alignment="CENTER" layoutX="161.0" layoutY="449.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class61" alignment="CENTER" layoutX="161.0" layoutY="488.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses62" alignment="CENTER" layoutX="312.0" layoutY="449.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class62" alignment="CENTER" layoutX="312.0" layoutY="488.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses63" alignment="CENTER" layoutX="459.0" layoutY="449.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class63" alignment="CENTER" layoutX="459.0" layoutY="488.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses64" alignment="CENTER" layoutX="610.0" layoutY="449.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class64" alignment="CENTER" layoutX="610.0" layoutY="488.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses65" alignment="CENTER" layoutX="756.0" layoutY="449.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class65" alignment="CENTER" layoutX="756.0" layoutY="488.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses66" alignment="CENTER" layoutX="907.0" layoutY="449.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class66" alignment="CENTER" layoutX="907.0" layoutY="488.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses71" alignment="CENTER" layoutX="160.0" layoutY="525.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class71" alignment="CENTER" layoutX="160.0" layoutY="564.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses72" alignment="CENTER" layoutX="311.0" layoutY="525.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class72" alignment="CENTER" layoutX="311.0" layoutY="564.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses73" alignment="CENTER" layoutX="458.0" layoutY="525.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class73" alignment="CENTER" layoutX="458.0" layoutY="564.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses74" alignment="CENTER" layoutX="609.0" layoutY="525.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class74" alignment="CENTER" layoutX="609.0" layoutY="564.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses75" alignment="CENTER" layoutX="755.0" layoutY="525.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class75" alignment="CENTER" layoutX="755.0" layoutY="564.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="corses76" alignment="CENTER" layoutX="906.0" layoutY="525.0" prefHeight="44.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="class76" alignment="CENTER" layoutX="906.0" layoutY="564.0" prefHeight="40.0" prefWidth="149.0">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="dashbordarchon" prefHeight="616.0" prefWidth="990.0" style="-fx-background-color: #FFF2F2;">
+               <children>
+                  <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#d1e6f1" height="254.0" layoutX="45.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="433.0" />
+                  <Label graphicTextGap="5.0" layoutX="58.0" layoutY="33.0" prefHeight="32.0" prefWidth="109.0" text="My Account" textFill="#365d7d" underline="true" wrapText="true">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label graphicTextGap="5.0" layoutX="58.0" layoutY="73.0" prefHeight="32.0" prefWidth="89.0" text="Matricule" wrapText="true">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label graphicTextGap="5.0" layoutX="58.0" layoutY="105.0" prefHeight="32.0" prefWidth="89.0" text="First Name" wrapText="true">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label graphicTextGap="5.0" layoutX="58.0" layoutY="137.0" prefHeight="32.0" prefWidth="89.0" text="Last Name" wrapText="true">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label graphicTextGap="5.0" layoutX="58.0" layoutY="169.0" prefHeight="32.0" prefWidth="89.0" text="Current Year" wrapText="true">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="matricule" alignment="CENTER" graphicTextGap="5.0" layoutX="255.0" layoutY="73.0" prefHeight="32.0" prefWidth="212.0" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="firstname" alignment="CENTER" graphicTextGap="5.0" layoutX="255.0" layoutY="105.0" prefHeight="32.0" prefWidth="212.0" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="lastname" alignment="CENTER" graphicTextGap="5.0" layoutX="255.0" layoutY="137.0" prefHeight="32.0" prefWidth="212.0" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="currentyear" alignment="CENTER" graphicTextGap="5.0" layoutX="255.0" layoutY="169.0" prefHeight="32.0" prefWidth="212.0" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label graphicTextGap="5.0" layoutX="58.0" layoutY="201.0" prefHeight="32.0" prefWidth="89.0" text="Section" wrapText="true">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label graphicTextGap="5.0" layoutX="58.0" layoutY="233.0" prefHeight="32.0" prefWidth="89.0" text="Group" wrapText="true">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="section" alignment="CENTER" graphicTextGap="5.0" layoutX="255.0" layoutY="201.0" prefHeight="32.0" prefWidth="212.0" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="group" alignment="CENTER" graphicTextGap="5.0" layoutX="255.0" layoutY="233.0" prefHeight="32.0" prefWidth="212.0" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label fx:id="testlb" alignment="CENTER" graphicTextGap="5.0" layoutX="78.0" layoutY="321.0" opacity="0.94" prefHeight="32.0" prefWidth="212.0" styleClass="label-test" stylesheets="@application.css" text="TEST" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <effect>
+                        <DropShadow height="10.0" radius="4.5" spread="0.09" width="10.0">
+                           <color>
+                              <Color red="0.3368055522441864" green="0.5640624761581421" blue="0.75" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
+                  <Label fx:id="testlb1" alignment="CENTER" graphicTextGap="5.0" layoutX="78.0" layoutY="362.0" opacity="0.94" prefHeight="32.0" prefWidth="212.0" styleClass="label-test" stylesheets="@application.css" text="TEST" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <effect>
+                        <DropShadow height="10.0" radius="4.5" spread="0.09" width="10.0">
+                           <color>
+                              <Color red="0.3368055522441864" green="0.5640624761581421" blue="0.75" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
+                  <Label fx:id="testlb2" alignment="CENTER" graphicTextGap="5.0" layoutX="78.0" layoutY="403.0" opacity="0.94" prefHeight="32.0" prefWidth="212.0" styleClass="label-test" stylesheets="@application.css" text="TEST" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <effect>
+                        <DropShadow height="10.0" radius="4.5" spread="0.09" width="10.0">
+                           <color>
+                              <Color red="0.3368055522441864" green="0.5640624761581421" blue="0.75" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
+                  <Label fx:id="testlb3" alignment="CENTER" graphicTextGap="5.0" layoutX="78.0" layoutY="444.0" opacity="0.94" prefHeight="32.0" prefWidth="212.0" styleClass="label-test" stylesheets="@application.css" text="TEST" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <effect>
+                        <DropShadow height="10.0" radius="4.5" spread="0.09" width="10.0">
+                           <color>
+                              <Color red="0.3368055522441864" green="0.5640624761581421" blue="0.75" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
+                  <Label fx:id="testlb4" alignment="CENTER" graphicTextGap="5.0" layoutX="78.0" layoutY="485.0" opacity="0.94" prefHeight="32.0" prefWidth="212.0" styleClass="label-test" stylesheets="@application.css" text="TEST" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <effect>
+                        <DropShadow height="10.0" radius="4.5" spread="0.09" width="10.0">
+                           <color>
+                              <Color red="0.3368055522441864" green="0.5640624761581421" blue="0.75" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
+                  <Label fx:id="testlb5" alignment="CENTER" graphicTextGap="5.0" layoutX="78.0" layoutY="526.0" opacity="0.94" prefHeight="32.0" prefWidth="212.0" styleClass="label-test" stylesheets="@application.css" text="TEST" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <effect>
+                        <DropShadow height="10.0" radius="4.5" spread="0.09" width="10.0">
+                           <color>
+                              <Color red="0.3368055522441864" green="0.5640624761581421" blue="0.75" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
+                  <Label fx:id="testlb6" alignment="CENTER" graphicTextGap="5.0" layoutX="78.0" layoutY="568.0" opacity="0.94" prefHeight="32.0" prefWidth="212.0" styleClass="label-test" stylesheets="@application.css" text="TEST" wrapText="true">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <effect>
+                        <DropShadow height="10.0" radius="4.5" spread="0.09" width="10.0">
+                           <color>
+                              <Color red="0.3368055522441864" green="0.5640624761581421" blue="0.75" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
+                  <AnchorPane fx:id="notifA" layoutX="875.0" layoutY="-88.0" prefHeight="716.0" prefWidth="263.0">
+                     <children>
+                        <AnchorPane fx:id="settingsA" prefHeight="716.0" prefWidth="263.0" style="-fx-background-color: #d1e6f1;" stylesheets="@application.css">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1e6f1" height="716.0" opacity="0.44" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="263.0" />
+                              <Button fx:id="settingsB1" layoutX="102.0" layoutY="24.0" mnemonicParsing="false" onAction="#initializenotif" prefHeight="49.0" prefWidth="19.0" styleClass="label-profile" stylesheets="@application.css" text="s" textFill="WHITE">
+                                 <effect>
+                                    <InnerShadow height="9.0" radius="4.0" width="9.0" />
+                                 </effect>
+                                 <font>
+                                    <Font name="Arial Bold Italic" size="32.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="DeconnexionBT" layoutX="31.0" layoutY="557.0" mnemonicParsing="false" onAction="#switchToScene22" prefHeight="49.0" prefWidth="200.0" styleClass="button-Deconnexion" stylesheets="@application.css" text="Deconnexion">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <Rectangle fx:id="notifrec" arcHeight="5.0" arcWidth="5.0" fill="#d1e6f1" height="716.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="263.0" />
+                        <Button fx:id="settingsB" layoutX="102.0" layoutY="24.0" mnemonicParsing="false" onAction="#initializeSettingst" prefHeight="49.0" prefWidth="19.0" styleClass="label-profile" stylesheets="@application.css" text="s" textFill="WHITE">
+                           <effect>
+                              <InnerShadow height="9.0" radius="4.0" width="9.0" />
+                           </effect>
+                           <font>
+                              <Font name="Arial Bold Italic" size="32.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="ExitButton" layoutX="210.0" layoutY="1.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="53.0" styleClass="button-quit" stylesheets="@application.css" text="X">
+                           <effect>
+                              <InnerShadow height="15.0" radius="7.0" width="15.0">
+                                 <color>
+                                    <Color red="0.2078431397676468" green="0.3607843220233917" blue="0.4901960790157318" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <AnchorPane fx:id="calendarContainer" layoutY="88.0" prefHeight="240.0" prefWidth="263.0">
+                           <children>
+                              <Label fx:id="monthYearLabel" layoutX="7.0" layoutY="15.0" prefHeight="27.0" prefWidth="192.0" text="Label" textFill="#365d7d">
+                                 <font>
+                                    <Font name="Arial Bold Italic" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="prevMonthBtn" layoutX="190.0" layoutY="16.0" mnemonicParsing="false" onAction="#initialize" styleClass="button-calender" stylesheets="@application.css" text="&lt;">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                              <GridPane fx:id="calendarGrid" alignment="CENTER_LEFT" layoutX="1.0" layoutY="65.0" prefHeight="172.0" prefWidth="246.0" stylesheets="@application.css">
+                                <columnConstraints>
+                                    <ColumnConstraints fx:id="pane" halignment="CENTER" hgrow="SOMETIMES" maxWidth="122.0" minWidth="0.0" prefWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="122.0" minWidth="0.0" prefWidth="10.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="122.0" minWidth="0.0" prefWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="173.0" minWidth="0.0" prefWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="173.0" minWidth="0.0" prefWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="173.0" minWidth="0.0" prefWidth="10.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="173.0" minWidth="0.0" prefWidth="10.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <styleClass>
+                                    <String fx:value="button-calender" />
+                                    <String fx:value="transparent-cell" />
+                                    <String fx:value="cell" />
+                                 </styleClass>
+                              </GridPane>
+                              <Button fx:id="nextMonthBtn" layoutX="212.0" layoutY="16.0" mnemonicParsing="false" onAction="#initialize" styleClass="button-calender" stylesheets="@application.css" text="&gt;">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="328.0" layoutY="287.0" prefHeight="320.0" prefWidth="537.0" styleClass="vbox-test" stylesheets="@application.css">
+                     <children>
+                        <Label layoutX="14.0" layoutY="7.0" prefHeight="32.0" prefWidth="192.0" text="Your Rank:" textFill="#365d7d" underline="true">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="exambtn" layoutX="471.0" layoutY="10.0" mnemonicParsing="false" onAction="#initializechart" styleClass="button-flex" stylesheets="@application.css" text="Exam">
+                           <font>
+                              <Font name="Segoe UI Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <BarChart fx:id="chart" layoutX="19.0" layoutY="35.0" legendVisible="false" prefHeight="267.0" prefWidth="500.0" style="-fx-background-color: #d1e6f1;" stylesheets="@application.css">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <BarChart fx:id="chartE" layoutX="19.0" layoutY="35.0" legendVisible="false" prefHeight="267.0" prefWidth="500.0" style="-fx-background-color: #d1e6f1;" stylesheets="@application.css">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </BarChart>
+                        <BarChart fx:id="chartM" layoutX="19.0" layoutY="48.0" legendVisible="false" prefHeight="267.0" prefWidth="500.0" style="-fx-background-color: #d1e6f1;" stylesheets="@application.css">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </BarChart>
+                        <Button fx:id="CCbtn" layoutX="430.0" layoutY="10.0" mnemonicParsing="false" onAction="#initializechart" styleClass="button-flex" stylesheets="@application.css" text="CC">
+                           <font>
+                              <Font name="Segoe UI Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="moyenbtn" layoutX="347.0" layoutY="10.0" mnemonicParsing="false" onAction="#initializechart" styleClass="button-flex" stylesheets="@application.css" text="Moyenne">
+                           <font>
+                              <Font name="Segoe UI Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#d1e6f1" height="254.0" layoutX="484.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="381.0" />
+                  <Rectangle arcHeight="300.0" arcWidth="300.0" fill="#d000ff" height="230.0" layoutX="586.0" layoutY="42.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="230.0" />
+                  <PieChart fx:id="progressPieChart" layoutX="575.0" layoutY="33.0" legendVisible="false" prefHeight="240.0" prefWidth="290.0" styleClass="chart-pie" stylesheets="@application.css" />
+                  <Rectangle arcHeight="300.0" arcWidth="300.0" fill="#d1e6f1" height="180.0" layoutX="610.0" layoutY="68.0" stroke="#d000ff" strokeWidth="5.0" width="181.0" />
+                  <Label fx:id="Labell" alignment="CENTER" layoutX="608.0" layoutY="63.0" prefHeight="185.0" prefWidth="186.0" text="84/">
+                     <font>
+                        <Font name="Calibri Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="646.0" layoutY="169.0" prefHeight="50.0" prefWidth="109.0" text="You Still have time you can do it" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="490.0" layoutY="33.0" prefHeight="32.0" prefWidth="171.0" text="End of Semaistre:" textAlignment="CENTER" textFill="#365d7d" underline="true" wrapText="true">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#d1e6f1" height="320.0" layoutX="46.0" layoutY="287.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="276.0" />
+                  <Label graphicTextGap="5.0" layoutX="58.0" layoutY="289.0" prefHeight="32.0" prefWidth="109.0" text="Module List:" textFill="#365d7d" underline="true" wrapText="true">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+      <Line endX="-101.0" endY="81.0" layoutX="333.0" layoutY="637.0" opacity="0.85" startX="-101.0" startY="-637.0" stroke="#d1e6f1" strokeWidth="3.0" />
+   </children>
+</AnchorPane>
