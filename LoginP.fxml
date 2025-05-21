@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="573.0" style="-fx-background-color: fff2f2;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginPController">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="237.0" BorderPane.alignment="CENTER">
+         <children>
+            <Line endX="106.0" endY="7.0" layoutX="126.0" layoutY="180.0" startX="-47.0" startY="-122.0" stroke="#355c7d" strokeWidth="10.0" />
+            <Polyline fill="#355c7d" layoutX="51.0" layoutY="40.0" points="-50.0, -40.0, 189.31529235839844, 148.0, -50.0, 148.0, 14.315292358398438, 59.0" rotate="180.0" strokeType="INSIDE" strokeWidth="0.0" />
+            <Polyline fill="#355c7d" layoutX="71.0" layoutY="157.0" points="-71.0, 243.0, -71.0, -165.0, 169.3153076171875, 31.0, 140.0, 243.0" strokeType="INSIDE" strokeWidth="0.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1e6f1" height="12.0" layoutX="146.0" layoutY="27.0" opacity="0.4" rotate="35.33" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="12.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1e6f1" height="12.0" layoutX="44.0" layoutY="84.0" opacity="0.4" rotate="-32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="12.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1e6f1" height="10.0" layoutX="151.0" layoutY="138.0" opacity="0.4" rotate="38.7" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1e6f1" height="8.0" layoutX="14.0" layoutY="369.0" opacity="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="8.0" />
+            <Label alignment="CENTER_RIGHT" ellipsisString="" layoutX="48.0" layoutY="143.0" prefHeight="68.0" prefWidth="144.0" text="WELCOME BACK! " textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="26.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label alignment="CENTER_RIGHT" ellipsisString="" layoutY="332.0" prefHeight="68.0" prefWidth="215.0" text="Copy right to the university of science and technology houari boumediene" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="8.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="332.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER_RIGHT" ellipsisString="" layoutX="126.0" layoutY="59.0" prefHeight="53.0" prefWidth="88.0" text="LOGIN" textAlignment="JUSTIFY" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="27.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label alignment="CENTER_RIGHT" ellipsisString="" layoutX="17.0" layoutY="127.0" prefHeight="44.0" prefWidth="82.0" text="Matricule" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <TextField fx:id="usernametextfield" alignment="TOP_CENTER" layoutX="118.0" layoutY="139.0" prefHeight="22.0" prefWidth="135.0" promptText="Enter your matricule" style="-fx-background-color: fff2f2;" />
+            <Line endX="33.0" layoutX="219.0" layoutY="164.0" startX="-100.0" />
+            <Button fx:id="Loginbutton" alignment="CENTER" layoutX="120.0" layoutY="304.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: #355c7d;" styleClass="button-flex" text="LOGIN" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER_RIGHT" ellipsisString="" layoutX="14.0" layoutY="193.0" prefHeight="44.0" prefWidth="88.0" text="password" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <PasswordField fx:id="passwoedfiled" alignment="CENTER" layoutX="115.0" layoutY="204.0" prefHeight="22.0" prefWidth="135.0" promptText="Enter your password" style="-fx-background-color: fff2f2;" />
+            <Button fx:id="Forgetbutton" alignment="CENTER" layoutX="188.0" layoutY="237.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="125.0" style="-fx-background-color: fff2f2;" text="Forget password?" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Line endX="33.0" layoutX="219.0" layoutY="229.0" startX="-100.0" />
+            <Label fx:id="loginmsgL" alignment="CENTER_RIGHT" layoutX="65.0" layoutY="14.0" prefHeight="51.0" prefWidth="210.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

@@ -1,0 +1,332 @@
+.button-flex{
+	-fx-background-color:#355C7D !important;
+	-fx-border-radius:20px;
+	-fx-text-fill: white;
+	
+}
+
+.button-flex:hover{
+	
+	-fx-background-color:#355C7D !important;
+	-fx-border-radius:20px;
+		-fx-text-fill: white;
+	
+		-fx-opacity:0.34;
+}
+.button-flex:selected{
+		-fx-background-color:#D1E6F1 !important;
+	-fx-border-radius:20px;
+	-fx-opacity:0.34;
+	
+}
+.button-flex:pressed{
+		-fx-background-color:#D1E6F1 !important;
+	-fx-border-radius:20px;
+	
+	-fx-opacity:0.34;
+	
+}
+.button-quit{
+	-fx-background-color:#d1e6f1 !important;
+	-fx-opacity:0.66;
+	-fx-text-fill: black;
+	
+}
+
+.button-quit:hover{
+	
+	-fx-background-color:#355C7D !important;
+
+		-fx-text-fill: white;
+	
+		
+}
+.button-quit:selected{
+		-fx-background-color:#355C7D !important;
+	    -fx-text-fill: white;
+	    
+	
+	
+}
+.button-quit:pressed{
+		-fx-background-color:#355C7D !important;
+	
+	
+	-fx-opacity:0.34;
+	
+}
+
+
+
+.button-Deconnexion{
+	 -fx-background-color: transparent; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: #355C7D;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+}
+.button-Deconnexion:hover{
+	
+
+    -fx-background-color: transparent; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: #355C7D;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+		-fx-opacity:0.34;
+}
+.button-Deconnexion:selected{
+	 -fx-background-color: transparent; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: #355C7D;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+}
+.button-Deconnexion:pressed{
+		 -fx-background-color: transparent; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: #355C7D;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+	
+	
+	-fx-opacity:0.34;
+	
+}
+.button-DeconnexionA{
+	 -fx-background-color: #355C7D; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill:white;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+}
+.button-DeconnexionA:hover{
+	
+
+    -fx-background-color: transparent; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: #d1e6f1;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+		-fx-opacity:0.34;
+}
+.button-DeconnexionA:selected{
+	 -fx-background-color: transparent; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: #d1e6f1;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+}
+.button-DeconnexionA:pressed{
+		 -fx-background-color: #d1e6f1; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: #d1e6f1;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+	
+	
+	-fx-opacity:0.34;
+	
+}
+.button-AdminE{
+	 -fx-background-color: transparent; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: #355C7D;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+}
+.button-AdminE:hover{
+	
+
+    -fx-background-color: #355C7D; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: white;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+		
+}
+.button-AdminE:selected{
+	  -fx-background-color: #355C7D; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: white;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+}
+.button-AdminE:pressed{
+		 -fx-background-color: transparent; /* Light to dark green */
+       -fx-border-color:  #355C7D;
+		-fx-text-fill: #355C7D;
+	 -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+	
+	
+	-fx-opacity:0.34;
+	
+}
+.label-test {
+    -fx-background-color: #ffffff;  /* Background color */
+
+   
+    -fx-background-radius: 10px;  /* Rounds the edges */
+    -fx-border-radius: 10px;  /* Rounds the border */
+    -fx-border-color: white; /* Optional: adds a border */
+}
+.label-id {
+    -fx-background-color: #ffffff;  /* Background color */
+
+   
+    -fx-background-radius: 5px;  /* Rounds the edges */
+    -fx-border-radius: 5px;  /* Rounds the border */
+    -fx-border-color: white; /* Optional: adds a border */
+}
+.button-calender{
+	-fx-background-color: rgba(53, 92, 125,0); /* 50% transparent background */
+    -fx-text-fill: #355c7d; /* Keep text fully visible */
+
+	
+	
+}
+.label-profile {
+    -fx-background-color: #D9D9D9;  /* Background color */
+
+   
+    -fx-background-radius: 600px;  /* Rounds the edges */
+    -fx-border-radius: 600px;  /* Rounds the border */
+
+}
+.vbox-test {
+    -fx-background-color: #d1e6f1 !important;  /* Background color */
+
+      -fx-arc-height:  30px;
+      -fx-arc-width:  30px;
+    -fx-background-radius: 15px;  /* Rounds the edges */
+    -fx-border-radius: 15px;  /* Rounds the border */
+ 
+}
+
+
+
+
+.chart-bar {
+    -fx-background-color: #365d7d; /* Your chosen color */
+    -fx-border-color: #365d7d;  
+     -fx-border-radius:20px;
+         -fx-background-radius: 10 10 0 0; /* Top-left, Top-right, Bottom-right, Bottom-left */
+    -fx-background-insets: 0;
+    -fx-border-radius: 10 10 0 0;
+    -fx-border-width: 0;
+}
+
+
+
+
+
+.chart-plot-background {
+    -fx-background-color: #d1e6f1 !important;
+}
+
+.data0.chart-pie { -fx-background-color: #00D560;
+	 -fx-border-color: transparent; 
+} /* First slice */
+.data1.chart-pie { -fx-background-color: transparent;
+	 -fx-border-color: transparent; 
+} 
+
+
+.chart-pie {
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+}
+
+
+.admis-label {
+    -fx-background-color: #2ecc71; /* Light to dark green */
+       -fx-border-color:  #27ae60;
+    -fx-text-fill: #27ae60;
+    -fx-padding: 5px 15px;
+    -fx-background-radius: 15px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+     -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+}
+.button-settingsB {
+    -fx-background-color: #2ecc71; /* Light to dark green */
+       -fx-border-color:  #27ae60;
+    -fx-text-fill: #27ae60;
+    -fx-padding: 5px 15px;
+    -fx-background-radius: 15px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+     -fx-background-radius: 40px;  /* Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+}
+.rejeter-label {
+    -fx-background-color: #e74c3c; /* Light to dark red */
+     -fx-border-color:  #c0392b;
+    -fx-text-fill:  #c0392b;
+    -fx-padding: 5px 15px;
+    -fx-background-radius: 15px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+      -fx-background-radius: 40px;  /*  -fx-border-color:  transparent;Rounds the edges */
+    -fx-border-radius: 40px;  /* Rounds the border */
+}
+.anchorpane-settings{
+	-fx-opacity:0.66;
+	
+	
+}
+.gridpane > .cell {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+.transparent-cell {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+/*   181 #27ae60
+ * 180
+ * 577     68
+ */
+/* Must use .my-table (matches the style class we added) */
+.my-table {
+    -fx-background-color: #fff2f2; /* Alice blue background */
+    -fx-border-color: #355C7D; /* Steel blue border */
+    -fx-border-width: 2px;
+}
+
+.my-table .column-header-background {
+ -fx-background-color: #fff2f2;
+  -fx-border-color: #355C7D; 
+ 
+ 
+ 
+ }
+
+.my-table .column-header {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.my-table .table-row-cell:odd {
+    -fx-background-color: #fff2f2;
+}
+.my-table .table-row-cell:even {
+    -fx-background-color: #d1e6f1;
+}
+.my-table .table-row-cell:selected {
+    -fx-background-color: #355C7D;
+    -fx-text-fill: white;
+}
+
+
+
+
+
+
